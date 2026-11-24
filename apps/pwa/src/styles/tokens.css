@@ -1,0 +1,129 @@
+/*
+ * MandaoLink — tokens de design. Direção "Faixa de sinal", paleta Cobalto, pele v2.
+ * Aprovado pelo Guilherme em 24/11/2026. Regras de uso em docs/design/README.md.
+ * Só variáveis: este arquivo não estiliza nada sozinho.
+ * Contraste (WCAG 2.2) medido ao lado de cada par usado com texto ou controle.
+ */
+:root {
+  color-scheme: light;
+
+  /* Base */
+  --cor-chao: #f1f3f9; /* fundo do app, papel levemente azulado */
+  --cor-superficie: #ffffff; /* cartões, listas, campos, folhas */
+  --cor-tinta: #10142b; /* texto: 16,4:1 sobre o chão */
+  --cor-tinta-suave: #525a78; /* texto secundário: 6,1:1 sobre o chão; 6,8:1 sobre branco */
+  --cor-borda-campo: #858ca6; /* borda de campo e controle: 3,3:1 sobre branco */
+  --cor-divisoria: #e0e4f0; /* divisórias e skeleton (decorativo) */
+
+  /* Marca: cobalto sólido, sem degradê. Só no que é do produto (aba ativa, botão principal, filtro, foco). */
+  --cor-casco: #2541d8; /* branco 7,4:1; cobalto sobre branco 7,4:1 */
+  --cor-sobre-marca: #ffffff;
+  --cor-casco-texto: #525a78;
+  --cor-foco: #2541d8;
+
+  /* Semáforo: cada estado tem fundo, texto sobre ele e um tom claro para listas */
+  --cor-verde: #0f7a55; /* branco 5,3:1 */
+  --cor-verde-claro: #e1f3eb;
+  --cor-verde-tinta: #0a5a3e; /* 7,2:1 sobre o claro */
+  --cor-sobre-verde: #ffffff;
+  --cor-amarelo: #c26a00; /* ponto e borda (não texto): 3,9:1 sobre branco */
+  --cor-amarelo-claro: #ffefd6;
+  --cor-amarelo-tinta: #6e3a00; /* 8,2:1 sobre o claro */
+  --cor-sobre-amarelo-acao: #ffffff; /* sobre a tinta âmbar: 9,3:1 */
+  --cor-vermelho: #cc2a1f; /* branco 5,4:1; também é a cor de erro */
+  --cor-vermelho-claro: #fdeceb;
+  --cor-vermelho-tinta: #9a1d14; /* 7,2:1 sobre o claro */
+  --cor-sobre-vermelho: #ffffff;
+  --cor-pausado: #3b4160; /* pausa feita pelo cliente, neutra: branco 10:1 */
+  --cor-sobre-pausado: #ffffff;
+  --botao-faixa-fundo: #ffffff;
+
+  /* Navegação flutuante de vidro */
+  --nav-fundo: rgb(255 255 255 / 0.74);
+  --nav-borda: rgb(16 20 43 / 0.06);
+  --nav-texto: #525a78; /* 6,8:1 sobre branco */
+  --nav-ativo-fundo: #2541d8;
+  --nav-ativo-texto: #ffffff; /* 7,4:1 */
+  --nav-ativo-texto-marca: #10142b;
+  --nav-anel-contador: #ffffff;
+
+  /* Profundidade */
+  --sombra-1: 0 1px 2px rgb(16 20 43 / 0.05), 0 6px 18px -6px rgb(37 65 216 / 0.1);
+  --sombra-2: 0 2px 4px rgb(16 20 43 / 0.06), 0 16px 32px -12px rgb(37 65 216 / 0.22);
+  --sombra-nav: 0 18px 40px -14px rgb(16 20 43 / 0.28);
+
+  /* Tipografia: Archivo variável (eixo wdth 62–125). Hospedar no PWA (@fontsource-variable/archivo/wdth.css). */
+  --fonte: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --fonte-largura-normal: 100;
+  --fonte-largura-sinal: 70; /* só na frase do estado */
+  --texto-xs: 0.8125rem; /* 13 */
+  --texto-sm: 0.9375rem; /* 15 */
+  --texto-md: 1.0625rem; /* 17, corpo */
+  --texto-lg: 1.375rem; /* 22, título de tela */
+  --texto-sinal: 2.75rem; /* 44, frase do estado */
+  --entrelinha: 1.4;
+  --entrelinha-justa: 1.05;
+  --peso-normal: 400;
+  --peso-medio: 600;
+  --peso-forte: 700;
+  --peso-sinal: 800;
+
+  /* Espaço (base 4) */
+  --esp-1: 4px;
+  --esp-2: 8px;
+  --esp-3: 12px;
+  --esp-4: 16px;
+  --esp-5: 20px;
+  --esp-6: 24px;
+  --esp-8: 32px;
+  --esp-10: 40px;
+
+  /* Formas */
+  --raio-sm: 10px; /* chips, skeleton, etiquetas */
+  --raio-md: 16px; /* botões, campos */
+  --raio-item: 18px; /* cartões de lista */
+  --raio-lg: 28px; /* folhas */
+  --raio-xl: 32px; /* faixa de sinal, navegação no computador */
+  --borda: 1px;
+  --alvo-toque: 48px; /* mínimo de qualquer controle */
+
+  /* Layout */
+  --largura-conteudo: 880px; /* coluna no computador */
+  --largura-painel: 1160px; /* Início em duas colunas no computador */
+  --largura-trilho: 232px; /* navegação lateral no computador */
+  --altura-nav: 68px;
+  --nav-margem: 12px;
+  --area-segura-baixo: env(safe-area-inset-bottom, 0px);
+  --area-segura-topo: env(safe-area-inset-top, 0px);
+  /* Espaço que a barra flutuante ocupa no celular: todo conteúdo rolável termina acima dela */
+  --folga-nav: calc(var(--altura-nav) + var(--nav-margem) + var(--area-segura-baixo) + var(--esp-6));
+
+  /* Movimento: só transform e opacity (e a cor da faixa). Um momento por mudança de estado. */
+  --dur-rapida: 160ms;
+  --dur-media: 320ms;
+  --dur-saida: 200ms;
+  --curva-saida: cubic-bezier(0.2, 0, 0, 1);
+  --curva-entrada: cubic-bezier(0.3, 0, 1, 1);
+  --mola: cubic-bezier(0.34, 1.4, 0.64, 1); /* leve passada do ponto: toque em botões, chips e pílula da aba */
+
+  /* Camadas */
+  --camada-nav: 30;
+  --camada-aviso: 40;
+  --camada-folha: 50;
+}
+
+@media (min-width: 960px) {
+  :root {
+    --texto-md: 1.125rem; /* 18 */
+    --texto-lg: 1.75rem; /* 28 */
+    --texto-sinal: 3.5rem; /* 56 */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-rapida: 0ms;
+    --dur-media: 0ms;
+    --dur-saida: 0ms;
+  }
+}
