@@ -60,7 +60,10 @@ test('bootstrap fake persiste entrada, G0-G9 e envio simulado; restart nao dupli
     assert.equal(Number((await db.query('SELECT count(*) AS n FROM mensagens_brutas')).rows[0].n), total);
     const queued = Number((await db.query("SELECT count(*) AS n FROM envios WHERE estado='na_fila'")).rows[0].n);
     assert.ok(queued > 0);
-    now += 1000; await runtime.stop(); await runtime.stop();
+    const sourceId = (await db.query('SELECT id FROM fontes LIMIT 1')).rows[0].id;
+    const accepting = runtime.accept({ sourceId, externalId: 'shutdown-race', text: 'Entrada sintetica durante encerramento', publishedAt: now });
+    now += 1000; await runtime.stop(); await accepting; await runtime.stop();
+    assert.equal((await db.query("SELECT 1 FROM mensagens_brutas WHERE mensagem_externa_id='shutdown-race'")).rowCount, 1);
     assert.equal(Number((await db.query("SELECT count(*) AS n FROM envios WHERE estado='na_fila'")).rows[0].n), queued);
     assert.ok(sourceStopped && readerClosed && bossStopped);
     await assert.rejects(runtime.accept({ sourceId: 'fake', externalId: 'after-stop', text: 'teste', publishedAt: now }), /encerrada/);

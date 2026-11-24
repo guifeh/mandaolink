@@ -1,10 +1,43 @@
-export interface ExceptionRow { id: string; tipo: string; descricao: string; severidade: string }
-export interface OperationState { pausado: boolean; semaforo: 'verde' | 'amarelo' | 'vermelho'; excecoes: ExceptionRow[]; enviosPendentes: number }
-export interface HistoryRow { id: string; titulo: string | null; id_loja: string; estado: string; simulado: boolean; motivo_descarte: string | null; motivo_legivel?: string | null; criado_em: string }
-export const statusText = { verde: 'Tudo certo', amarelo: 'Precisa de atenção', vermelho: 'Operação interrompida' };
-export function repairLink(type: string): string {
-  if (/whatsapp|sessao|pareamento/.test(type)) return '#pareamento';
-  if (/tag|afiliado/.test(type)) return '#afiliado';
-  if (/horario|limite/.test(type)) return '#horarios';
-  return '#nicho';
+export interface OperationState {
+  semaforo: 'verde' | 'amarelo' | 'vermelho';
+  pausado: boolean;
+  excecoes: Array<{
+    id: string;
+    tipo: string;
+    descricao: string;
+    severidade?: 'amarelo' | 'vermelho';
+    criada_em?: string;
+  }>;
+  enviosPendentes: number;
+}
+
+export interface HistoryRow {
+  id: string;
+  titulo?: string;
+  id_loja?: string;
+  estado: string;
+  simulado?: boolean;
+  criado_em: string;
+  enviado_em?: string | null;
+  motivo_descarte?: string | null;
+  motivo_legivel?: string | null;
+}
+
+export const statusText = {
+  verde: 'Operação normal',
+  amarelo: 'Atenção necessária',
+  vermelho: 'Operação interrompida',
+} as const;
+
+export function repairLink(tipo: string): string {
+  if (tipo.includes('whatsapp') || tipo.includes('desconectado') || tipo === 'whatsapp_desconectado') {
+    return '#pareamento';
+  }
+  if (tipo.includes('tag') || tipo.includes('afiliado') || tipo === 'tag_invalida') {
+    return '#afiliado';
+  }
+  if (tipo.includes('limite') || tipo.includes('horario')) {
+    return '#horarios';
+  }
+  return '#operacao';
 }

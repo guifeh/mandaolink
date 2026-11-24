@@ -43,8 +43,8 @@ export async function startRuntime(options: AppOptions & {
       return { status: 'enviado', mensagemId: `simulado:${message.idempotencyKey}`, simulado: true };
     }
   } : connectors.publisher;
-  const accept = async (message: IncomingMessage) => {
-    if (stopped) throw new Error('ingestao encerrada');
+  const accepting = new Set<Promise<void>>();
+  const persist = async (message: IncomingMessage) => {
     if (!message.externalId.trim() || !message.text.trim() || message.text.length > 100000 || !Number.isFinite(message.publishedAt) ||
         (message.advertisedPriceCents != null && (!Number.isSafeInteger(message.advertisedPriceCents) || message.advertisedPriceCents <= 0))) throw new Error('mensagem de origem invalida');
     const client = await db.connect();
@@ -57,6 +57,13 @@ export async function startRuntime(options: AppOptions & {
       await client.query('COMMIT');
     } catch (error) { await client.query('ROLLBACK'); throw error; }
     finally { client.release(); }
+  };
+  const accept = (message: IncomingMessage) => {
+    if (stopped) return Promise.reject(new Error('ingestao encerrada'));
+    const pending = persist(message);
+    accepting.add(pending);
+    void pending.then(() => accepting.delete(pending), () => accepting.delete(pending));
+    return pending;
   };
   const processPending = async () => {
     const client = await db.connect();
@@ -98,7 +105,7 @@ export async function startRuntime(options: AppOptions & {
     stopped = true; clearInterval(timer); heartbeat.stop();
     try { await connectors.source.stop(); }
     finally {
-      try { await active; }
+      try { await Promise.allSettled([...accepting]); await active; }
       finally { try { await worker?.stop(); } finally { await connectors.reader.close?.(); } }
     }
   })();
