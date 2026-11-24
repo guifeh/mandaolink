@@ -586,3 +586,94 @@ test('janela 18–02 atravessa meia-noite mas a cota SQL reinicia por dia civil 
     await db.query("UPDATE config_nicho SET horario_inicio='08:00',horario_fim='22:00' WHERE id=1");
   }
 });
+
+test('fontes e destino: lista estados, ativa/desativa e bloqueia destino nos dois sentidos', async () => {
+  const token = '7'.repeat(64);
+  await db.query("INSERT INTO auth_sessoes(token_hash,expira_em) VALUES ($1,now()+interval '1 hour')", [
+    createHash('sha256').update(token).digest('hex'),
+  ]);
+  const headers = { cookie: `sessao=${token}` };
+  const fonte = (
+    await db.query(
+      "INSERT INTO fontes(plataforma,identificador_externo,nome,criada_em) VALUES ('whatsapp','1200@g.us','Fonte teste',now()-interval '25 hours') RETURNING id",
+    )
+  ).rows[0].id;
+  assert.equal((await app.inject('/fontes')).statusCode, 401);
+  assert.equal(
+    (await app.inject({ method: 'PUT', url: `/fontes/${fonte}`, headers, payload: { ativa: 'true' } })).statusCode,
+    400,
+  );
+  assert.equal(
+    (await app.inject({ method: 'PUT', url: '/fontes/invalido', headers, payload: { ativa: true } })).statusCode,
+    400,
+  );
+  let list = (await app.inject({ url: '/fontes', headers })).json();
+  assert.equal(list.fontes.find((f: { id: string }) => f.id === fonte).estado, 'quieta');
+  assert.equal(
+    (await app.inject({ method: 'PUT', url: `/fontes/${fonte}`, headers, payload: { ativa: true } })).statusCode,
+    200,
+  );
+  const destination = { ...config, destino_whatsapp_jid: '1200@g.us' };
+  assert.equal((await app.inject({ method: 'PUT', url: '/config', headers, payload: destination })).statusCode, 409);
+  assert.equal(
+    (await app.inject({ method: 'PUT', url: `/fontes/${fonte}`, headers, payload: { ativa: false } })).statusCode,
+    200,
+  );
+  assert.equal((await app.inject({ method: 'PUT', url: '/config', headers, payload: destination })).statusCode, 200);
+  assert.equal(
+    (await app.inject({ method: 'PUT', url: `/fontes/${fonte}`, headers, payload: { ativa: true } })).statusCode,
+    409,
+  );
+  await assert.rejects(db.query('UPDATE fontes SET ativa=true WHERE id=$1', [fonte]), /destino/i);
+  assert.equal(
+    (await app.inject({ method: 'PUT', url: '/config', headers, payload: config })).json().destino_whatsapp_jid,
+    '1200@g.us',
+  );
+  list = (await app.inject({ url: '/fontes', headers })).json();
+  assert.equal(
+    list.fontes.some((f: { id: string }) => f.id === fonte),
+    false,
+  );
+  assert.equal(
+    (
+      await app.inject({
+        method: 'PUT',
+        url: '/config',
+        headers,
+        payload: { ...config, destino_whatsapp_jid: 'telefone' },
+      })
+    ).statusCode,
+    400,
+  );
+  assert.equal(
+    (await app.inject({ method: 'PUT', url: '/config', headers, payload: { ...config, destino_whatsapp_jid: null } }))
+      .statusCode,
+    200,
+  );
+  await db.query(
+    "INSERT INTO excecoes(tipo,severidade,descricao,fonte_id) VALUES ('fonte_perdida','amarelo','Exemplo',$1)",
+    [fonte],
+  );
+  list = (await app.inject({ url: '/fontes', headers })).json();
+  assert.equal(list.fontes.find((f: { id: string }) => f.id === fonte).estado, 'perdida');
+  assert.equal(
+    (await app.inject({ method: 'PUT', url: `/fontes/${fonte}`, headers, payload: { ativa: false } })).statusCode,
+    200,
+  );
+  assert.equal(
+    (await db.query('SELECT 1 FROM excecoes WHERE fonte_id=$1 AND resolvida_em IS NULL', [fonte])).rowCount,
+    0,
+  );
+  assert.ok(list.fontes.some((f: { estado: string }) => f.estado === 'ativa'));
+  assert.equal(
+    (
+      await app.inject({
+        method: 'PUT',
+        url: '/fontes/00000000-0000-0000-0000-000000000000',
+        headers,
+        payload: { ativa: true },
+      })
+    ).statusCode,
+    404,
+  );
+});

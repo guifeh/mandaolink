@@ -20,6 +20,7 @@ test('shell e SW publicos, endpoints operacionais privados na mesma origem', asy
       assert.equal((await app.inject({ url, headers: { accept: 'text/html' } })).statusCode, 401, url);
     }
     assert.equal((await app.inject({ url: '/arquivo-ausente.js', headers: { accept: 'text/html' } })).statusCode, 401);
+    assert.equal((await app.inject('/fontes')).statusCode, 401);
     assert.equal(publicPwaPath('/assets/../config'), false);
   } finally {
     await app.close();

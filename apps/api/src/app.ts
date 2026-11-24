@@ -9,6 +9,7 @@ import { buildDailySummary } from '@mandaolink/core';
 import { registerOperations } from './operations.js';
 import { createPushService } from './push.js';
 import { publicPwaPath, isPwaNavigation } from './static.js';
+import { registerSources, destinationConflict } from './sources.js';
 
 const hash = (value: string) => createHash('sha256').update(value).digest('hex');
 const token = () => randomBytes(32).toString('hex');
@@ -45,6 +46,7 @@ export interface NicheConfig {
   limite_dia: number;
   horario_inicio: string;
   horario_fim: string;
+  destino_whatsapp_jid?: string | null;
 }
 export interface AppOptions {
   db: Pool;
@@ -83,7 +85,8 @@ export async function buildApp(options: AppOptions) {
       req.url.startsWith('/auth/') ||
       (req.method === 'GET' &&
         (publicPwaPath(req.url.split('?')[0]) ||
-          (!req.routeOptions.url && isPwaNavigation(req.url.split('?')[0], req.headers.accept))))
+          ((!req.routeOptions.url || (req.routeOptions.config.pwaNavigation && app.hasReplyDecorator('sendFile'))) &&
+            isPwaNavigation(req.url.split('?')[0], req.headers.accept))))
     )
       return;
     const session = req.cookies.sessao;
@@ -173,31 +176,56 @@ export async function buildApp(options: AppOptions) {
     return reply.code(204).send();
   });
   app.get('/config', async () => (await db.query('SELECT * FROM config_nicho WHERE id=1')).rows[0]);
-  app.put<{ Body: NicheConfig }>('/config', { schema: { body: object(configProperties) } }, async (req, reply) => {
-    const b = req.body;
-    if (b.limite_hora > b.limite_dia)
-      return reply.code(400).send({ erro: 'O limite por hora não pode ser maior que o limite diário.' });
-    if (b.horario_inicio === b.horario_fim)
-      return reply.code(400).send({ erro: 'Os horários de início e término devem ser diferentes.' });
-    return (
-      await db.query(
-        `UPDATE config_nicho SET nome=$1, palavras_chave=$2, palavras_bloqueadas=$3,
-      categorias=$4, tag_amazon=$5, limite_hora=$6, limite_dia=$7, horario_inicio=$8, horario_fim=$9, atualizado_em=now()
+  app.put<{ Body: NicheConfig }>(
+    '/config',
+    {
+      schema: {
+        body: object(
+          {
+            ...configProperties,
+            destino_whatsapp_jid: {
+              anyOf: [{ type: 'string', maxLength: 128, pattern: '^[0-9]+(-[0-9]+)?@g\\.us$' }, { type: 'null' }],
+            },
+          },
+          Object.keys(configProperties),
+        ),
+      },
+    },
+    async (req, reply) => {
+      const b = req.body;
+      if (b.limite_hora > b.limite_dia)
+        return reply.code(400).send({ erro: 'O limite por hora não pode ser maior que o limite diário.' });
+      if (b.horario_inicio === b.horario_fim)
+        return reply.code(400).send({ erro: 'Os horários de início e término devem ser diferentes.' });
+      try {
+        return (
+          await db.query(
+            `UPDATE config_nicho SET nome=$1, palavras_chave=$2, palavras_bloqueadas=$3,
+      categorias=$4, tag_amazon=$5, limite_hora=$6, limite_dia=$7, horario_inicio=$8, horario_fim=$9,
+      destino_whatsapp_jid=CASE WHEN $10::boolean THEN $11 ELSE destino_whatsapp_jid END, atualizado_em=now()
       WHERE id=1 RETURNING *`,
-        [
-          b.nome,
-          b.palavras_chave,
-          b.palavras_bloqueadas,
-          b.categorias,
-          b.tag_amazon,
-          b.limite_hora,
-          b.limite_dia,
-          b.horario_inicio,
-          b.horario_fim,
-        ],
-      )
-    ).rows[0];
-  });
+            [
+              b.nome,
+              b.palavras_chave,
+              b.palavras_bloqueadas,
+              b.categorias,
+              b.tag_amazon,
+              b.limite_hora,
+              b.limite_dia,
+              b.horario_inicio,
+              b.horario_fim,
+              Object.hasOwn(b, 'destino_whatsapp_jid'),
+              b.destino_whatsapp_jid ?? null,
+            ],
+          )
+        ).rows[0];
+      } catch (error) {
+        if (destinationConflict(error))
+          return reply.code(409).send({ erro: 'Desative a fonte antes de escolher esse grupo como destino.' });
+        throw error;
+      }
+    },
+  );
   app.put<{ Body: { pausado: boolean } }>(
     '/pausa',
     { schema: { body: object({ pausado: { type: 'boolean' } }) } },
@@ -313,6 +341,7 @@ export async function buildApp(options: AppOptions) {
       };
     },
   );
+  registerSources(app, db);
   registerOperations(
     app,
     db,
