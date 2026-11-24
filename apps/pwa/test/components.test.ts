@@ -117,18 +117,18 @@ test('Tela Nicho: validação e adição de palavras do nicho e proibidas', asyn
 test('Tela Horários e Limites: validação estrita de horários e proporção hora/dia', async () => {
   const validar = (inicio: string, fim: string, hora: number, dia: number) => {
     if (!inicio || !fim) return 'Informe o horário de início e término.';
-    if (inicio >= fim) return 'O horário de início deve ser anterior ao horário de término.';
+    if (inicio === fim) return 'Os horários de início e término devem ser diferentes.';
     if (hora <= 0) return 'O máximo por hora deve ser pelo menos 1.';
     if (dia <= 0) return 'O máximo por dia deve ser pelo menos 1.';
     if (hora > dia) return 'O limite por hora não pode ser maior que o limite diário.';
     return null;
   };
 
-  // Horário invertido
-  assert.equal(validar('22:00', '08:00', 5, 30), 'O horário de início deve ser anterior ao horário de término.');
+  // Horário que atravessa a meia-noite (início > fim) é válido na Fase B
+  assert.equal(validar('22:00', '08:00', 5, 30), null);
 
   // Horários iguais
-  assert.equal(validar('10:00', '10:00', 5, 30), 'O horário de início deve ser anterior ao horário de término.');
+  assert.equal(validar('10:00', '10:00', 5, 30), 'Os horários de início e término devem ser diferentes.');
 
   // Limite por hora maior que dia
   assert.equal(validar('08:00', '22:00', 50, 30), 'O limite por hora não pode ser maior que o limite diário.');

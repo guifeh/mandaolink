@@ -8,6 +8,9 @@ interface Props {
 
 export function AffiliateAccountPage({ apiClient = api }: Props) {
   const [tagAmazon, setTagAmazon] = useState('');
+  const [tagOriginal, setTagOriginal] = useState('');
+  const [confirmandoTroca, setConfirmandoTroca] = useState(false);
+  const [erroTag, setErroTag] = useState<string | null>(null);
   const [carregando, setCarregando] = useState(true);
   const [salvando, setSalvando] = useState(false);
   const [feedback, setFeedback] = useState<FeedbackMsg | null>(null);
@@ -20,11 +23,12 @@ export function AffiliateAccountPage({ apiClient = api }: Props) {
     try {
       setCarregando(true);
       const conf = await apiClient.fetchConfig();
-      setTagAmazon(conf.tag_amazon ?? '');
+      const tag = conf.tag_amazon ?? '';
+      setTagAmazon(tag);
+      setTagOriginal(tag);
       setFeedback(null);
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Falha ao carregar';
-      setFeedback({ tipo: 'erro', texto: msg });
+    } catch {
+      setFeedback({ tipo: 'erro', texto: 'Não foi possível carregar a tag. Tente novamente mais tarde.' });
     } finally {
       setCarregando(false);
     }
@@ -43,27 +47,45 @@ export function AffiliateAccountPage({ apiClient = api }: Props) {
     return null;
   }
 
-  async function salvar(e: React.FormEvent) {
-    e.preventDefault();
-    const erroValidacao = validarTag(tagAmazon);
-    if (erroValidacao) {
-      setFeedback({ tipo: 'erro', texto: erroValidacao });
-      return;
-    }
-
+  async function executarSalvar(tag: string) {
     try {
       setSalvando(true);
       setFeedback(null);
       await apiClient.updateConfig({
-        tag_amazon: tagAmazon.trim().toLowerCase(),
+        tag_amazon: tag,
       });
+      setTagOriginal(tag);
+      setConfirmandoTroca(false);
       setFeedback({ tipo: 'sucesso', texto: 'Tag da Amazon salva com sucesso!' });
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Erro ao salvar alterações';
-      setFeedback({ tipo: 'erro', texto: msg });
+    } catch (err) {
+      console.error(err);
+      setFeedback({
+        tipo: 'erro',
+        texto: 'Não foi possível salvar a tag da Amazon. Confira a conexão e tente de novo.',
+      });
     } finally {
       setSalvando(false);
     }
+  }
+
+  async function salvar(e: React.FormEvent) {
+    e.preventDefault();
+    setErroTag(null);
+    const erroValidacao = validarTag(tagAmazon);
+    if (erroValidacao) {
+      setErroTag(erroValidacao);
+      return;
+    }
+
+    const tagLimpa = tagAmazon.trim().toLowerCase();
+
+    // Se já havia tag cadastrada e ela está sendo alterada, pede confirmação
+    if (tagOriginal && tagLimpa !== tagOriginal) {
+      setConfirmandoTroca(true);
+      return;
+    }
+
+    await executarSalvar(tagLimpa);
   }
 
   if (carregando) {
@@ -83,6 +105,45 @@ export function AffiliateAccountPage({ apiClient = api }: Props) {
 
       <Feedback msg={feedback} />
 
+      {/* Caixa de confirmação para troca de tag */}
+      {confirmandoTroca && (
+        <div
+          className="card"
+          role="alert"
+          style={{
+            borderColor: '#f59e0b',
+            background: '#fffbeb',
+            marginBottom: '16px',
+          }}
+        >
+          <p style={{ fontWeight: 600, color: '#92400e', marginBottom: '12px' }}>
+            Trocar a tag muda para onde vão as comissões dos próximos envios. Os links já publicados continuam com a tag
+            antiga. Continuar?
+          </p>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => void executarSalvar(tagAmazon.trim().toLowerCase())}
+              disabled={salvando}
+            >
+              {salvando ? 'Salvando…' : 'Confirmar e salvar'}
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => {
+                setConfirmandoTroca(false);
+                setTagAmazon(tagOriginal);
+              }}
+              disabled={salvando}
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      )}
+
       <form onSubmit={salvar}>
         <div className="card">
           <h2 className="card-title">Tag da Amazon</h2>
@@ -100,14 +161,25 @@ export function AffiliateAccountPage({ apiClient = api }: Props) {
               className="form-input"
               placeholder="exemplo: meucanal-20"
               value={tagAmazon}
-              onChange={(e) => setTagAmazon(e.target.value.toLowerCase())}
+              onChange={(e) => {
+                setTagAmazon(e.target.value.toLowerCase());
+                setErroTag(null);
+                setConfirmandoTroca(false);
+              }}
+              aria-invalid={erroTag ? 'true' : 'false'}
+              aria-describedby={erroTag ? 'erro-tag-amazon' : undefined}
               required
             />
+            {erroTag && (
+              <span id="erro-tag-amazon" className="field-error" role="alert">
+                {erroTag}
+              </span>
+            )}
           </div>
         </div>
 
         <button type="submit" className="btn btn-primary" disabled={salvando}>
-          {salvando ? 'Salvando...' : 'Salvar tag da Amazon'}
+          {salvando ? 'Salvando…' : 'Salvar tag da Amazon'}
         </button>
       </form>
     </div>
