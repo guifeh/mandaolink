@@ -1,8 +1,15 @@
 /*
- * MandaoLink — componentes base da direção "Faixa de sinal".
+ * MandaoLink — componentes base. Direção "Faixa de sinal", paleta Cobalto, pele v2.
  * Depende de tokens.css. Prefixo .ml- para conviver com o CSS atual até a migração.
  * Sem lógica: estados vêm de modificadores (--verde) ou de atributos ARIA (aria-current, aria-invalid, aria-busy).
+ * A seção "Pele v2" no fim deste arquivo vale sobre a base: navegação flutuante, profundidade e movimento.
  */
+
+@property --n {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
 
 /* ---------- Base ---------- */
 .ml-app,
@@ -1000,5 +1007,379 @@ button.ml-item:hover {
 @media (min-width: 960px) {
   .ml-barra-salvar {
     bottom: var(--esp-6);
+  }
+}
+
+/* ---------- Validade do código de pareamento ---------- */
+.ml-validade {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  font-size: var(--texto-sm);
+  color: var(--cor-tinta-suave);
+}
+.ml-validade strong {
+  color: var(--cor-tinta);
+}
+.ml-validade__barra {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--cor-divisoria);
+  overflow: hidden;
+  position: relative;
+}
+.ml-validade__barra::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--cor-casco);
+  transform-origin: left;
+  transform: scaleX(var(--resta, 1));
+  transition: transform 1s linear;
+}
+
+/* =====================================================================
+ * Pele v2 (aprovada em 24/11/2026): navegação flutuante de vidro, cantos
+ * maiores, profundidade em camadas e microinterações. Vale sobre a base acima.
+ * ===================================================================== */
+
+/* Troca de tela suave (View Transitions). No SPA: document.startViewTransition(). */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root) {
+  animation: 180ms ease-in both ml-sai;
+}
+::view-transition-new(root) {
+  animation: 260ms var(--curva-saida) both ml-entra;
+}
+@keyframes ml-sai {
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+@keyframes ml-entra {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* ---------- Faixa de sinal: cartão grande com brilho da própria cor ---------- */
+.ml-sinal {
+  --sinal-texto: var(--sobre-sinal, #fff);
+  margin: calc(var(--area-segura-topo) + 10px) 10px 0;
+  border-radius: var(--raio-xl);
+  padding: var(--esp-5) 22px var(--esp-6);
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in oklab, var(--sinal-fundo) 72%, #fff) 0%, transparent 60%),
+    var(--sinal-fundo);
+  box-shadow: 0 20px 44px -22px color-mix(in oklab, var(--sinal-fundo) 80%, transparent);
+  transition:
+    background-color var(--dur-media) var(--curva-saida),
+    box-shadow var(--dur-media) var(--curva-saida);
+}
+.ml-sinal--verde {
+  --sobre-sinal: var(--cor-sobre-verde, #fff);
+}
+.ml-sinal--vermelho {
+  --sobre-sinal: var(--cor-sobre-vermelho, #fff);
+}
+.ml-sinal--pausado {
+  --sobre-sinal: var(--cor-sobre-pausado, #fff);
+}
+.ml-sinal--amarelo {
+  --sobre-sinal: var(--cor-amarelo-tinta);
+  border-bottom: 0;
+  box-shadow:
+    inset 0 0 0 1.5px color-mix(in oklab, var(--cor-amarelo) 55%, transparent),
+    0 20px 44px -26px color-mix(in oklab, var(--cor-amarelo) 70%, transparent);
+}
+.ml-sinal--carregando {
+  --sobre-sinal: var(--cor-tinta-suave);
+}
+.ml-botao--na-faixa {
+  background: var(--botao-faixa-fundo, #fff);
+  color: var(--sinal-fundo);
+  box-shadow: 0 6px 16px -8px rgb(0 0 0 / 0.35);
+}
+.ml-sinal--amarelo .ml-botao--na-faixa {
+  background: var(--cor-amarelo-tinta);
+  color: var(--cor-sobre-amarelo-acao, #fff);
+}
+
+/* ---------- Superfícies em camadas ---------- */
+.ml-item,
+.ml-opcao,
+.ml-filtro,
+.ml-aviso:not(.ml-aviso--teste),
+.ml-previa {
+  border-color: var(--item-borda, transparent);
+  box-shadow: var(--sombra-1);
+}
+.ml-item {
+  border-radius: 18px;
+  transition:
+    transform 160ms var(--curva-saida),
+    box-shadow 160ms var(--curva-saida);
+}
+a.ml-item:hover,
+button.ml-item:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--sombra-2);
+  border-color: var(--item-borda, transparent);
+}
+a.ml-item:active {
+  transform: scale(0.985);
+}
+.ml-vazio {
+  border-radius: 20px;
+  background: color-mix(in oklab, var(--cor-superficie) 60%, transparent);
+}
+
+/* ---------- Botões: pressão com mola ---------- */
+.ml-botao {
+  border-radius: 14px;
+  transition:
+    transform 220ms var(--mola),
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+.ml-botao:active:not(:disabled) {
+  transform: scale(0.96);
+}
+.ml-botao--principal {
+  background: var(--cor-casco);
+  color: var(--cor-sobre-marca, #fff);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.18),
+    0 8px 20px -10px color-mix(in oklab, var(--cor-casco) 85%, transparent);
+}
+.ml-botao--principal:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--cor-casco) 88%, var(--cor-tinta));
+}
+.ml-botao--secundario {
+  border-color: var(--item-borda, transparent);
+  box-shadow: var(--sombra-1);
+}
+.ml-botao--perigo {
+  color: var(--cor-sobre-vermelho, #fff);
+}
+
+/* ---------- Filtro com pílula ---------- */
+.ml-filtro {
+  border-radius: 16px;
+}
+.ml-filtro label {
+  border-radius: 12px;
+  transition:
+    background-color 220ms var(--curva-saida),
+    color 220ms var(--curva-saida);
+}
+.ml-filtro label:has(input:checked) {
+  background: var(--cor-casco);
+  color: var(--cor-sobre-marca, #fff);
+}
+
+/* ---------- Chips que entram com mola ---------- */
+.ml-chip {
+  border-radius: 999px;
+  animation: ml-chip-entra 260ms var(--mola) both;
+}
+@keyframes ml-chip-entra {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+
+/* ---------- Números do dia que contam até o valor ---------- */
+.ml-conta {
+  --n: var(--alvo);
+  counter-reset: n var(--n);
+  animation: ml-conta 900ms var(--curva-saida) both;
+  font-variant-numeric: tabular-nums;
+}
+.ml-conta::before {
+  content: counter(n);
+}
+@keyframes ml-conta {
+  from {
+    --n: 0;
+  }
+  to {
+    --n: var(--alvo);
+  }
+}
+
+/* ---------- Navegação flutuante com vidro ---------- */
+.ml-conteudo {
+  padding-bottom: calc(var(--altura-nav) + var(--nav-margem) + var(--area-segura-baixo) + var(--esp-8));
+}
+.ml-nav {
+  inset: auto var(--nav-margem) calc(var(--nav-margem) + var(--area-segura-baixo)) var(--nav-margem);
+  height: var(--altura-nav);
+  padding: 6px;
+  gap: 4px;
+  border-radius: 24px;
+  background: var(--nav-fundo);
+  border: 1px solid var(--nav-borda);
+  box-shadow: var(--sombra-nav);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  backdrop-filter: blur(20px) saturate(1.8);
+}
+.ml-nav__item {
+  flex: 1;
+  min-width: 0;
+  gap: 3px;
+  border-radius: 18px;
+  color: var(--nav-texto);
+  font-size: 11px;
+  letter-spacing: 0.01em;
+  isolation: isolate;
+  transition: color 220ms var(--curva-saida);
+}
+.ml-nav__item svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.6;
+}
+/* No app, uma única pílula desliza entre as abas (transform: translateX). No protótipo, ela aparece na aba ativa. */
+.ml-nav__item[aria-current='page'] {
+  color: var(--nav-ativo-texto);
+  font-weight: var(--peso-medio);
+}
+.ml-nav__item[aria-current='page']::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--nav-ativo-fundo);
+  animation: ml-pilula 320ms var(--mola) both;
+}
+@keyframes ml-pilula {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+}
+.ml-nav__contador {
+  top: 4px;
+  background: var(--cor-vermelho);
+  color: var(--cor-sobre-vermelho, #fff);
+  box-shadow: 0 0 0 2px var(--nav-anel-contador, #fff);
+}
+
+@media (min-width: 960px) {
+  .ml-app {
+    grid-template-columns: calc(var(--largura-trilho) + 2 * 16px) minmax(0, 1fr);
+  }
+  .ml-nav {
+    position: sticky;
+    top: 16px;
+    inset: auto;
+    margin: 16px;
+    height: calc(100dvh - 32px);
+    padding: var(--esp-5) var(--esp-3);
+    border-radius: var(--raio-xl);
+  }
+  .ml-nav__marca {
+    color: var(--nav-ativo-texto-marca, var(--cor-tinta));
+  }
+  .ml-nav__item {
+    flex: none;
+    height: auto;
+    min-height: 44px;
+    border-radius: 14px;
+    font-size: var(--texto-sm);
+  }
+  .ml-conteudo {
+    padding-bottom: var(--esp-10);
+  }
+  .ml-sinal {
+    margin: var(--esp-6) 0 0;
+  }
+}
+
+/* ---------- Folha de confirmação ---------- */
+.ml-folha {
+  border-radius: var(--raio-xl) var(--raio-xl) 0 0;
+  box-shadow: 0 -20px 60px -20px rgb(0 0 0 / 0.35);
+  animation-timing-function: var(--mola);
+}
+@media (min-width: 960px) {
+  .ml-folha {
+    border-radius: var(--raio-xl);
+  }
+}
+
+/* ---------- Movimento reduzido: tudo instantâneo, números já no valor final ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .ml-chip,
+  .ml-conta,
+  .ml-nav__item[aria-current='page']::before,
+  .ml-folha {
+    animation: none;
+  }
+  .ml-item,
+  .ml-botao,
+  .ml-sinal {
+    transition: none;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* Botão secundário dentro de um cartão: fundo do chão para não sumir no branco */
+.ml-item .ml-botao--secundario,
+.ml-vazio .ml-botao--secundario {
+  background: var(--cor-chao);
+  box-shadow: none;
+}
+
+/* ---------- Folga da barra flutuante (todas as telas roláveis) ---------- */
+/* O último item sempre termina acima da barra: altura da barra + margem + safe-area + respiro. */
+.ml-conteudo {
+  padding-bottom: var(--esp-6);
+}
+.ml-app:has(> .ml-nav) .ml-principal {
+  padding-bottom: var(--folga-nav);
+}
+@media (min-width: 960px) {
+  .ml-app:has(> .ml-nav) .ml-principal {
+    padding-bottom: var(--esp-10);
+  }
+}
+
+/* ---------- Início em duas colunas no computador ---------- */
+/* Celular: estado e pendências em cima, o dia embaixo. Computador (≥ 1100 px): estado | dia. */
+@media (min-width: 1100px) {
+  .ml-principal:has(.ml-inicio) {
+    max-width: calc(var(--largura-painel) + 2 * var(--esp-8));
+  }
+  .ml-inicio {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: var(--esp-8);
+    align-items: start;
+  }
+  .ml-inicio__dia {
+    padding-top: var(--esp-6);
+  }
+  .ml-inicio__estado > .ml-conteudo {
+    padding-top: var(--esp-6);
+  }
+}
+
+/* ---------- Listas em grade no computador (ex.: Pendências) ---------- */
+@media (min-width: 1100px) {
+  .ml-lista--grade {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    align-items: start;
   }
 }
