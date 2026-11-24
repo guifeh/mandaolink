@@ -13,6 +13,7 @@ import type {
   SendOutcome,
   SocketFactory,
   SourceMessage,
+  StatusEvent,
   WaSocket,
   WaStatus,
   WhatsAppConnector,
@@ -141,6 +142,24 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
   let sock: WaSocket | null = null;
   let auth: AuthBundle | null = null;
   let state: WaStatus = 'parado';
+  const statusHandlers = new Set<(s: StatusEvent) => void>();
+  /** Muda o estado e avisa os ouvintes. Cada QR novo é avisado mesmo sem mudar de estado. */
+  const setState = (next: WaStatus, qr?: string) => {
+    if (next === state && !qr) return;
+    state = next;
+    const ev: StatusEvent = qr ? { estado: next, qr } : { estado: next };
+    notify(ev);
+  };
+  /** Ouvinte com erro não pode interromper o fluxo de conexão (QR, alertas, reconexão). */
+  function notify(ev: StatusEvent, only?: (s: StatusEvent) => void) {
+    for (const h of only ? [only] : statusHandlers) {
+      try {
+        h(ev);
+      } catch (e) {
+        onError(e);
+      }
+    }
+  }
   let open = false;
   let attempt = 0;
   let stopped = false;
@@ -221,13 +240,13 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
     s.ev.on('connection.update', (u: ConnectionUpdate) => {
       if (!current()) return;
       if (u.qr) {
-        state = 'aguardando_pareamento';
+        setState('aguardando_pareamento', u.qr);
         for (const w of qrWaiters.splice(0)) w(u.qr);
       }
       if (u.connection === 'open') {
         open = true;
         attempt = 0;
-        state = 'conectado';
+        setState('conectado');
         clearAlert();
         safe(o.exceptions.resolve('desconectado'));
         safe(o.exceptions.resolve('sessao_invalidada'));
@@ -239,18 +258,18 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
         const code = u.lastDisconnect?.error?.output?.statusCode;
         const fatal = code !== undefined ? FATAL.get(code) : undefined;
         if (fatal) {
-          state = fatal.tipo === 'numero_bloqueado' ? 'numero_bloqueado' : 'sessao_invalida';
+          setState(fatal.tipo === 'numero_bloqueado' ? 'numero_bloqueado' : 'sessao_invalida');
           clearAlert();
           safe(o.exceptions.resolve('desconectado'));
           safe(o.exceptions.open({ tipo: fatal.tipo, descricao: fatal.descricao, severidade: 'vermelho' }));
           return;
         }
         if (code === CODE.restartRequired) {
-          state = 'conectando';
+          setState('conectando');
           scheduleReconnect(true);
           return;
         }
-        state = 'reconectando';
+        setState('reconectando');
         // Aviso só se a queda durar mais de 10 min; até lá, só reconecta.
         alertTimer ??= setTimeout(() => {
           alertTimer = null;
@@ -319,7 +338,7 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
     auth ??= await o.auth();
     const gen = ++generation;
     open = false;
-    state = attempt === 0 && state !== 'reconectando' ? 'conectando' : 'reconectando';
+    setState(attempt === 0 && state !== 'reconectando' ? 'conectando' : 'reconectando');
     sock = await o.socketFactory(auth);
     wire(sock, gen);
   }
@@ -401,6 +420,14 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
       msgHandlers.add(h);
       return () => msgHandlers.delete(h);
     },
+    onStatus(h) {
+      statusHandlers.add(h);
+      // Estado atual na inscrição: um cliente SSE novo não precisa esperar a próxima mudança.
+      queueMicrotask(() => {
+        if (statusHandlers.has(h)) notify({ estado: state }, h);
+      });
+      return () => statusHandlers.delete(h);
+    },
     onEcho(h) {
       echoHandlers.add(h);
       return () => echoHandlers.delete(h);
@@ -433,7 +460,7 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
       if (reconnectTimer) clearTimeout(reconnectTimer);
       clearAlert();
       open = false;
-      state = 'parado';
+      setState('parado');
       sock?.end();
       sock = null;
     },

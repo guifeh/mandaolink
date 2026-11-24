@@ -50,6 +50,7 @@ const publisher = createWhatsAppPublisher(wa);              // Publisher do send
 - `pairByCode('+55 11 9…')` devolve um código de 8 caracteres. O cliente digita no celular, em Aparelhos conectados → Conectar com número de telefone. O conector espera o socket ficar pronto antes de pedir o código.
 - `pairByQR()` devolve o texto do QR, que o PWA desenha. O QR muda a cada ~20 s; chame de novo para pegar o próximo.
 - `status()`: `parado | conectando | aguardando_pareamento | conectado | reconectando | sessao_invalida | numero_bloqueado`.
+- `onStatus(h)` → unsubscribe: avisa `{ estado, qr? }` a cada mudança de estado e a cada QR novo. Encaixa no `PairingService.subscribe` da P6 (SSE `/pareamento/eventos`); o `qr` vale ~20 s.
 
 ## Reconciliação (S4)
 `onEcho` entrega `{ grupoExternoId, mensagemExternaId, textoHash, em }`. O `textoHash` usa o mesmo sha256 do `envios.texto_hash`. O reconciliador promove `incerto → enviado` por `mensagem_externa_id` ou, se não houver, por `texto_hash` + destino nos 10 min seguintes. A corrida eco × ack está fechada: o `queue-store.confirmed` do Pleno aceita o envio já `enviado` sem sobrescrever o id conciliado.
