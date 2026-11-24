@@ -63,7 +63,7 @@ export function OperationsPage() {
       ) : (
         <>
           <section
-            className={`operation-status operation-status-${state.semaforo}`}
+            className={`operation-status operation-status-${state.pausado ? 'pausado' : state.semaforo}`}
             aria-label="Status da operação"
             role="status"
           >

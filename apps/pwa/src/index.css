@@ -8,6 +8,7 @@
   --border: #e2e8f0;
   --danger: #ef4444;
   --success: #10b981;
+  --warning: #fde68a;
 }
 
 * {
@@ -102,11 +103,16 @@ body {
 }
 
 .operation-status-amarelo {
-  background: yellow;
+  background: var(--warning);
 }
 
 .operation-status-vermelho {
   background: var(--danger);
+}
+
+.operation-status-pausado {
+  background: var(--bg);
+  border: 1px solid var(--border);
 }
 
 .operation-status-title {
