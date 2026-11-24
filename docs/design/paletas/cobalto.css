@@ -1,0 +1,41 @@
+/* Paleta "Cobalto" — proposta em validação. Contrastes em paletas/contrastes.json. */
+:root {
+  color-scheme: light;
+  --cor-chao: #f1f3f9;
+  --cor-superficie: #ffffff;
+  --cor-tinta: #10142b;
+  --cor-tinta-suave: #525a78;
+  --cor-borda-campo: #858ca6;
+  --cor-divisoria: #e0e4f0;
+  --cor-casco: #2541d8;
+  --cor-sobre-marca: #ffffff;
+  --cor-casco-texto: #525a78;
+  --cor-foco: #2541d8;
+  --cor-verde: #0f7a55;
+  --cor-verde-claro: #e1f3eb;
+  --cor-verde-tinta: #0a5a3e;
+  --cor-sobre-verde: #ffffff;
+  --cor-amarelo: #c26a00;
+  --cor-amarelo-claro: #ffefd6;
+  --cor-amarelo-tinta: #6e3a00;
+  --cor-sobre-amarelo-acao: #ffffff;
+  --cor-vermelho-claro: #fdeceb;
+  --cor-vermelho-tinta: #9a1d14;
+  --cor-sobre-vermelho: #ffffff;
+  --cor-sobre-pausado: #ffffff;
+  --botao-faixa-fundo: #ffffff;
+  --cor-vermelho: #cc2a1f;
+  --cor-pausado: #3b4160;
+  --nav-fundo: rgb(255 255 255 / 0.74);
+  --nav-solido: #ffffff;
+  --nav-borda: rgb(16 20 43 / 0.06);
+  --nav-texto: #525a78;
+  --nav-ativo-fundo: #2541d8;
+  --nav-ativo-solido: #2541d8;
+  --nav-ativo-texto: #ffffff;
+  --nav-ativo-texto-marca: #10142b;
+  --nav-anel-contador: #ffffff;
+  --sombra-1: 0 1px 2px rgb(16 20 43 / 0.05), 0 6px 18px -6px rgb(37 65 216 / 0.1);
+  --sombra-2: 0 2px 4px rgb(16 20 43 / 0.06), 0 16px 32px -12px rgb(37 65 216 / 0.22);
+  --sombra-nav: 0 18px 40px -14px rgb(16 20 43 / 0.28);
+}

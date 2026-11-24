@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0e3b43" />
+    <title>Primeira configuração — protótipo MandaoLink</title>
+    <!-- Só no protótipo: no app, a Archivo é servida pelo próprio PWA (@fontsource-variable/archivo). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../apps/pwa/src/styles/tokens.css" />
+    <link rel="stylesheet" href="../../../apps/pwa/src/styles/componentes.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body class="ml-app">
+    <a class="ml-pular" href="#conteudo">Pular para o conteúdo</a>
+
+    <main class="ml-principal" id="conteudo">
+      <div class="ml-aviso ml-aviso--teste" role="status">
+        <span class="ml-aviso__texto">Modo teste: nada está sendo enviado ao grupo</span>
+      </div>
+
+      <section class="ml-sinal ml-sinal--verde" aria-live="polite">
+        <div class="ml-sinal__topo">
+          <span class="ml-sinal__marca">MandaoLink</span><span class="ml-sinal__atualizado">agora</span>
+        </div>
+        <h1 class="ml-sinal__frase">Tudo pronto</h1>
+        <p class="ml-sinal__motivo">
+          O sistema começa em modo teste: as ofertas aprovadas ficam só no histórico e nada vai para o grupo até o modo
+          teste ser desligado.
+        </p>
+        <div class="ml-sinal__acoes">
+          <button type="button" class="ml-botao ml-botao--na-faixa ml-botao--largo">Ir para o início</button>
+        </div>
+      </section>
+      <div class="ml-conteudo">
+        <p class="ml-resumo">
+          Nos próximos dias, olhe o Histórico para ver o que seria publicado. É o melhor jeito de ajustar o nicho.
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f3f4f6" />
+    <title>Histórico — protótipo MandaoLink</title>
+    <!-- Só no protótipo: no app, a Archivo é servida pelo próprio PWA (@fontsource-variable/archivo). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../../apps/pwa/src/styles/tokens.css" />
+    <link rel="stylesheet" href="../../../../apps/pwa/src/styles/componentes.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+      }
+    </style>
+    <link rel="stylesheet" href="../nanquim.css" />
+    <link rel="stylesheet" href="../pele-v2.css" />
+  </head>
+  <body class="ml-app">
+    <a class="ml-pular" href="#conteudo">Pular para o conteúdo</a>
+    <nav class="ml-nav" aria-label="Navegação principal">
+      <span class="ml-nav__marca">MandaoLink</span>
+      <a class="ml-nav__item" href="#"
+        ><svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="1.6" />
+          <path
+            d="M8.6 8.6a4.8 4.8 0 0 0 0 6.8M15.4 8.6a4.8 4.8 0 0 1 0 6.8M5.7 5.7a8.9 8.9 0 0 0 0 12.6M18.3 5.7a8.9 8.9 0 0 1 0 12.6"
+          /></svg
+        ><span>Início</span></a
+      >
+      <a class="ml-nav__item" href="#"
+        ><svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.5 16.5V11a5.5 5.5 0 0 1 11 0v5.5l1.5 2h-14z" />
+          <path d="M10 20.5a2 2 0 0 0 4 0" /></svg
+        ><span>Pendências</span></a
+      >
+      <a class="ml-nav__item" href="#" aria-current="page"
+        ><svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3.5 12a8.5 8.5 0 1 0 2.5-6" />
+          <path d="M3.5 4v4.5H8" />
+          <path d="M12 7.5V12l3 2" /></svg
+        ><span>Histórico</span></a
+      >
+      <a class="ml-nav__item" href="#"
+        ><svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 4v5M6 13v7M12 4v1.5M12 9.5V20M18 4v9.5M18 17.5V20" />
+          <circle cx="6" cy="11" r="2" />
+          <circle cx="12" cy="7.5" r="2" />
+          <circle cx="18" cy="15.5" r="2" /></svg
+        ><span>Ajustes</span></a
+      >
+    </nav>
+    <main class="ml-principal" id="conteudo">
+      <div class="ml-conteudo">
+        <header>
+          <h1 class="ml-tela-titulo">Histórico</h1>
+          <p class="ml-tela-desc">O que foi para o grupo e o que ficou de fora, com o motivo.</p>
+        </header>
+        <fieldset class="ml-filtro" style="border: var(--borda) solid var(--cor-divisoria); margin: 0">
+          <legend class="ml-so-leitor">Mostrar</legend>
+          <label><input type="radio" name="f" checked /><span>Todas</span></label
+          ><label><input type="radio" name="f" /><span>Enviadas</span></label
+          ><label><input type="radio" name="f" /><span>Descartadas</span></label
+          ><label><input type="radio" name="f" /><span>Incertas</span></label>
+        </fieldset>
+        <section class="ml-secao">
+          <h2 class="ml-secao__titulo">Hoje, 24 de novembro</h2>
+          <ul class="ml-lista">
+            <li>
+              <a class="ml-item" href="#"
+                ><span class="ml-item__texto"
+                  ><span class="ml-item__titulo">Suporte veicular magnético com carregador por indução 15W</span
+                  ><span class="ml-item__meta">Às 10h42</span></span
+                ><span class="ml-item__lado"
+                  ><span class="ml-num">R$ 89,90</span><br /><span class="ml-etiqueta ml-etiqueta--verde"
+                    >Enviada</span
+                  ></span
+                ><svg class="ml-item__seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg
+              ></a>
+            </li>
+            <li>
+              <a class="ml-item" href="#"
+                ><span class="ml-item__texto"
+                  ><span class="ml-item__titulo">Kit tapete automotivo de borracha, 5 peças</span
+                  ><span class="ml-item__meta">Às 10h31. Oferta já enviada recentemente</span></span
+                ><span class="ml-item__lado"><span class="ml-etiqueta">Descartada</span></span
+                ><svg class="ml-item__seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg
+              ></a>
+            </li>
+            <li>
+              <a class="ml-item" href="#"
+                ><span class="ml-item__texto"
+                  ><span class="ml-item__titulo">Carregador veicular USB-C 45W</span
+                  ><span class="ml-item__meta">Às 10h12. Não confirmamos se saiu</span></span
+                ><span class="ml-item__lado"
+                  ><span class="ml-num">R$ 49,90</span><br /><span class="ml-etiqueta ml-etiqueta--amarelo"
+                    >Incerta</span
+                  ></span
+                ><svg class="ml-item__seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg
+              ></a>
+            </li>
+            <li>
+              <a class="ml-item" href="#"
+                ><span class="ml-item__texto"
+                  ><span class="ml-item__titulo">Carrinho de controle remoto off-road</span
+                  ><span class="ml-item__meta">Às 9h40. Contém palavra proibida</span></span
+                ><span class="ml-item__lado"><span class="ml-etiqueta">Descartada</span></span
+                ><svg class="ml-item__seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg
+              ></a>
+            </li>
+          </ul>
+        </section>
+        <section class="ml-secao">
+          <h2 class="ml-secao__titulo">Ontem, 23 de novembro</h2>
+          <ul class="ml-lista">
+            <li>
+              <a class="ml-item" href="#"
+                ><span class="ml-item__texto"
+                  ><span class="ml-item__titulo">Aspirador portátil automotivo 120W</span
+                  ><span class="ml-item__meta">Às 21h05</span></span
+                ><span class="ml-item__lado"
+                  ><span class="ml-num">R$ 129,00</span><br /><span class="ml-etiqueta ml-etiqueta--verde"
+                    >Enviada</span
+                  ></span
+                ><svg class="ml-item__seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg
+              ></a>
+            </li>
+            <li>
+              <a class="ml-item" href="#"
+                ><span class="ml-item__texto"
+                  ><span class="ml-item__titulo">Calibrador de pneu digital</span
+                  ><span class="ml-item__meta">Às 20h48. Preço subiu ou oferta acabou</span></span
+                ><span class="ml-item__lado"><span class="ml-etiqueta">Descartada</span></span
+                ><svg class="ml-item__seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg
+              ></a>
+            </li>
+          </ul>
+        </section>
+        <p class="ml-campo__ajuda" style="text-align: center">Carregando mais…</p>
+      </div>
+    </main>
+  </body>
+</html>

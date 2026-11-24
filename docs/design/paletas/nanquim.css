@@ -1,0 +1,41 @@
+/* Paleta "Nanquim" — proposta em validação. Contrastes em paletas/contrastes.json. */
+:root {
+  color-scheme: light;
+  --cor-chao: #f3f4f6;
+  --cor-superficie: #ffffff;
+  --cor-tinta: #0c0e12;
+  --cor-tinta-suave: #5b616e;
+  --cor-borda-campo: #868c98;
+  --cor-divisoria: #e2e4e9;
+  --cor-casco: #0c0e12;
+  --cor-sobre-marca: #ffffff;
+  --cor-casco-texto: #c9ccd3;
+  --cor-foco: #0c0e12;
+  --cor-verde: #0f7a55;
+  --cor-verde-claro: #e1f3eb;
+  --cor-verde-tinta: #0a5a3e;
+  --cor-sobre-verde: #ffffff;
+  --cor-amarelo: #c26a00;
+  --cor-amarelo-claro: #ffefd6;
+  --cor-amarelo-tinta: #6e3a00;
+  --cor-sobre-amarelo-acao: #ffffff;
+  --cor-vermelho-claro: #fdeceb;
+  --cor-vermelho-tinta: #9a1d14;
+  --cor-sobre-vermelho: #ffffff;
+  --cor-sobre-pausado: #ffffff;
+  --botao-faixa-fundo: #ffffff;
+  --cor-vermelho: #cf2a1e;
+  --cor-pausado: #3a3f4a;
+  --nav-fundo: rgb(12 14 18 / 0.82);
+  --nav-solido: #0c0e12;
+  --nav-borda: rgb(255 255 255 / 0.08);
+  --nav-texto: #b9bdc6;
+  --nav-ativo-fundo: rgb(255 255 255 / 0.16);
+  --nav-ativo-solido: #33363c;
+  --nav-ativo-texto: #ffffff;
+  --nav-ativo-texto-marca: #ffffff;
+  --nav-anel-contador: #0c0e12;
+  --sombra-1: 0 1px 2px rgb(12 14 18 / 0.05), 0 6px 18px -6px rgb(12 14 18 / 0.1);
+  --sombra-2: 0 2px 4px rgb(12 14 18 / 0.06), 0 14px 30px -10px rgb(12 14 18 / 0.18);
+  --sombra-nav: 0 18px 40px -12px rgb(12 14 18 / 0.45);
+}

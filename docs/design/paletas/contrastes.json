@@ -1,0 +1,407 @@
+{
+  "nanquim": [
+    {
+      "par": "cor-tinta / cor-chao",
+      "cores": "#0c0e12 / #f3f4f6",
+      "contraste": 17.55,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-tinta-suave / cor-chao",
+      "cores": "#5b616e / #f3f4f6",
+      "contraste": 5.65,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-tinta-suave / cor-superficie",
+      "cores": "#5b616e / #ffffff",
+      "contraste": 6.21,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-borda-campo / cor-superficie",
+      "cores": "#868c98 / #ffffff",
+      "contraste": 3.38,
+      "minimo": 3,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-marca / cor-casco",
+      "cores": "#ffffff / #0c0e12",
+      "contraste": 19.32,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-verde / cor-verde",
+      "cores": "#ffffff / #0f7a55",
+      "contraste": 5.34,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-vermelho / cor-vermelho",
+      "cores": "#ffffff / #cf2a1e",
+      "contraste": 5.25,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-amarelo-tinta / cor-amarelo-claro",
+      "cores": "#6e3a00 / #ffefd6",
+      "contraste": 8.19,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-amarelo-acao / cor-amarelo-tinta",
+      "cores": "#ffffff / #6e3a00",
+      "contraste": 9.26,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-pausado / cor-pausado",
+      "cores": "#ffffff / #3a3f4a",
+      "contraste": 10.55,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "nav-texto / nav-solido",
+      "cores": "#b9bdc6 / #0c0e12",
+      "contraste": 10.26,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "nav-ativo-texto / nav-ativo-solido",
+      "cores": "#ffffff / #33363c",
+      "contraste": 12.11,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-verde / botao-faixa-fundo",
+      "cores": "#0f7a55 / #ffffff",
+      "contraste": 5.34,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-vermelho / botao-faixa-fundo",
+      "cores": "#cf2a1e / #ffffff",
+      "contraste": 5.25,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-pausado / botao-faixa-fundo",
+      "cores": "#3a3f4a / #ffffff",
+      "contraste": 10.55,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-verde-tinta / cor-verde-claro",
+      "cores": "#0a5a3e / #e1f3eb",
+      "contraste": 7.16,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-vermelho-tinta / cor-vermelho-claro",
+      "cores": "#9a1d14 / #fdeceb",
+      "contraste": 7.18,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-amarelo / cor-superficie",
+      "cores": "#c26a00 / #ffffff",
+      "contraste": 3.92,
+      "minimo": 3,
+      "ok": true
+    }
+  ],
+  "cobalto": [
+    {
+      "par": "cor-tinta / cor-chao",
+      "cores": "#10142b / #f1f3f9",
+      "contraste": 16.36,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-tinta-suave / cor-chao",
+      "cores": "#525a78 / #f1f3f9",
+      "contraste": 6.12,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-tinta-suave / cor-superficie",
+      "cores": "#525a78 / #ffffff",
+      "contraste": 6.79,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-borda-campo / cor-superficie",
+      "cores": "#858ca6 / #ffffff",
+      "contraste": 3.33,
+      "minimo": 3,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-marca / cor-casco",
+      "cores": "#ffffff / #2541d8",
+      "contraste": 7.43,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-verde / cor-verde",
+      "cores": "#ffffff / #0f7a55",
+      "contraste": 5.34,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-vermelho / cor-vermelho",
+      "cores": "#ffffff / #cc2a1f",
+      "contraste": 5.36,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-amarelo-tinta / cor-amarelo-claro",
+      "cores": "#6e3a00 / #ffefd6",
+      "contraste": 8.19,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-amarelo-acao / cor-amarelo-tinta",
+      "cores": "#ffffff / #6e3a00",
+      "contraste": 9.26,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-pausado / cor-pausado",
+      "cores": "#ffffff / #3b4160",
+      "contraste": 9.95,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "nav-texto / nav-solido",
+      "cores": "#525a78 / #ffffff",
+      "contraste": 6.79,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "nav-ativo-texto / nav-ativo-solido",
+      "cores": "#ffffff / #2541d8",
+      "contraste": 7.43,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-verde / botao-faixa-fundo",
+      "cores": "#0f7a55 / #ffffff",
+      "contraste": 5.34,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-vermelho / botao-faixa-fundo",
+      "cores": "#cc2a1f / #ffffff",
+      "contraste": 5.36,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-pausado / botao-faixa-fundo",
+      "cores": "#3b4160 / #ffffff",
+      "contraste": 9.95,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-verde-tinta / cor-verde-claro",
+      "cores": "#0a5a3e / #e1f3eb",
+      "contraste": 7.16,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-vermelho-tinta / cor-vermelho-claro",
+      "cores": "#9a1d14 / #fdeceb",
+      "contraste": 7.18,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-amarelo / cor-superficie",
+      "cores": "#c26a00 / #ffffff",
+      "contraste": 3.92,
+      "minimo": 3,
+      "ok": true
+    },
+    {
+      "par": "cor-casco / cor-superficie",
+      "cores": "#2541d8 / #ffffff",
+      "contraste": 7.43,
+      "minimo": 4.5,
+      "ok": true
+    }
+  ],
+  "noturno": [
+    {
+      "par": "cor-tinta / cor-chao",
+      "cores": "#e9f1f3 / #0b1114",
+      "contraste": 16.61,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-tinta-suave / cor-chao",
+      "cores": "#98a8ae / #0b1114",
+      "contraste": 7.74,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-tinta-suave / cor-superficie",
+      "cores": "#98a8ae / #151e22",
+      "contraste": 6.89,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-borda-campo / cor-superficie",
+      "cores": "#6a7d84 / #151e22",
+      "contraste": 3.93,
+      "minimo": 3,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-marca / cor-casco",
+      "cores": "#0b1114 / #3cc8d8",
+      "contraste": 9.46,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-verde / cor-verde",
+      "cores": "#0b1114 / #2fbf78",
+      "contraste": 8.01,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-vermelho / cor-vermelho",
+      "cores": "#0b1114 / #ef5d53",
+      "contraste": 5.76,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-amarelo-tinta / cor-amarelo-claro",
+      "cores": "#ffc56b / #2a2110",
+      "contraste": 10.16,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-amarelo-acao / cor-amarelo-tinta",
+      "cores": "#0b1114 / #ffc56b",
+      "contraste": 12.18,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-sobre-pausado / cor-pausado",
+      "cores": "#0b1114 / #8b9aa1",
+      "contraste": 6.55,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "nav-texto / nav-solido",
+      "cores": "#98a8ae / #151e22",
+      "contraste": 6.89,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "nav-ativo-texto / nav-ativo-solido",
+      "cores": "#0b1114 / #3cc8d8",
+      "contraste": 9.46,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-verde / botao-faixa-fundo",
+      "cores": "#2fbf78 / #0b1114",
+      "contraste": 8.01,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-vermelho / botao-faixa-fundo",
+      "cores": "#ef5d53 / #0b1114",
+      "contraste": 5.76,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-pausado / botao-faixa-fundo",
+      "cores": "#8b9aa1 / #0b1114",
+      "contraste": 6.55,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-verde-tinta / cor-verde-claro",
+      "cores": "#7fe0ae / #11291d",
+      "contraste": 9.7,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-vermelho-tinta / cor-vermelho-claro",
+      "cores": "#ff9d94 / #311517",
+      "contraste": 8.4,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-amarelo / cor-superficie",
+      "cores": "#f2a93b / #151e22",
+      "contraste": 8.47,
+      "minimo": 3,
+      "ok": true
+    },
+    {
+      "par": "cor-tinta / cor-superficie",
+      "cores": "#e9f1f3 / #151e22",
+      "contraste": 14.78,
+      "minimo": 4.5,
+      "ok": true
+    },
+    {
+      "par": "cor-casco / cor-superficie",
+      "cores": "#3cc8d8 / #151e22",
+      "contraste": 8.42,
+      "minimo": 4.5,
+      "ok": true
+    }
+  ]
+}

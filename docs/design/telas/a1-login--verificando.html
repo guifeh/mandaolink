@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0e3b43" />
+    <title>Login — protótipo MandaoLink</title>
+    <!-- Só no protótipo: no app, a Archivo é servida pelo próprio PWA (@fontsource-variable/archivo). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../apps/pwa/src/styles/tokens.css" />
+    <link rel="stylesheet" href="../../../apps/pwa/src/styles/componentes.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body class="ml-app">
+    <a class="ml-pular" href="#conteudo">Pular para o conteúdo</a>
+
+    <main class="ml-principal" id="conteudo">
+      <div
+        class="ml-conteudo"
+        style="max-width: 440px; margin-inline: auto; padding-top: calc(var(--esp-10) + var(--area-segura-topo))"
+      >
+        <p
+          style="
+            font-weight: 800;
+            font-variation-settings: 'wdth' 70;
+            font-size: 2rem;
+            color: var(--cor-casco);
+            line-height: 1;
+          "
+        >
+          MandaoLink
+        </p>
+        <div role="status">
+          <h1 class="ml-tela-titulo">Entrando…</h1>
+          <p class="ml-tela-desc">Conferindo o seu link.</p>
+        </div>
+        <span class="ml-skeleton ml-skeleton--item"></span>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MandaoLink — protótipos da fase B</title>
+    <link rel="stylesheet" href="../../apps/pwa/src/styles/tokens.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 32px;
+        background: #d9dcd8;
+        font-family: var(--fonte);
+        color: var(--cor-tinta);
+      }
+      h1 {
+        font-size: 28px;
+        margin: 0 0 4px;
+      }
+      h2 {
+        font-size: 22px;
+        margin: 48px 0 4px;
+      }
+      p {
+        margin: 0 0 16px;
+        max-width: 80ch;
+      }
+      .fila {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        align-items: flex-start;
+      }
+      figure {
+        margin: 0;
+      }
+      figcaption {
+        font-size: 13px;
+        margin-top: 6px;
+        max-width: 390px;
+      }
+      iframe {
+        border: 0;
+        border-radius: 24px;
+        background: #fff;
+        box-shadow: 0 0 0 1px #0002;
+        display: block;
+      }
+      .desk > div {
+        width: 640px;
+        height: 400px;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 0 0 1px #0002;
+      }
+      .desk iframe {
+        transform: scale(0.5);
+        transform-origin: 0 0;
+        border-radius: 0;
+      }
+      nav a {
+        margin-right: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>MandaoLink — fase B (configurar e avisar)</h1>
+    <p>
+      Protótipo estático da direção “Faixa de sinal”. Usa os mesmos <code>tokens.css</code> e
+      <code>componentes.css</code> do app. Todos os dados são de exemplo. Cada quadro abre sozinho em
+      <code>telas/</code>.
+    </p>
+    <nav>
+      <a href="#b1-nicho">B1</a><a href="#b2-horarios">B2</a><a href="#b3-amazon">B3</a><a href="#b4-avisos">B4</a
+      ><a href="#b5-assistente">B5</a>
+    </nav>
+    <section id="b1-nicho">
+      <h2>B1 · Nicho</h2>
+      <p>
+        Cada palavra é salva ao adicionar ou remover, com “Desfazer”. Não existe botão de salvar para esquecer. Inclui o
+        teste “Esse produto passaria?”.
+      </p>
+      <div class="fila">
+        <figure>
+          <iframe
+            src="telas/b1-nicho--padrao.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B1 · Nicho: Padrão, celular"
+          ></iframe>
+          <figcaption>Padrão</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b1-nicho--adicionada.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B1 · Nicho: Palavra adicionada (salva), celular"
+          ></iframe>
+          <figcaption>Palavra adicionada (salva)</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b1-nicho--repetida.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B1 · Nicho: Palavra repetida, celular"
+          ></iframe>
+          <figcaption>Palavra repetida</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b1-nicho--teste-passa.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B1 · Nicho: Teste: passaria, celular"
+          ></iframe>
+          <figcaption>Teste: passaria</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b1-nicho--teste-barra.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B1 · Nicho: Teste: não passaria, celular"
+          ></iframe>
+          <figcaption>Teste: não passaria</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b1-nicho--vazio.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B1 · Nicho: Sem palavras do nicho, celular"
+          ></iframe>
+          <figcaption>Sem palavras do nicho</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b1-nicho--erro-salvar.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B1 · Nicho: Erro ao salvar, celular"
+          ></iframe>
+          <figcaption>Erro ao salvar</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b1-nicho--carregando.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B1 · Nicho: Carregando, celular"
+          ></iframe>
+          <figcaption>Carregando</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b1-nicho--erro-rede.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B1 · Nicho: Erro de rede, celular"
+          ></iframe>
+          <figcaption>Erro de rede</figcaption>
+        </figure>
+      </div>
+      <div class="fila" style="margin-top: 24px">
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/b1-nicho--padrao.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="B1 · Nicho: Padrão, computador"
+            ></iframe>
+          </div>
+          <figcaption>Padrão, 1280</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section id="b2-horarios">
+      <h2>B2 · Horários e limites</h2>
+      <p>Uma frase resume o efeito dos números. A barra de salvar só aparece quando algo muda.</p>
+      <div class="fila">
+        <figure>
+          <iframe
+            src="telas/b2-horarios--padrao.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B2 · Horários e limites: Padrão (salvo), celular"
+          ></iframe>
+          <figcaption>Padrão (salvo)</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b2-horarios--alterado.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B2 · Horários e limites: Alterado, não salvo, celular"
+          ></iframe>
+          <figcaption>Alterado, não salvo</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b2-horarios--erro.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B2 · Horários e limites: Erro de validação, celular"
+          ></iframe>
+          <figcaption>Erro de validação</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b2-horarios--madrugada.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B2 · Horários e limites: Passa da meia-noite, celular"
+          ></iframe>
+          <figcaption>Passa da meia-noite</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b2-horarios--salvo.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B2 · Horários e limites: Salvo, celular"
+          ></iframe>
+          <figcaption>Salvo</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b2-horarios--carregando.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B2 · Horários e limites: Carregando, celular"
+          ></iframe>
+          <figcaption>Carregando</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b2-horarios--erro-rede.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B2 · Horários e limites: Erro de rede, celular"
+          ></iframe>
+          <figcaption>Erro de rede</figcaption>
+        </figure>
+      </div>
+      <div class="fila" style="margin-top: 24px">
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/b2-horarios--padrao.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="B2 · Horários e limites: Padrão (salvo), computador"
+            ></iframe>
+          </div>
+          <figcaption>Padrão (salvo), 1280</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section id="b3-amazon">
+      <h2>B3 · Conta Amazon</h2>
+      <p>Validação ao sair do campo, com o erro embaixo dele. Trocar uma tag que já está em uso pede confirmação.</p>
+      <div class="fila">
+        <figure>
+          <iframe
+            src="telas/b3-amazon--padrao.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B3 · Conta Amazon: Padrão (em uso), celular"
+          ></iframe>
+          <figcaption>Padrão (em uso)</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b3-amazon--invalida.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B3 · Conta Amazon: Tag inválida, celular"
+          ></iframe>
+          <figcaption>Tag inválida</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b3-amazon--confirmar-troca.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B3 · Conta Amazon: Confirmar troca, celular"
+          ></iframe>
+          <figcaption>Confirmar troca</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b3-amazon--salva.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B3 · Conta Amazon: Salva, celular"
+          ></iframe>
+          <figcaption>Salva</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b3-amazon--vazia.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B3 · Conta Amazon: Sem tag, celular"
+          ></iframe>
+          <figcaption>Sem tag</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b3-amazon--carregando.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B3 · Conta Amazon: Carregando, celular"
+          ></iframe>
+          <figcaption>Carregando</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b3-amazon--erro-rede.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B3 · Conta Amazon: Erro de rede, celular"
+          ></iframe>
+          <figcaption>Erro de rede</figcaption>
+        </figure>
+      </div>
+      <div class="fila" style="margin-top: 24px">
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/b3-amazon--padrao.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="B3 · Conta Amazon: Padrão (em uso), computador"
+            ></iframe>
+          </div>
+          <figcaption>Padrão (em uso), 1280</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section id="b4-avisos">
+      <h2>B4 · Avisos</h2>
+      <p>
+        Notificação no aparelho primeiro, depois as reservas (WhatsApp e e-mail) e o resumo do dia. Explica o bloqueio
+        do navegador e a instalação no iPhone.
+      </p>
+      <div class="fila">
+        <figure>
+          <iframe
+            src="telas/b4-avisos--desligado.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B4 · Avisos: Notificações desligadas, celular"
+          ></iframe>
+          <figcaption>Notificações desligadas</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b4-avisos--ligado.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B4 · Avisos: Ligadas, celular"
+          ></iframe>
+          <figcaption>Ligadas</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b4-avisos--teste.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B4 · Avisos: Teste enviado, celular"
+          ></iframe>
+          <figcaption>Teste enviado</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b4-avisos--negado.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B4 · Avisos: Bloqueado pelo navegador, celular"
+          ></iframe>
+          <figcaption>Bloqueado pelo navegador</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b4-avisos--ios.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B4 · Avisos: iPhone sem o painel instalado, celular"
+          ></iframe>
+          <figcaption>iPhone sem o painel instalado</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b4-avisos--carregando.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B4 · Avisos: Carregando, celular"
+          ></iframe>
+          <figcaption>Carregando</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b4-avisos--erro-rede.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B4 · Avisos: Erro de rede, celular"
+          ></iframe>
+          <figcaption>Erro de rede</figcaption>
+        </figure>
+      </div>
+      <div class="fila" style="margin-top: 24px">
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/b4-avisos--desligado.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="B4 · Avisos: Notificações desligadas, computador"
+            ></iframe>
+          </div>
+          <figcaption>Notificações desligadas, 1280</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section id="b5-assistente">
+      <h2>B5 · Primeira configuração</h2>
+      <p>5 passos, sem a navegação do app, com a opção de terminar depois. Termina com o modo teste ligado.</p>
+      <div class="fila">
+        <figure>
+          <iframe
+            src="telas/b5-assistente--p1-whatsapp.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B5 · Primeira configuração: Passo 1: conectar WhatsApp, celular"
+          ></iframe>
+          <figcaption>Passo 1: conectar WhatsApp</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b5-assistente--p2-destino.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B5 · Primeira configuração: Passo 2: grupo das ofertas, celular"
+          ></iframe>
+          <figcaption>Passo 2: grupo das ofertas</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b5-assistente--p2-vazio.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B5 · Primeira configuração: Passo 2: nenhum grupo, celular"
+          ></iframe>
+          <figcaption>Passo 2: nenhum grupo</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b5-assistente--p3-fontes.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B5 · Primeira configuração: Passo 3: grupos de origem, celular"
+          ></iframe>
+          <figcaption>Passo 3: grupos de origem</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b5-assistente--p4-nicho.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B5 · Primeira configuração: Passo 4: nicho, celular"
+          ></iframe>
+          <figcaption>Passo 4: nicho</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b5-assistente--p5-amazon.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B5 · Primeira configuração: Passo 5: conta Amazon, celular"
+          ></iframe>
+          <figcaption>Passo 5: conta Amazon</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/b5-assistente--concluido.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="B5 · Primeira configuração: Concluído (modo teste), celular"
+          ></iframe>
+          <figcaption>Concluído (modo teste)</figcaption>
+        </figure>
+      </div>
+      <div class="fila" style="margin-top: 24px">
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/b5-assistente--p1-whatsapp.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="B5 · Primeira configuração: Passo 1: conectar WhatsApp, computador"
+            ></iframe>
+          </div>
+          <figcaption>Passo 1: conectar WhatsApp, 1280</figcaption>
+        </figure>
+      </div>
+    </section>
+  </body>
+</html>
