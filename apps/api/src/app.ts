@@ -173,8 +173,10 @@ export async function buildApp(options: AppOptions) {
   app.get('/config', async () => (await db.query('SELECT * FROM config_nicho WHERE id=1')).rows[0]);
   app.put<{ Body: NicheConfig }>('/config', { schema: { body: object(configProperties) } }, async (req, reply) => {
     const b = req.body;
-    if (b.limite_hora > b.limite_dia || b.horario_inicio >= b.horario_fim)
-      return reply.code(400).send({ erro: 'limites ou horarios invalidos' });
+    if (b.limite_hora > b.limite_dia)
+      return reply.code(400).send({ erro: 'O limite por hora não pode ser maior que o limite diário.' });
+    if (b.horario_inicio === b.horario_fim)
+      return reply.code(400).send({ erro: 'Os horários de início e término devem ser diferentes.' });
     return (
       await db.query(
         `UPDATE config_nicho SET nome=$1, palavras_chave=$2, palavras_bloqueadas=$3,

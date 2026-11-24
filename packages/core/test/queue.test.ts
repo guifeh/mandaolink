@@ -230,3 +230,38 @@ test('pausa durante G9 impede reserva e expiracao durante leitura descarta', asy
   assert.equal(await dispatchNext(s.d), 'descartado');
   assert.equal(s.calls(), 0);
 });
+
+const overnightCases = [
+  ['17:59', '2026-11-23T20:59:00Z', false],
+  ['18:00', '2026-11-23T21:00:00Z', true],
+  ['23:59', '2026-11-24T02:59:00Z', true],
+  ['00:00', '2026-11-24T03:00:00Z', true],
+  ['01:59', '2026-11-24T04:59:00Z', true],
+  ['02:00', '2026-11-24T05:00:00Z', false],
+] as const;
+for (const [localTime, utc, allowed] of overnightCases) {
+  test(`fila 18–02 no fuso Sao Paulo em ${localTime}: ${allowed ? 'envia' : 'aguarda'}`, async () => {
+    const s = setup();
+    s.advance(Date.parse(utc) - initial);
+    s.state.horarioInicio = '18:00';
+    s.state.horarioFim = '02:00';
+    s.add('noturna');
+    assert.equal(await dispatchNext(s.d), allowed ? 'enviado' : 'fora_do_horario');
+    assert.equal(s.calls(), allowed ? 1 : 0);
+  });
+}
+
+test('janela usa regras historicas do fuso em transicoes do horario de verao', () => {
+  for (const utc of [
+    '2018-11-04T02:59:00Z', // 23:59, antes de pular de 23:59 para 01:00.
+    '2018-11-04T03:00:00Z', // 01:00, com horario de verao.
+    '2019-02-17T01:59:00Z', // 23:59, antes de repetir a hora das 23.
+    '2019-02-17T02:00:00Z', // 23:00, com horario padrao.
+    '2019-02-17T03:00:00Z', // 00:00 do novo dia civil.
+  ]) {
+    assert.equal(sendingWindow(Date.parse(utc), '18:00:00', '02:00:00', 'America/Sao_Paulo'), true, utc);
+  }
+  assert.equal(sendingWindow(Date.parse('2018-11-04T04:00:00Z'), '18:00', '02:00', 'America/Sao_Paulo'), false);
+  assert.equal(sendingWindow(Date.parse('2019-02-17T05:00:00Z'), '18:00', '02:00', 'America/Sao_Paulo'), false);
+  assert.equal(sendingWindow(initial, '08:00', '08:00', 'America/Sao_Paulo'), false);
+});
