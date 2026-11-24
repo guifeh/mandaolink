@@ -90,6 +90,31 @@ body {
   color: var(--text);
 }
 
+.operation-status {
+  padding: 28px 20px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  color: var(--text);
+}
+
+.operation-status-verde {
+  background: var(--success);
+}
+
+.operation-status-amarelo {
+  background: yellow;
+}
+
+.operation-status-vermelho {
+  background: var(--danger);
+}
+
+.operation-status-title {
+  font-size: 1.75rem;
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
 .card-desc {
   font-size: 0.85rem;
   color: var(--text-muted);

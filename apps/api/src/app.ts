@@ -8,7 +8,7 @@ import { isIP } from 'node:net';
 import { buildDailySummary } from '@mandaolink/core';
 import { registerOperations } from './operations.js';
 import { createPushService } from './push.js';
-import { publicPwaPath } from './static.js';
+import { publicPwaPath, isPwaNavigation } from './static.js';
 
 const hash = (value: string) => createHash('sha256').update(value).digest('hex');
 const token = () => randomBytes(32).toString('hex');
@@ -81,7 +81,9 @@ export async function buildApp(options: AppOptions) {
     if (
       req.url.split('?')[0] === '/saude' ||
       req.url.startsWith('/auth/') ||
-      (req.method === 'GET' && publicPwaPath(req.url.split('?')[0]))
+      (req.method === 'GET' &&
+        (publicPwaPath(req.url.split('?')[0]) ||
+          (!req.routeOptions.url && isPwaNavigation(req.url.split('?')[0], req.headers.accept))))
     )
       return;
     const session = req.cookies.sessao;

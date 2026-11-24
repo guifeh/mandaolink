@@ -3,7 +3,7 @@ export function loadSession() {
   return (sessionRequest ??= (async () => {
     const token = new URLSearchParams(window.location.hash.slice(1)).get('token');
     if (token) {
-      window.history.replaceState(null, '', '/#operacao');
+      window.history.replaceState(null, '', '/');
       if (!/^[a-f0-9]{64}$/.test(token)) return false;
       const verified = await fetch('/auth/verificar', {
         method: 'POST',

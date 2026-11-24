@@ -7,8 +7,14 @@ export interface OperationState {
     descricao: string;
     severidade?: 'amarelo' | 'vermelho';
     criada_em?: string;
+    fonte_id?: string | null;
   }>;
   enviosPendentes: number;
+}
+
+export interface PendingState {
+  excecoes: OperationState['excecoes'];
+  envios: Array<{ id: string; estado: 'falhou' | 'incerto'; erro: string | null }>;
 }
 
 export interface HistoryRow {
@@ -29,15 +35,19 @@ export const statusText = {
   vermelho: 'Operação interrompida',
 } as const;
 
-export function repairLink(tipo: string): string {
+export function repairLink(tipo: string, fonteId?: string | null): string {
+  if (tipo === 'whatsapp_numero_bloqueado') return '/ajuda#numero-bloqueado';
+  if (tipo === 'whatsapp_removido_do_grupo') return fonteId ? '/fontes' : '/ajuda#grupo-destino';
+  if (tipo.includes('fonte')) return '/fontes';
   if (tipo.includes('whatsapp') || tipo.includes('desconectado') || tipo === 'whatsapp_desconectado') {
-    return '#pareamento';
+    return '/#pareamento';
   }
   if (tipo.includes('tag') || tipo.includes('afiliado') || tipo === 'tag_invalida') {
-    return '#afiliado';
+    return '/#afiliado';
   }
   if (tipo.includes('limite') || tipo.includes('horario')) {
-    return '#horarios';
+    return '/#horarios';
   }
-  return '#operacao';
+  if (tipo.includes('falha')) return '/ajuda#falhas';
+  return '/ajuda';
 }
