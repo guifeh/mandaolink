@@ -54,7 +54,9 @@ export function sendingWindow(now: number, start: string, end: string, zone: str
     hourCycle: 'h23',
   }).formatToParts(now);
   const current = `${parts.find((p) => p.type === 'hour')!.value}:${parts.find((p) => p.type === 'minute')!.value}`;
-  return current >= start.slice(0, 5) && current < end.slice(0, 5);
+  const from = start.slice(0, 5),
+    to = end.slice(0, 5);
+  return from > to ? current >= from || current < to : current >= from && current < to;
 }
 function blocked(s: DispatchState, now: number): string | null {
   if (s.pausado) return 'pausado';

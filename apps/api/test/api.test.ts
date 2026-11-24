@@ -14,6 +14,7 @@ import {
   renderMessage,
   validateMessage,
   resolve,
+  sendingWindow,
   type PipelineInput,
   type PipelineConfig,
 } from '@mandaolink/core';
@@ -111,7 +112,7 @@ test('config persiste arrays, tag e limites e bloqueia corpo desconhecido/invali
   assert.equal(got.tag_amazon, 'cliente-20');
   for (const invalid of [
     { ...config, limite_hora: 40 },
-    { ...config, horario_fim: '07:00' },
+    { ...config, horario_fim: '08:00' },
     { ...config, extra: true },
     { ...config, limite_hora: '5' },
   ]) {
@@ -298,7 +299,7 @@ test('event sink persiste antes/depois do ASIN sem perder preco historico de env
   assert.equal((await db.query("SELECT 1 FROM ofertas WHERE id_loja='B099999999'")).rowCount, 0);
 });
 const queueNow = Date.parse('2026-11-23T12:00:00Z');
-async function queueCandidate(asin: string, destination: string) {
+async function queueCandidate(asin: string, destination: string, now = queueNow) {
   await db.query('UPDATE fontes SET ativa=true,autorizada_em=now() WHERE id=$1', [sourceId]);
   await db.query(
     "UPDATE config_nicho SET pausado=false,palavras_chave=ARRAY['carro'],palavras_bloqueadas='{}',categorias='{}' WHERE id=1",
@@ -308,15 +309,15 @@ async function queueCandidate(asin: string, destination: string) {
     await db.query(
       `INSERT INTO mensagens_brutas(fonte_id,mensagem_externa_id,conteudo,publicada_em,recebida_em,preco_anunciado_centavos)
     VALUES ($1,$2,$3,$4,$4,1000) RETURNING id`,
-      [sourceId, crypto.randomUUID(), JSON.stringify({ texto: text }), new Date(queueNow)],
+      [sourceId, crypto.randomUUID(), JSON.stringify({ texto: text }), new Date(now)],
     )
   ).rows[0];
   const input: PipelineInput = {
     mensagemId: m.id,
     texto: text,
     fonte: { id: sourceId, ativa: true, autorizada: true },
-    publicadaEm: queueNow,
-    recebidaEm: queueNow,
+    publicadaEm: now,
+    recebidaEm: now,
     precoFonteCentavos: 1000,
   };
   const config: PipelineConfig = {
@@ -326,7 +327,7 @@ async function queueCandidate(asin: string, destination: string) {
   };
   const outcome = await runPipeline(input, config, {
     ...createPipelineStore(db, destination),
-    now: () => queueNow,
+    now: () => now,
     resolve,
     nicheGate,
     renderMessage,
@@ -341,7 +342,7 @@ async function queueCandidate(asin: string, destination: string) {
           priceCents: 1000,
           image: 'https://example.test/synthetic.jpg',
           available: true,
-          checkedAt: new Date(queueNow).toISOString(),
+          checkedAt: new Date(now).toISOString(),
         },
       }),
     },
@@ -512,4 +513,76 @@ test('operacao autenticada mostra pausa, historico paginado e pareamento simulad
     (await app.inject({ method: 'POST', url: '/push/assinatura', headers, payload: invalid })).statusCode,
     400,
   );
+});
+
+test('config aceita janela noturna, rejeita horarios iguais e preserva limites', async () => {
+  const token = '8'.repeat(64);
+  await db.query("INSERT INTO auth_sessoes(token_hash,expira_em) VALUES ($1,now()+interval '1 hour')", [
+    createHash('sha256').update(token).digest('hex'),
+  ]);
+  const headers = { cookie: `sessao=${token}` };
+  try {
+    const response = await app.inject({
+      method: 'PUT',
+      url: '/config',
+      headers,
+      payload: { ...config, horario_inicio: '18:00', horario_fim: '02:00' },
+    });
+    assert.equal(response.statusCode, 200);
+    assert.equal(response.json().horario_inicio.slice(0, 5), '18:00');
+    assert.equal(response.json().horario_fim.slice(0, 5), '02:00');
+    const equal = await app.inject({
+      method: 'PUT',
+      url: '/config',
+      headers,
+      payload: { ...config, horario_fim: '08:00' },
+    });
+    assert.equal(equal.statusCode, 400);
+    assert.equal(equal.json().erro, 'Os horários de início e término devem ser diferentes.');
+    const limits = await app.inject({
+      method: 'PUT',
+      url: '/config',
+      headers,
+      payload: { ...config, limite_hora: 40 },
+    });
+    assert.equal(limits.statusCode, 400);
+    assert.equal(limits.json().erro, 'O limite por hora não pode ser maior que o limite diário.');
+    await assert.rejects(
+      db.query("UPDATE config_nicho SET horario_inicio='02:00',horario_fim='02:00' WHERE id=1"),
+      /check/i,
+    );
+  } finally {
+    await db.query("UPDATE config_nicho SET horario_inicio='08:00',horario_fim='22:00' WHERE id=1");
+  }
+});
+
+test('janela 18–02 atravessa meia-noite mas a cota SQL reinicia por dia civil de Sao Paulo', async () => {
+  const beforeMidnight = Date.parse('2026-11-25T02:59:00Z');
+  const midnight = Date.parse('2026-11-25T03:00:00Z');
+  const store = createQueueStore(db);
+  try {
+    await db.query("UPDATE config_nicho SET horario_inicio='18:00',horario_fim='02:00' WHERE id=1");
+    const candidate = await queueCandidate('B099887766', 'grupo-noturno', beforeMidnight);
+    const id = await store.enqueue(
+      candidate.input,
+      candidate.config,
+      candidate.outcome,
+      'grupo-noturno',
+      beforeMidnight,
+    );
+    assert.ok(id);
+    const item = (await store.next(beforeMidnight))!;
+    assert.equal(item.id, id);
+    assert.equal(await store.claim(item, candidate.outcome, beforeMidnight, beforeMidnight + 180000), true);
+    assert.equal((await store.state(beforeMidnight)).contagemDia, 1);
+    const after = await store.state(midnight);
+    assert.equal(after.contagemDia, 0);
+    assert.equal(after.contagemHora, 1);
+    assert.equal(after.proximoEm, beforeMidnight + 180000);
+    assert.equal(after.fuso, 'America/Sao_Paulo');
+    assert.equal(sendingWindow(beforeMidnight, after.horarioInicio, after.horarioFim, after.fuso), true);
+    assert.equal(sendingWindow(midnight, after.horarioInicio, after.horarioFim, after.fuso), true);
+  } finally {
+    await db.query("UPDATE config_nicho SET horario_inicio='08:00',horario_fim='22:00' WHERE id=1");
+  }
 });
