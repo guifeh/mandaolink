@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MandaoLink — protótipos da fase A</title>
+    <link rel="stylesheet" href="../../apps/pwa/src/styles/tokens.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 32px;
+        background: #d9dcd8;
+        font-family: var(--fonte);
+        color: var(--cor-tinta);
+      }
+      h1 {
+        font-size: 28px;
+        margin: 0 0 4px;
+      }
+      h2 {
+        font-size: 22px;
+        margin: 48px 0 4px;
+      }
+      p {
+        margin: 0 0 16px;
+        max-width: 80ch;
+      }
+      .fila {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        align-items: flex-start;
+      }
+      figure {
+        margin: 0;
+      }
+      figcaption {
+        font-size: 13px;
+        margin-top: 6px;
+        max-width: 390px;
+      }
+      iframe {
+        border: 0;
+        border-radius: 24px;
+        background: #fff;
+        box-shadow: 0 0 0 1px #0002;
+        display: block;
+      }
+      .desk > div {
+        width: 640px;
+        height: 400px;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 0 0 1px #0002;
+      }
+      .desk iframe {
+        transform: scale(0.5);
+        transform-origin: 0 0;
+        border-radius: 0;
+      }
+      nav a {
+        margin-right: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>MandaoLink — fase A (operar)</h1>
+    <p>
+      Protótipo estático da direção “Faixa de sinal”. Usa os mesmos <code>tokens.css</code> e
+      <code>componentes.css</code> do app. Todos os dados são de exemplo. Cada quadro abre sozinho em
+      <code>telas/</code>.
+    </p>
+    <nav>
+      <a href="#a1-login">A1</a><a href="#a2-inicio">A2</a><a href="#a3-pendencias">A3</a><a href="#a4-whatsapp">A4</a
+      ><a href="#a5-historico">A5</a><a href="#a6-fontes">A6</a>
+    </nav>
+    <section id="a1-login">
+      <h2>A1 · Login</h2>
+      <p>Entrada por link no e-mail. Sem navegação. Sessão de 30 dias.</p>
+      <div class="fila">
+        <figure>
+          <iframe
+            src="telas/a1-login--padrao.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A1 · Login: Padrão, celular"
+          ></iframe>
+          <figcaption>Padrão</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a1-login--enviando.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A1 · Login: Enviando, celular"
+          ></iframe>
+          <figcaption>Enviando</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a1-login--enviado.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A1 · Login: E-mail enviado, celular"
+          ></iframe>
+          <figcaption>E-mail enviado</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a1-login--vencido.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A1 · Login: Link vencido ou usado, celular"
+          ></iframe>
+          <figcaption>Link vencido ou usado</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a1-login--limite.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A1 · Login: Limite de tentativas, celular"
+          ></iframe>
+          <figcaption>Limite de tentativas</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a1-login--erro-email.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A1 · Login: E-mail inválido, celular"
+          ></iframe>
+          <figcaption>E-mail inválido</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a1-login--sessao-expirada.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A1 · Login: Sessão expirada, celular"
+          ></iframe>
+          <figcaption>Sessão expirada</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a1-login--verificando.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A1 · Login: Entrando (carregando), celular"
+          ></iframe>
+          <figcaption>Entrando (carregando)</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a1-login--erro-rede.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A1 · Login: Erro de rede, celular"
+          ></iframe>
+          <figcaption>Erro de rede</figcaption>
+        </figure>
+      </div>
+      <div class="fila" style="margin-top: 24px">
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/a1-login--padrao.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="A1 · Login: Padrão, computador"
+            ></iframe>
+          </div>
+          <figcaption>Padrão, 1280</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section id="a2-inicio">
+      <h2>A2 · Início (semáforo)</h2>
+      <p>
+        Diz em 1 segundo se está tudo bem. A faixa muda de cor e traz uma única ação. A pausa fica embaixo, quieta e com
+        confirmação.
+      </p>
+      <div class="fila">
+        <figure>
+          <iframe
+            src="telas/a2-inicio--verde.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A2 · Início (semáforo): Verde: tudo rodando, celular"
+          ></iframe>
+          <figcaption>Verde: tudo rodando</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a2-inicio--amarelo.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A2 · Início (semáforo): Amarelo: grupo de origem perdido, celular"
+          ></iframe>
+          <figcaption>Amarelo: grupo de origem perdido</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a2-inicio--vermelho.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A2 · Início (semáforo): Vermelho: WhatsApp desconectado, celular"
+          ></iframe>
+          <figcaption>Vermelho: WhatsApp desconectado</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a2-inicio--pausado-cliente.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A2 · Início (semáforo): Pausado por você, celular"
+          ></iframe>
+          <figcaption>Pausado por você</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a2-inicio--pausado-sistema.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A2 · Início (semáforo): Pausado pelo sistema (falhas), celular"
+          ></iframe>
+          <figcaption>Pausado pelo sistema (falhas)</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a2-inicio--modo-teste.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A2 · Início (semáforo): Modo teste ligado, celular"
+          ></iframe>
+          <figcaption>Modo teste ligado</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a2-inicio--sem-fonte.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A2 · Início (semáforo): Sem nenhuma fonte, celular"
+          ></iframe>
+          <figcaption>Sem nenhuma fonte</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a2-inicio--carregando.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A2 · Início (semáforo): Carregando, celular"
+          ></iframe>
+          <figcaption>Carregando</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a2-inicio--erro-rede.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A2 · Início (semáforo): Erro de rede, celular"
+          ></iframe>
+          <figcaption>Erro de rede</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a2-inicio--confirmar-pausa.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A2 · Início (semáforo): Confirmação da pausa, celular"
+          ></iframe>
+          <figcaption>Confirmação da pausa</figcaption>
+        </figure>
+      </div>
+      <div class="fila" style="margin-top: 24px">
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/a2-inicio--verde.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="A2 · Início (semáforo): Verde: tudo rodando, computador"
+            ></iframe>
+          </div>
+          <figcaption>Verde: tudo rodando, 1280</figcaption>
+        </figure>
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/a2-inicio--vermelho.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="A2 · Início (semáforo): Vermelho: WhatsApp desconectado, computador"
+            ></iframe>
+          </div>
+          <figcaption>Vermelho: WhatsApp desconectado, 1280</figcaption>
+        </figure>
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/a2-inicio--confirmar-pausa.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="A2 · Início (semáforo): Confirmação da pausa, computador"
+            ></iframe>
+          </div>
+          <figcaption>Confirmação da pausa, 1280</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section id="a3-pendencias">
+      <h2>A3 · Pendências</h2>
+      <p>Central de consertos: 1 botão por item, em ordem de gravidade. O número aparece na aba.</p>
+      <div class="fila">
+        <figure>
+          <iframe
+            src="telas/a3-pendencias--lista.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A3 · Pendências: Lista (vermelho + amarelo), celular"
+          ></iframe>
+          <figcaption>Lista (vermelho + amarelo)</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a3-pendencias--pausado-falhas.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A3 · Pendências: Pausado por falhas, celular"
+          ></iframe>
+          <figcaption>Pausado por falhas</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a3-pendencias--numero-bloqueado.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A3 · Pendências: Número bloqueado, celular"
+          ></iframe>
+          <figcaption>Número bloqueado</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a3-pendencias--resolvido.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A3 · Pendências: Item resolvido (feedback), celular"
+          ></iframe>
+          <figcaption>Item resolvido (feedback)</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a3-pendencias--vazio.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A3 · Pendências: Vazio, celular"
+          ></iframe>
+          <figcaption>Vazio</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a3-pendencias--carregando.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A3 · Pendências: Carregando, celular"
+          ></iframe>
+          <figcaption>Carregando</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a3-pendencias--erro-rede.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A3 · Pendências: Erro de rede, celular"
+          ></iframe>
+          <figcaption>Erro de rede</figcaption>
+        </figure>
+      </div>
+      <div class="fila" style="margin-top: 24px">
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/a3-pendencias--lista.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="A3 · Pendências: Lista (vermelho + amarelo), computador"
+            ></iframe>
+          </div>
+          <figcaption>Lista (vermelho + amarelo), 1280</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section id="a4-whatsapp">
+      <h2>A4 · Conectar WhatsApp</h2>
+      <p>No celular, por código (o cliente não lê QR na própria tela). No computador, por QR que se renova sozinho.</p>
+      <div class="fila">
+        <figure>
+          <iframe
+            src="telas/a4-whatsapp--numero.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A4 · Conectar WhatsApp: Celular: informar o número, celular"
+          ></iframe>
+          <figcaption>Celular: informar o número</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a4-whatsapp--numero-erro.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A4 · Conectar WhatsApp: Número inválido, celular"
+          ></iframe>
+          <figcaption>Número inválido</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a4-whatsapp--codigo.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A4 · Conectar WhatsApp: Código gerado (aguardando), celular"
+          ></iframe>
+          <figcaption>Código gerado (aguardando)</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a4-whatsapp--codigo-expirado.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A4 · Conectar WhatsApp: Código expirado, celular"
+          ></iframe>
+          <figcaption>Código expirado</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a4-whatsapp--conectado.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A4 · Conectar WhatsApp: Conectado, celular"
+          ></iframe>
+          <figcaption>Conectado</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a4-whatsapp--bloqueado.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A4 · Conectar WhatsApp: Número bloqueado, celular"
+          ></iframe>
+          <figcaption>Número bloqueado</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a4-whatsapp--erro.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A4 · Conectar WhatsApp: Erro ao gerar, celular"
+          ></iframe>
+          <figcaption>Erro ao gerar</figcaption>
+        </figure>
+      </div>
+      <div class="fila" style="margin-top: 24px">
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/a4-whatsapp--conectado.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="A4 · Conectar WhatsApp: Conectado, computador"
+            ></iframe>
+          </div>
+          <figcaption>Conectado, 1280</figcaption>
+        </figure>
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/a4-whatsapp--qr.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="A4 · Conectar WhatsApp: Computador: QR (aguardando), computador"
+            ></iframe>
+          </div>
+          <figcaption>Computador: QR (aguardando), 1280</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section id="a5-historico">
+      <h2>A5 · Histórico e A5.1 · Detalhe da oferta</h2>
+      <p>Lista por dia com filtro. Cada item abre a prévia exata da mensagem e o caminho pelos filtros.</p>
+      <div class="fila">
+        <figure>
+          <iframe
+            src="telas/a5-historico--lista.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A5 · Histórico e A5.1 · Detalhe da oferta: Lista (todas), celular"
+          ></iframe>
+          <figcaption>Lista (todas)</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a5-historico--incertas.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A5 · Histórico e A5.1 · Detalhe da oferta: Filtro: incertas, celular"
+          ></iframe>
+          <figcaption>Filtro: incertas</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a5-historico--vazio-dia.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A5 · Histórico e A5.1 · Detalhe da oferta: Vazio do dia, celular"
+          ></iframe>
+          <figcaption>Vazio do dia</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a5-historico--fim.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A5 · Histórico e A5.1 · Detalhe da oferta: Fim da lista, celular"
+          ></iframe>
+          <figcaption>Fim da lista</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a5-historico--carregando.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A5 · Histórico e A5.1 · Detalhe da oferta: Carregando, celular"
+          ></iframe>
+          <figcaption>Carregando</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a5-historico--erro-rede.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A5 · Histórico e A5.1 · Detalhe da oferta: Erro de rede, celular"
+          ></iframe>
+          <figcaption>Erro de rede</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a5-historico--detalhe-enviada.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A5 · Histórico e A5.1 · Detalhe da oferta: Detalhe: enviada, celular"
+          ></iframe>
+          <figcaption>Detalhe: enviada</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a5-historico--detalhe-descartada.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A5 · Histórico e A5.1 · Detalhe da oferta: Detalhe: descartada, celular"
+          ></iframe>
+          <figcaption>Detalhe: descartada</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a5-historico--detalhe-incerta.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A5 · Histórico e A5.1 · Detalhe da oferta: Detalhe: incerta, celular"
+          ></iframe>
+          <figcaption>Detalhe: incerta</figcaption>
+        </figure>
+      </div>
+      <div class="fila" style="margin-top: 24px">
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/a5-historico--lista.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="A5 · Histórico e A5.1 · Detalhe da oferta: Lista (todas), computador"
+            ></iframe>
+          </div>
+          <figcaption>Lista (todas), 1280</figcaption>
+        </figure>
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/a5-historico--detalhe-enviada.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="A5 · Histórico e A5.1 · Detalhe da oferta: Detalhe: enviada, computador"
+            ></iframe>
+          </div>
+          <figcaption>Detalhe: enviada, 1280</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section id="a6-fontes">
+      <h2>A6 · Grupos de origem (fontes)</h2>
+      <p>
+        Liga e desliga cada grupo e mostra se está ativo, quieto ou perdido. O grupo de destino aparece bloqueado.
+        Entrada pela aba Ajustes.
+      </p>
+      <div class="fila">
+        <figure>
+          <iframe
+            src="telas/a6-fontes--ajustes.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A6 · Grupos de origem (fontes): Aba Ajustes (entrada), celular"
+          ></iframe>
+          <figcaption>Aba Ajustes (entrada)</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a6-fontes--lista.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A6 · Grupos de origem (fontes): Lista, celular"
+          ></iframe>
+          <figcaption>Lista</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a6-fontes--perdida.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A6 · Grupos de origem (fontes): Fonte perdida (vinda da pendência), celular"
+          ></iframe>
+          <figcaption>Fonte perdida (vinda da pendência)</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a6-fontes--sem-whatsapp.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A6 · Grupos de origem (fontes): WhatsApp não conectado, celular"
+          ></iframe>
+          <figcaption>WhatsApp não conectado</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a6-fontes--nenhum-grupo.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A6 · Grupos de origem (fontes): Nenhum grupo, celular"
+          ></iframe>
+          <figcaption>Nenhum grupo</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a6-fontes--carregando.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A6 · Grupos de origem (fontes): Carregando, celular"
+          ></iframe>
+          <figcaption>Carregando</figcaption>
+        </figure>
+        <figure>
+          <iframe
+            src="telas/a6-fontes--erro-rede.html"
+            width="390"
+            height="844"
+            loading="lazy"
+            title="A6 · Grupos de origem (fontes): Erro de rede, celular"
+          ></iframe>
+          <figcaption>Erro de rede</figcaption>
+        </figure>
+      </div>
+      <div class="fila" style="margin-top: 24px">
+        <figure class="desk">
+          <div>
+            <iframe
+              src="telas/a6-fontes--lista.html"
+              width="1280"
+              height="800"
+              loading="lazy"
+              title="A6 · Grupos de origem (fontes): Lista, computador"
+            ></iframe>
+          </div>
+          <figcaption>Lista, 1280</figcaption>
+        </figure>
+      </div>
+    </section>
+  </body>
+</html>

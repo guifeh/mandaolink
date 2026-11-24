@@ -1,0 +1,611 @@
+[
+  {
+    "arq": "a1-login--padrao.html",
+    "tela": "a1-login",
+    "estado": "padrao",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "a1-login--enviando.html",
+    "tela": "a1-login",
+    "estado": "enviando",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a1-login--enviado.html",
+    "tela": "a1-login",
+    "estado": "enviado",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a1-login--vencido.html",
+    "tela": "a1-login",
+    "estado": "vencido",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a1-login--limite.html",
+    "tela": "a1-login",
+    "estado": "limite",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a1-login--erro-email.html",
+    "tela": "a1-login",
+    "estado": "erro-email",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a1-login--sessao-expirada.html",
+    "tela": "a1-login",
+    "estado": "sessao-expirada",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a1-login--verificando.html",
+    "tela": "a1-login",
+    "estado": "verificando",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a1-login--erro-rede.html",
+    "tela": "a1-login",
+    "estado": "erro-rede",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a2-inicio--verde.html",
+    "tela": "a2-inicio",
+    "estado": "verde",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "a2-inicio--amarelo.html",
+    "tela": "a2-inicio",
+    "estado": "amarelo",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a2-inicio--vermelho.html",
+    "tela": "a2-inicio",
+    "estado": "vermelho",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "a2-inicio--pausado-cliente.html",
+    "tela": "a2-inicio",
+    "estado": "pausado-cliente",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a2-inicio--pausado-sistema.html",
+    "tela": "a2-inicio",
+    "estado": "pausado-sistema",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a2-inicio--modo-teste.html",
+    "tela": "a2-inicio",
+    "estado": "modo-teste",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a2-inicio--sem-fonte.html",
+    "tela": "a2-inicio",
+    "estado": "sem-fonte",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a2-inicio--carregando.html",
+    "tela": "a2-inicio",
+    "estado": "carregando",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a2-inicio--erro-rede.html",
+    "tela": "a2-inicio",
+    "estado": "erro-rede",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a2-inicio--confirmar-pausa.html",
+    "tela": "a2-inicio",
+    "estado": "confirmar-pausa",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "a3-pendencias--lista.html",
+    "tela": "a3-pendencias",
+    "estado": "lista",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "a3-pendencias--pausado-falhas.html",
+    "tela": "a3-pendencias",
+    "estado": "pausado-falhas",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a3-pendencias--numero-bloqueado.html",
+    "tela": "a3-pendencias",
+    "estado": "numero-bloqueado",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a3-pendencias--resolvido.html",
+    "tela": "a3-pendencias",
+    "estado": "resolvido",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a3-pendencias--vazio.html",
+    "tela": "a3-pendencias",
+    "estado": "vazio",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a3-pendencias--carregando.html",
+    "tela": "a3-pendencias",
+    "estado": "carregando",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a3-pendencias--erro-rede.html",
+    "tela": "a3-pendencias",
+    "estado": "erro-rede",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a4-whatsapp--numero.html",
+    "tela": "a4-whatsapp",
+    "estado": "numero",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a4-whatsapp--numero-erro.html",
+    "tela": "a4-whatsapp",
+    "estado": "numero-erro",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a4-whatsapp--codigo.html",
+    "tela": "a4-whatsapp",
+    "estado": "codigo",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a4-whatsapp--codigo-expirado.html",
+    "tela": "a4-whatsapp",
+    "estado": "codigo-expirado",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a4-whatsapp--conectado.html",
+    "tela": "a4-whatsapp",
+    "estado": "conectado",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "a4-whatsapp--bloqueado.html",
+    "tela": "a4-whatsapp",
+    "estado": "bloqueado",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a4-whatsapp--erro.html",
+    "tela": "a4-whatsapp",
+    "estado": "erro",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a4-whatsapp--qr.html",
+    "tela": "a4-whatsapp",
+    "estado": "qr",
+    "desktop": true,
+    "soDesktop": true
+  },
+  {
+    "arq": "a5-historico--lista.html",
+    "tela": "a5-historico",
+    "estado": "lista",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "a5-historico--incertas.html",
+    "tela": "a5-historico",
+    "estado": "incertas",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a5-historico--vazio-dia.html",
+    "tela": "a5-historico",
+    "estado": "vazio-dia",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a5-historico--fim.html",
+    "tela": "a5-historico",
+    "estado": "fim",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a5-historico--carregando.html",
+    "tela": "a5-historico",
+    "estado": "carregando",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a5-historico--erro-rede.html",
+    "tela": "a5-historico",
+    "estado": "erro-rede",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a5-historico--detalhe-enviada.html",
+    "tela": "a5-historico",
+    "estado": "detalhe-enviada",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "a5-historico--detalhe-descartada.html",
+    "tela": "a5-historico",
+    "estado": "detalhe-descartada",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a5-historico--detalhe-incerta.html",
+    "tela": "a5-historico",
+    "estado": "detalhe-incerta",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a6-fontes--ajustes.html",
+    "tela": "a6-fontes",
+    "estado": "ajustes",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a6-fontes--lista.html",
+    "tela": "a6-fontes",
+    "estado": "lista",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "a6-fontes--perdida.html",
+    "tela": "a6-fontes",
+    "estado": "perdida",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a6-fontes--sem-whatsapp.html",
+    "tela": "a6-fontes",
+    "estado": "sem-whatsapp",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a6-fontes--nenhum-grupo.html",
+    "tela": "a6-fontes",
+    "estado": "nenhum-grupo",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a6-fontes--carregando.html",
+    "tela": "a6-fontes",
+    "estado": "carregando",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "a6-fontes--erro-rede.html",
+    "tela": "a6-fontes",
+    "estado": "erro-rede",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b1-nicho--padrao.html",
+    "tela": "b1-nicho",
+    "estado": "padrao",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "b1-nicho--adicionada.html",
+    "tela": "b1-nicho",
+    "estado": "adicionada",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b1-nicho--repetida.html",
+    "tela": "b1-nicho",
+    "estado": "repetida",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b1-nicho--teste-passa.html",
+    "tela": "b1-nicho",
+    "estado": "teste-passa",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b1-nicho--teste-barra.html",
+    "tela": "b1-nicho",
+    "estado": "teste-barra",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b1-nicho--vazio.html",
+    "tela": "b1-nicho",
+    "estado": "vazio",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b1-nicho--erro-salvar.html",
+    "tela": "b1-nicho",
+    "estado": "erro-salvar",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b1-nicho--carregando.html",
+    "tela": "b1-nicho",
+    "estado": "carregando",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b1-nicho--erro-rede.html",
+    "tela": "b1-nicho",
+    "estado": "erro-rede",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b2-horarios--padrao.html",
+    "tela": "b2-horarios",
+    "estado": "padrao",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "b2-horarios--alterado.html",
+    "tela": "b2-horarios",
+    "estado": "alterado",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b2-horarios--erro.html",
+    "tela": "b2-horarios",
+    "estado": "erro",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b2-horarios--madrugada.html",
+    "tela": "b2-horarios",
+    "estado": "madrugada",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b2-horarios--salvo.html",
+    "tela": "b2-horarios",
+    "estado": "salvo",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b2-horarios--carregando.html",
+    "tela": "b2-horarios",
+    "estado": "carregando",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b2-horarios--erro-rede.html",
+    "tela": "b2-horarios",
+    "estado": "erro-rede",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b3-amazon--padrao.html",
+    "tela": "b3-amazon",
+    "estado": "padrao",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "b3-amazon--invalida.html",
+    "tela": "b3-amazon",
+    "estado": "invalida",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b3-amazon--confirmar-troca.html",
+    "tela": "b3-amazon",
+    "estado": "confirmar-troca",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b3-amazon--salva.html",
+    "tela": "b3-amazon",
+    "estado": "salva",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b3-amazon--vazia.html",
+    "tela": "b3-amazon",
+    "estado": "vazia",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b3-amazon--carregando.html",
+    "tela": "b3-amazon",
+    "estado": "carregando",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b3-amazon--erro-rede.html",
+    "tela": "b3-amazon",
+    "estado": "erro-rede",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b4-avisos--desligado.html",
+    "tela": "b4-avisos",
+    "estado": "desligado",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "b4-avisos--ligado.html",
+    "tela": "b4-avisos",
+    "estado": "ligado",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b4-avisos--teste.html",
+    "tela": "b4-avisos",
+    "estado": "teste",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b4-avisos--negado.html",
+    "tela": "b4-avisos",
+    "estado": "negado",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b4-avisos--ios.html",
+    "tela": "b4-avisos",
+    "estado": "ios",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b4-avisos--carregando.html",
+    "tela": "b4-avisos",
+    "estado": "carregando",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b4-avisos--erro-rede.html",
+    "tela": "b4-avisos",
+    "estado": "erro-rede",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b5-assistente--p1-whatsapp.html",
+    "tela": "b5-assistente",
+    "estado": "p1-whatsapp",
+    "desktop": true,
+    "soDesktop": false
+  },
+  {
+    "arq": "b5-assistente--p2-destino.html",
+    "tela": "b5-assistente",
+    "estado": "p2-destino",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b5-assistente--p2-vazio.html",
+    "tela": "b5-assistente",
+    "estado": "p2-vazio",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b5-assistente--p3-fontes.html",
+    "tela": "b5-assistente",
+    "estado": "p3-fontes",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b5-assistente--p4-nicho.html",
+    "tela": "b5-assistente",
+    "estado": "p4-nicho",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b5-assistente--p5-amazon.html",
+    "tela": "b5-assistente",
+    "estado": "p5-amazon",
+    "desktop": false,
+    "soDesktop": false
+  },
+  {
+    "arq": "b5-assistente--concluido.html",
+    "tela": "b5-assistente",
+    "estado": "concluido",
+    "desktop": false,
+    "soDesktop": false
+  }
+]

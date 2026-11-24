@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0e3b43" />
+    <title>Primeira configuração — protótipo MandaoLink</title>
+    <!-- Só no protótipo: no app, a Archivo é servida pelo próprio PWA (@fontsource-variable/archivo). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../apps/pwa/src/styles/tokens.css" />
+    <link rel="stylesheet" href="../../../apps/pwa/src/styles/componentes.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body class="ml-app">
+    <a class="ml-pular" href="#conteudo">Pular para o conteúdo</a>
+
+    <main class="ml-principal" id="conteudo">
+      <div class="ml-conteudo" style="max-width: 560px; margin-inline: auto; padding-bottom: var(--esp-10)">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <span style="font-weight: 800; font-variation-settings: 'wdth' 70; font-size: 1.5rem; color: var(--cor-casco)"
+            >MandaoLink</span
+          ><button type="button" class="ml-botao ml-botao--texto">Terminar depois</button>
+        </div>
+        <div class="ml-progresso">
+          <span>Passo 2 de 5: Grupo das ofertas</span>
+          <div class="ml-progresso__trilho" aria-hidden="true">
+            <span data-feito></span><span data-feito></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <div><h1 class="ml-tela-titulo">Em qual grupo publicar?</h1></div>
+        <div class="ml-vazio">
+          <p class="ml-vazio__titulo">O número do sistema não está em nenhum grupo</p>
+          <p>Pelo seu WhatsApp, adicione +55 11 91234-5678 ao seu grupo de ofertas e toque em Atualizar.</p>
+          <button type="button" class="ml-botao ml-botao--secundario">Atualizar</button>
+        </div>
+        <div class="ml-secao">
+          <button type="button" class="ml-botao ml-botao--principal ml-botao--largo" disabled>Continuar</button
+          ><button type="button" class="ml-botao ml-botao--texto">Voltar</button>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

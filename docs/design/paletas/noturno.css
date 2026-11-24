@@ -1,0 +1,42 @@
+/* Paleta "Noturno" — proposta em validação. Contrastes em paletas/contrastes.json. */
+:root {
+  color-scheme: dark;
+  --cor-chao: #0b1114;
+  --cor-superficie: #151e22;
+  --cor-tinta: #e9f1f3;
+  --cor-tinta-suave: #98a8ae;
+  --cor-borda-campo: #6a7d84;
+  --cor-divisoria: #25333a;
+  --cor-casco: #3cc8d8;
+  --cor-sobre-marca: #0b1114;
+  --cor-casco-texto: #98a8ae;
+  --cor-foco: #3cc8d8;
+  --cor-verde: #2fbf78;
+  --cor-verde-claro: #11291d;
+  --cor-verde-tinta: #7fe0ae;
+  --cor-sobre-verde: #0b1114;
+  --cor-amarelo: #f2a93b;
+  --cor-amarelo-claro: #2a2110;
+  --cor-amarelo-tinta: #ffc56b;
+  --cor-sobre-amarelo-acao: #0b1114;
+  --cor-vermelho: #ef5d53;
+  --cor-vermelho-claro: #311517;
+  --cor-vermelho-tinta: #ff9d94;
+  --cor-sobre-vermelho: #0b1114;
+  --cor-pausado: #8b9aa1;
+  --cor-sobre-pausado: #0b1114;
+  --nav-fundo: rgb(21 30 34 / 0.78);
+  --nav-solido: #151e22;
+  --nav-borda: rgb(255 255 255 / 0.07);
+  --nav-texto: #98a8ae;
+  --nav-ativo-fundo: #3cc8d8;
+  --nav-ativo-solido: #3cc8d8;
+  --nav-ativo-texto: #0b1114;
+  --nav-ativo-texto-marca: #e9f1f3;
+  --nav-anel-contador: #151e22;
+  --sombra-1: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 8px 20px -10px rgb(0 0 0 / 0.6);
+  --sombra-2: 0 1px 0 rgb(255 255 255 / 0.05) inset, 0 16px 32px -12px rgb(0 0 0 / 0.7);
+  --sombra-nav: 0 18px 44px -10px rgb(0 0 0 / 0.75);
+  --botao-faixa-fundo: #0b1114;
+  --item-borda: #25333a;
+}

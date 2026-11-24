@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MandaoLink — paleta Noturno</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 32px;
+        background: #e7e8ea;
+        font-family: 'Archivo', system-ui, sans-serif;
+        color: #15181d;
+      }
+      h1 {
+        font-size: 30px;
+        margin: 0 0 6px;
+      }
+      h2 {
+        font-size: 24px;
+        margin: 40px 0 6px;
+      }
+      p {
+        max-width: 84ch;
+        margin: 0 0 10px;
+        line-height: 1.45;
+      }
+      .fila {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: flex-start;
+        margin-top: 18px;
+      }
+      figure {
+        margin: 0;
+      }
+      figcaption {
+        font-size: 13px;
+        margin-top: 6px;
+      }
+      figure > div {
+        overflow: hidden;
+        border-radius: 30px;
+        box-shadow:
+          0 0 0 1px #0002,
+          0 20px 40px -24px #0006;
+      }
+      .desk > div {
+        border-radius: 14px;
+      }
+      iframe {
+        border: 0;
+        display: block;
+        transform-origin: 0 0;
+      }
+      .amostras {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 14px 0;
+      }
+      .amostras li {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        background: #fff;
+        padding: 6px 10px 6px 6px;
+        border-radius: 12px;
+      }
+      .amostras span {
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+        box-shadow: inset 0 0 0 1px #0002;
+      }
+      .amostras code {
+        color: #555;
+        font-size: 12px;
+      }
+      .nota {
+        font-size: 13px;
+        color: #444;
+      }
+      nav a {
+        margin-right: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Paleta Noturno</h1>
+    <p>Pele v2 com a paleta Noturno. Dados de exemplo. <a href="index.html">Comparar as 3</a></p>
+    <section id="noturno" class="paleta">
+      <h2>Noturno</h2>
+      <p>
+        <strong>A ideia:</strong> Tema escuro com ciano. Parece um painel de monitoramento: bom para olhar à noite e
+        econômico em telas OLED. Nas faixas, o texto é escuro sobre cor acesa, como uma luz de painel.
+      </p>
+      <p>
+        <strong>Por que não é genérica:</strong> O ciano não colide com nenhuma das 3 cores do semáforo, e quem domina a
+        tela é a cor do estado, não a da marca. Risco honesto: fundo quase preto com um único acento vivo é um padrão
+        frequente de IA. Uso só como tema escuro opcional, não como identidade principal.
+      </p>
+      <ul class="amostras">
+        <li><span style="background: #0b1114"></span>Fundo<code>#0b1114</code></li>
+        <li><span style="background: #151e22"></span>Superfície<code>#151e22</code></li>
+        <li><span style="background: #e9f1f3"></span>Texto<code>#e9f1f3</code></li>
+        <li><span style="background: #98a8ae"></span>Texto suave<code>#98a8ae</code></li>
+        <li><span style="background: #3cc8d8"></span>Marca<code>#3cc8d8</code></li>
+        <li><span style="background: #2fbf78"></span>Verde<code>#2fbf78</code></li>
+        <li><span style="background: #f2a93b"></span>Âmbar<code>#f2a93b</code></li>
+        <li><span style="background: #ef5d53"></span>Vermelho<code>#ef5d53</code></li>
+        <li><span style="background: #8b9aa1"></span>Pausado<code>#8b9aa1</code></li>
+      </ul>
+      <p class="nota">
+        Contraste AA conferido em 20 pares de texto e controle: todos passam (paletas/contrastes.json).
+      </p>
+      <div class="fila">
+        <figure>
+          <div style="width: 390px; height: 844px">
+            <iframe
+              src="noturno/a2-inicio--vermelho.html"
+              width="390"
+              height="844"
+              loading="eager"
+              title="A2 Início · vermelho · 390"
+              style="zoom: 1"
+            ></iframe>
+          </div>
+          <figcaption>A2 Início · vermelho · 390</figcaption>
+        </figure>
+        <figure>
+          <div style="width: 390px; height: 844px">
+            <iframe
+              src="noturno/a2-inicio--verde.html"
+              width="390"
+              height="844"
+              loading="eager"
+              title="A2 Início · verde · 390"
+              style="zoom: 1"
+            ></iframe>
+          </div>
+          <figcaption>A2 Início · verde · 390</figcaption>
+        </figure>
+        <figure>
+          <div style="width: 390px; height: 844px">
+            <iframe
+              src="noturno/a3-pendencias--lista.html"
+              width="390"
+              height="844"
+              loading="eager"
+              title="A3 Pendências · 390"
+              style="zoom: 1"
+            ></iframe>
+          </div>
+          <figcaption>A3 Pendências · 390</figcaption>
+        </figure>
+        <figure>
+          <div style="width: 390px; height: 844px">
+            <iframe
+              src="noturno/a5-historico--lista.html"
+              width="390"
+              height="844"
+              loading="eager"
+              title="A5 Histórico · 390"
+              style="zoom: 1"
+            ></iframe>
+          </div>
+          <figcaption>A5 Histórico · 390</figcaption>
+        </figure>
+      </div>
+      <div class="fila">
+        <figure class="desk">
+          <div style="width: 640px; height: 400px">
+            <iframe
+              src="noturno/a2-inicio--verde.html"
+              width="1280"
+              height="800"
+              loading="eager"
+              title="A2 Início · verde · 1280"
+              style="zoom: 0.5"
+            ></iframe>
+          </div>
+          <figcaption>A2 Início · verde · 1280</figcaption>
+        </figure>
+        <figure class="desk">
+          <div style="width: 640px; height: 400px">
+            <iframe
+              src="noturno/a2-inicio--vermelho.html"
+              width="1280"
+              height="800"
+              loading="eager"
+              title="A2 Início · vermelho · 1280"
+              style="zoom: 0.5"
+            ></iframe>
+          </div>
+          <figcaption>A2 Início · vermelho · 1280</figcaption>
+        </figure>
+      </div>
+    </section>
+  </body>
+</html>

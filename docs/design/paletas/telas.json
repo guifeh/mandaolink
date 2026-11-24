@@ -1,0 +1,14 @@
+[
+  { "p": "nanquim", "arq": "a2-inicio--vermelho" },
+  { "p": "nanquim", "arq": "a2-inicio--verde" },
+  { "p": "nanquim", "arq": "a3-pendencias--lista" },
+  { "p": "nanquim", "arq": "a5-historico--lista" },
+  { "p": "cobalto", "arq": "a2-inicio--vermelho" },
+  { "p": "cobalto", "arq": "a2-inicio--verde" },
+  { "p": "cobalto", "arq": "a3-pendencias--lista" },
+  { "p": "cobalto", "arq": "a5-historico--lista" },
+  { "p": "noturno", "arq": "a2-inicio--vermelho" },
+  { "p": "noturno", "arq": "a2-inicio--verde" },
+  { "p": "noturno", "arq": "a3-pendencias--lista" },
+  { "p": "noturno", "arq": "a5-historico--lista" }
+]
