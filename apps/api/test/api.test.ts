@@ -656,6 +656,14 @@ test('fontes e destino: lista estados, ativa/desativa e bloqueia destino nos doi
   );
   list = (await app.inject({ url: '/fontes', headers })).json();
   assert.equal(list.fontes.find((f: { id: string }) => f.id === fonte).estado, 'perdida');
+  assert.equal(
+    (await app.inject({ method: 'PUT', url: `/fontes/${fonte}`, headers, payload: { ativa: false } })).statusCode,
+    200,
+  );
+  assert.equal(
+    (await db.query('SELECT 1 FROM excecoes WHERE fonte_id=$1 AND resolvida_em IS NULL', [fonte])).rowCount,
+    0,
+  );
   assert.ok(list.fontes.some((f: { estado: string }) => f.estado === 'ativa'));
   assert.equal(
     (

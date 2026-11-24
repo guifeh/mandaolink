@@ -45,9 +45,13 @@ export function registerSources(app: FastifyInstance, db: Pool) {
       try {
         const row = (
           await db.query(
-            `UPDATE fontes SET ativa=$2,
+            `WITH updated AS (UPDATE fontes SET ativa=$2,
         autorizada_em=CASE WHEN $2 THEN COALESCE(autorizada_em,now()) ELSE autorizada_em END
-        WHERE id=$1 RETURNING *`,
+        WHERE id=$1 RETURNING *), resolved AS (
+          UPDATE excecoes SET resolvida_em=now() WHERE resolvida_em IS NULL
+          AND tipo IN ('fonte_perdida','whatsapp_removido_do_grupo')
+          AND fonte_id IN (SELECT id FROM updated WHERE NOT ativa) RETURNING id
+        ) SELECT * FROM updated`,
             [req.params.id, req.body.ativa],
           )
         ).rows[0];

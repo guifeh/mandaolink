@@ -2,7 +2,9 @@ import staticFiles from '@fastify/static';
 import type { FastifyInstance } from 'fastify';
 import { fileURLToPath } from 'node:url';
 declare module 'fastify' {
-  interface FastifyContextConfig { pwaNavigation?: boolean }
+  interface FastifyContextConfig {
+    pwaNavigation?: boolean;
+  }
 }
 export async function servePwa(app: FastifyInstance) {
   await app.register(staticFiles, {
