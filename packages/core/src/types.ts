@@ -54,7 +54,8 @@ export interface ReferenceCase {
 export interface PipelineDecision {
   rotulo: DecisionLabel;
   motivo?: string | null;
-  gate?: GateCode | string | null;
+  // GateCode para os gates conhecidos; string livre para códigos antigos.
+  gate?: GateCode | (string & {}) | null;
 }
 
 export type PipelineFunction = (caso: ReferenceCase) => Promise<PipelineDecision> | PipelineDecision;

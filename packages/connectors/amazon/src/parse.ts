@@ -29,7 +29,7 @@ function decode(s: string): string {
     .replace(/&amp;/g, '&')
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
-    .replace(/&nbsp;| /g, ' ')
+    .replace(/&nbsp;|\u00a0/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }

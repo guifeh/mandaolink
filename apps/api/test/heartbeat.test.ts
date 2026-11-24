@@ -41,11 +41,11 @@ test('heartbeat nao sobrepoe requests e nao pinga se banco indisponivel', async 
     release = resolve;
   });
   const heartbeat = startHeartbeat('https://monitor.example.test/ping/synthetic', {
-    fetchImpl: (async () => {
+    fetchImpl: async () => {
       calls++;
       await pending;
       return new Response('ok');
-    }) as typeof fetch,
+    },
     schedule: (fn) => {
       tick = fn;
       return () => {};
@@ -65,10 +65,10 @@ test('heartbeat nao sobrepoe requests e nao pinga se banco indisponivel', async 
     onError: () => {
       errors++;
     },
-    fetchImpl: (async () => {
+    fetchImpl: async () => {
       calls++;
       return new Response('ok');
-    }) as typeof fetch,
+    },
     schedule: (fn) => {
       tick = fn;
       return () => {};

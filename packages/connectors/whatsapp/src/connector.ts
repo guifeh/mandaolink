@@ -94,16 +94,38 @@ export function backoffMs(attempt: number, random = Math.random): number {
   return Math.round(base * (0.5 + random() / 2));
 }
 
-function textOf(message: any): string {
-  const m = message?.message ?? {};
-  return m.conversation ?? m.extendedTextMessage?.text ?? m.imageMessage?.caption ?? m.videoMessage?.caption ?? '';
+// Formas mínimas dos eventos do Baileys que o conector lê.
+type ConnectionUpdate = {
+  qr?: string;
+  connection?: 'open' | 'close' | 'connecting';
+  lastDisconnect?: { error?: { output?: { statusCode?: number } } };
+};
+type WaMessage = {
+  key?: { remoteJid?: string | null; id?: string | null; fromMe?: boolean | null };
+  messageTimestamp?: unknown;
+  message?: {
+    conversation?: string | null;
+    extendedTextMessage?: { text?: string | null } | null;
+    imageMessage?: { caption?: string | null } | null;
+    videoMessage?: { caption?: string | null } | null;
+  } | null;
+};
+type MessagesUpsert = { type?: string; messages?: WaMessage[] };
+type ParticipantsUpdate = { id: string; action: string; participants?: unknown[] };
+
+function textOf(w: WaMessage): string {
+  const m = w.message;
+  return m?.conversation ?? m?.extendedTextMessage?.text ?? m?.imageMessage?.caption ?? m?.videoMessage?.caption ?? '';
 }
+
+const abortError = (signal: AbortSignal) =>
+  signal.reason instanceof Error ? signal.reason : new Error('operacao_cancelada');
 
 const defaultSleep = (ms: number, signal?: AbortSignal) =>
   new Promise<void>((resolve, reject) => {
-    if (signal?.aborted) return reject(signal.reason);
+    if (signal?.aborted) return reject(abortError(signal));
     const t = setTimeout(resolve, ms);
-    signal?.addEventListener('abort', () => (clearTimeout(t), reject(signal.reason)), { once: true });
+    signal?.addEventListener('abort', () => (clearTimeout(t), reject(abortError(signal))), { once: true });
   });
 
 export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector {
@@ -135,7 +157,8 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
   const qrWaiters: ((qr: string) => void)[] = [];
   const inflight = new Map<string, Promise<SendOutcome>>();
 
-  const safe = (p: Promise<unknown>) => p.catch(onError);
+  /** Dispara sem esperar; erro vai para onError (efeitos colaterais de evento). */
+  const safe = (p: Promise<unknown>): void => void p.catch(onError);
 
   async function sources(): Promise<Set<string>> {
     return new Set((await (typeof o.fontes === 'function' ? o.fontes() : o.fontes)).map(jidUser));
@@ -191,9 +214,11 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
 
   function wire(s: WaSocket, gen: number) {
     const current = () => gen === generation && !stopped;
-    s.ev.on('creds.update', () => current() && auth && safe(auth.saveCreds()));
+    s.ev.on('creds.update', () => {
+      if (current() && auth) safe(auth.saveCreds());
+    });
 
-    s.ev.on('connection.update', (u: any) => {
+    s.ev.on('connection.update', (u: ConnectionUpdate) => {
       if (!current()) return;
       if (u.qr) {
         state = 'aguardando_pareamento';
@@ -211,7 +236,7 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
       }
       if (u.connection === 'close') {
         open = false;
-        const code: number | undefined = u.lastDisconnect?.error?.output?.statusCode;
+        const code = u.lastDisconnect?.error?.output?.statusCode;
         const fatal = code !== undefined ? FATAL.get(code) : undefined;
         if (fatal) {
           state = fatal.tipo === 'numero_bloqueado' ? 'numero_bloqueado' : 'sessao_invalida';
@@ -242,16 +267,18 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
       }
     });
 
-    s.ev.on('messages.upsert', (u: any) => {
+    s.ev.on('messages.upsert', (u: MessagesUpsert) => {
       if (!current()) return;
       for (const m of u.messages ?? []) {
         const jid = jidUser(m.key?.remoteJid ?? '');
-        if (!jid.endsWith('@g.us') || !m.key?.id) continue;
+        const id = m.key?.id;
+        if (!jid.endsWith('@g.us') || !id) continue;
         const texto = textOf(m);
+        // messageTimestamp vem como number ou Long (protobuf); Number() cobre os dois.
         const em = Number(m.messageTimestamp ?? 0) * 1000 || now();
-        if (m.key.fromMe) {
+        if (m.key?.fromMe) {
           if (destinos.has(jid)) {
-            const e = { grupoExternoId: jid, mensagemExternaId: m.key.id, textoHash: textHash(texto), em };
+            const e = { grupoExternoId: jid, mensagemExternaId: id, textoHash: textHash(texto), em };
             for (const h of echoHandlers) h(e);
           }
           continue;
@@ -261,7 +288,7 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
         const sm: SourceMessage = {
           plataforma: 'whatsapp',
           grupoExternoId: jid,
-          mensagemExternaId: m.key.id,
+          mensagemExternaId: id,
           texto,
           publicadaEm: em,
         };
@@ -269,7 +296,7 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
       }
     });
 
-    s.ev.on('group-participants.update', (u: any) => {
+    s.ev.on('group-participants.update', (u: ParticipantsUpdate) => {
       if (!current() || u.action !== 'remove' || !(u.participants ?? []).some((p: unknown) => isMe(s, p))) return;
       const g = jidUser(u.id);
       const cliente = destinos.has(g);
@@ -332,8 +359,8 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
         ? await Promise.race([
             sent,
             new Promise<never>((_, reject) => {
-              if (signal.aborted) reject(signal.reason);
-              signal.addEventListener('abort', () => reject(signal.reason), { once: true });
+              if (signal.aborted) reject(abortError(signal));
+              signal.addEventListener('abort', () => reject(abortError(signal)), { once: true });
             }),
           ])
         : await sent;

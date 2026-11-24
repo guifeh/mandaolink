@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify';
 import type { Pool } from 'pg';
 import QRCode from 'qrcode';
-import { createPushService } from './push.js';
+import { type createPushService } from './push.js';
 import { traduzirMotivo } from '@mandaolink/core';
 
 export function registerOperations(

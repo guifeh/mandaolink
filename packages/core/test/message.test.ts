@@ -1,13 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import {
-  truncateTitle,
-  formatPriceBRL,
-  formatTimeSaoPaulo,
-  renderMessage,
-  validateMessage,
-  extractUrls,
-} from '../src/message.js';
+import { truncateTitle, formatPriceBRL, formatTimeSaoPaulo, renderMessage, validateMessage } from '../src/message.js';
 
 test('truncateTitle corta em até 120 caracteres sem quebrar palavras', () => {
   const curto = 'Suporte Veicular Magnético';

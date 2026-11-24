@@ -1,4 +1,4 @@
-﻿import { test } from 'node:test';
+import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { PGlite } from '@electric-sql/pglite';
 import { readFile } from 'node:fs/promises';
@@ -41,9 +41,9 @@ test('push persiste chaves, ensaio nao envia; entrega deduplica e remove assinat
     assert.equal(calls, 1);
     assert.equal(Number((await db.query('SELECT count(*) AS n FROM push_entregas')).rows[0].n), 1);
     await db.query("INSERT INTO excecoes(criada_em) VALUES (now()+interval '2 seconds')");
-    const expired = createPushService(db, 'mailto:owner@example.test', false, (async () => {
+    const expired = createPushService(db, 'mailto:owner@example.test', false, async () => {
       throw { statusCode: 410 };
-    }) as Parameters<typeof createPushService>[3]);
+    });
     await expired.notify();
     assert.equal((await db.query('SELECT * FROM push_subscriptions')).rowCount, 0);
   } finally {

@@ -9,14 +9,24 @@ import { join } from 'node:path';
 import { backoffMs, createWhatsAppConnector, textHash, type ConnectorOptions } from '../src/connector.ts';
 import { createWhatsAppPublisher } from '../src/publisher.ts';
 import { parseAuthKey, useEncryptedFileAuthState } from '../src/auth-state.ts';
-import type { AuthBundle, ExceptionSink, WaSocket } from '../src/types.ts';
+import type { AuthBundle, ExceptionSink, SourceMessage, WaSocket } from '../src/types.ts';
+
+type KeyStore = {
+  get(type: string, ids: string[]): Promise<Record<string, { public: Uint8Array }>>;
+  set(data: Record<string, Record<string, unknown>>): Promise<void>;
+};
 
 const CLIENTE = '120363000000000001@g.us';
 const FONTE = '120363000000000002@g.us';
 const ME = '5511900000000:7@s.whatsapp.net';
 
 class FakeSocket implements WaSocket {
-  ev = new EventEmitter();
+  private bus = new EventEmitter().setMaxListeners(50);
+  ev = {
+    on: (event: string, handler: (arg: never) => void) => {
+      this.bus.on(event, handler as (arg: unknown) => void);
+    },
+  };
   ws = { isOpen: true };
   user = { id: ME, lid: '99999999999:7@lid' };
   calls: string[] = [];
@@ -25,16 +35,11 @@ class FakeSocket implements WaSocket {
     [CLIENTE]: { id: CLIENTE, subject: 'Cliente', participants: [{}, {}] },
     [FONTE]: { id: FONTE, subject: 'Fonte', participants: [{}] },
   };
-  sendImpl: (jid: string, content: Record<string, unknown>) => Promise<any> = async () => ({ key: { id: 'WAMSG1' } });
+  sendImpl: (jid: string, content: Record<string, unknown>) => Promise<{ key?: { id?: string | null } } | undefined> =
+    async () => ({ key: { id: 'WAMSG1' } });
   ended = false;
-  constructor() {
-    this.ev.setMaxListeners(50);
-  }
-  on(event: string, handler: (a: any) => void) {
-    this.ev.on(event, handler);
-  }
   emit(event: string, arg: unknown) {
-    this.ev.emit(event, arg);
+    this.bus.emit(event, arg);
   }
   async sendMessage(jid: string, content: Record<string, unknown>) {
     this.calls.push('sendMessage');
@@ -254,7 +259,7 @@ test('eco: mensagem nossa no grupo do cliente vira EchoMessage com o hash do tex
 test('mensagem de fonte: entrega texto e ids, sem remetente; ignora histórico, privado e grupo do cliente', async () => {
   const { c, sock, openConn } = await setup();
   await openConn();
-  const got: any[] = [];
+  const got: SourceMessage[] = [];
   c.onMessage((m) => got.push(m));
   const msg = (jid: string, id: string) => ({
     key: { remoteJid: jid, id, fromMe: false, participant: '5511977776666@s.whatsapp.net' },
@@ -415,7 +420,7 @@ test('auth cifrado: grava sem texto claro, relê com a chave certa e falha com a
   const a = await useEncryptedFileAuthState(dir, key);
   const regId = (a.state.creds as { registrationId: number }).registrationId;
   await a.saveCreds();
-  await (a.state.keys as any).set({
+  await (a.state.keys as KeyStore).set({
     'pre-key': { '1': { public: Buffer.from('segredo-teste'), private: Buffer.alloc(32, 1) } },
   });
   const files = await readdir(dir);
@@ -426,7 +431,7 @@ test('auth cifrado: grava sem texto claro, relê com a chave certa e falha com a
 
   const b = await useEncryptedFileAuthState(dir, key);
   assert.equal((b.state.creds as { registrationId: number }).registrationId, regId);
-  const k = await (b.state.keys as any).get('pre-key', ['1']);
+  const k = await (b.state.keys as KeyStore).get('pre-key', ['1']);
   assert.equal(Buffer.from(k['1'].public).toString(), 'segredo-teste');
 
   await assert.rejects(useEncryptedFileAuthState(dir, parseAuthKey(Buffer.alloc(32, 8).toString('base64'))));

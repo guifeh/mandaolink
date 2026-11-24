@@ -10,7 +10,7 @@ const [mode = 'sample', via = 'fetch', a3, a4] = process.argv.slice(2);
 const asins = readFileSync('fixtures/asins-carro.txt', 'utf8')
   .split(/\r?\n/)
   .filter(Boolean)
-  .map((l) => l.split('\t')[0].replace(/^﻿/, ''));
+  .map((l) => l.split('\t')[0].replace(/^\ufeff/, ''));
 
 // via: fetch | browser | auto (fetch com fallback para navegador, como no pipeline)
 const browserReader = () => createBrowserReader({ userDataDir: '.profile-amazon' });

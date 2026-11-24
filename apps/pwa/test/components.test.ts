@@ -22,7 +22,7 @@ test('ApiClient fetchConfig e updateConfig enviam cabeçalhos e cookies corretam
   // Intercepta fetch global durante o teste
   const originalFetch = globalThis.fetch;
   try {
-    globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+    globalThis.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
       const url = String(input);
       assert.equal(init?.credentials, 'include', 'Requisições devem incluir credentials');
 
@@ -37,7 +37,7 @@ test('ApiClient fetchConfig e updateConfig enviam cabeçalhos e cookies corretam
       }
 
       return new Response(null, { status: 404 });
-    }) as typeof fetch;
+    };
 
     const config = await client.fetchConfig();
     assert.equal(config.nome, 'Carro');
@@ -82,7 +82,7 @@ test('Tela Nicho: validação e adição de palavras do nicho e proibidas', asyn
 
   // 1. Carrega dados
   const loaded = await mockClient.fetchConfig();
-  let palavrasNicho = [...loaded.palavras_chave];
+  const palavrasNicho = [...loaded.palavras_chave];
   let palavrasProibidas = [...loaded.palavras_bloqueadas];
 
   // 2. Adiciona termo ao nicho
@@ -228,7 +228,7 @@ test('ApiClient normaliza horários HH:MM:SS do PostgreSQL para HH:MM em fetchCo
   let putPayload: NicheConfig | null = null;
 
   try {
-    globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+    globalThis.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
       const url = String(input);
       if (url.endsWith('/config') && init?.method === 'GET') {
         return new Response(JSON.stringify(fakePgConfig), {
@@ -251,7 +251,7 @@ test('ApiClient normaliza horários HH:MM:SS do PostgreSQL para HH:MM em fetchCo
       }
 
       return new Response(null, { status: 404 });
-    }) as typeof fetch;
+    };
 
     // 1. fetchConfig normaliza os horários para HH:MM
     const loaded = await client.fetchConfig();

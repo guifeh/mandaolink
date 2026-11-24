@@ -151,7 +151,7 @@ export async function runBeforeSend(offer: QueuedOffer, d: PipelineDependencies)
     await record(9, { status: 'REPROVA', motivo: 'indisponível' });
     return state;
   }
-  if (d.now() - Date.parse(state.produto!.checkedAt) > (config.reverAposMs ?? 30 * 60000)) {
+  if (d.now() - Date.parse(state.produto.checkedAt) > (config.reverAposMs ?? 30 * 60000)) {
     const read = await readProduct(d, asin);
     if (read.ok) state.produto = read.product;
     if (!(await record(4, g4(read, asin, d.now(), config.reverAposMs)))) {
@@ -163,8 +163,8 @@ export async function runBeforeSend(offer: QueuedOffer, d: PipelineDependencies)
     return state;
   }
   if (
-    !(await record(5, g5(d.nicheGate(state.produto!.title, config.nicho, state.produto!.category)))) ||
-    !(await record(6, g6(state.produto!.priceCents, input.precoFonteCentavos, state.produto!.cupom)))
+    !(await record(5, g5(d.nicheGate(state.produto.title, config.nicho, state.produto.category)))) ||
+    !(await record(6, g6(state.produto.priceCents, input.precoFonteCentavos, state.produto.cupom)))
   ) {
     await record(9, state.resultado);
     return state;
@@ -174,7 +174,7 @@ export async function runBeforeSend(offer: QueuedOffer, d: PipelineDependencies)
     await record(9, state.resultado);
     return state;
   }
-  const p = state.produto!;
+  const p = state.produto;
   try {
     state.mensagem = d.renderMessage({
       titulo: p.title!,

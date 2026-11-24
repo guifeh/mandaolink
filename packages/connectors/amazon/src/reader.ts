@@ -3,6 +3,7 @@
 // Playwright com perfil persistente. Se os dois bloquearem, entra em pausa (cooldown) e
 // devolve bloqueado_* para o G4 adiar, sem martelar a Amazon.
 
+import type { BrowserContext } from 'playwright';
 import { detectBlock, parseProductHtml, type Product } from './parse.ts';
 
 export type ReadFailure =
@@ -71,7 +72,7 @@ export function createBrowserReader(opts: {
   headless?: boolean;
   timeoutMs?: number;
 }): ProductReader {
-  let ctxPromise: Promise<import('playwright').BrowserContext> | null = null;
+  let ctxPromise: Promise<BrowserContext> | null = null;
   const context = () =>
     (ctxPromise ??= import('playwright').then(async ({ chromium }) => {
       const ctx = await chromium.launchPersistentContext(opts.userDataDir, {

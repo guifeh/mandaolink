@@ -49,7 +49,11 @@ export default tseslint.config(
     files: ['apps/pwa/**/*.{ts,tsx}'],
     languageOptions: { globals: { ...globals.browser } },
     plugins: { 'react-hooks': reactHooks },
-    rules: reactHooks.configs.recommended.rules,
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+      // Handler async em onClick/onSubmit é o padrão do React; promessas soltas seguem proibidas.
+      '@typescript-eslint/no-misused-promises': ['error', { checksVoidReturn: { attributes: false } }],
+    },
   },
   {
     // Testes: asserts em mocks e promessas do node:test são legítimos.
@@ -59,6 +63,10 @@ export default tseslint.config(
         'error',
         { allowForKnownSafeCalls: [{ from: 'package', package: 'node:test', name: ['test', 'it', 'describe'] }] },
       ],
+      // Mocks de fetch/socket: métodos soltos, String(url) e throw de valores não-Error são intencionais.
+      '@typescript-eslint/unbound-method': 'off',
+      '@typescript-eslint/no-base-to-string': 'off',
+      '@typescript-eslint/only-throw-error': 'off',
     },
   },
   prettier,

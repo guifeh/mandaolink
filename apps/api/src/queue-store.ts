@@ -9,7 +9,6 @@ import {
   type PipelineInput,
   type PipelineConfig,
   type PipelineOutcome,
-  type QueueItem,
   type QueueStore,
 } from '@mandaolink/core';
 import { loadLastSend, loadPipelineConfig } from './pipeline-store.js';

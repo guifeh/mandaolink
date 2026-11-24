@@ -61,10 +61,10 @@ export async function createFakeConnectors(db: Pool, now = Date.now): Promise<Ru
       },
     },
     resolve: (url) =>
-      resolve(url, (async (target: string | URL | Request) => {
-        const location = redirects.get(String(target));
+      resolve(url, async (target: string | URL | Request) => {
+        const location = redirects.get(target instanceof Request ? target.url : target.toString());
         return new Response(null, { status: location ? 302 : 404, headers: location ? { location } : {} });
-      }) as typeof fetch),
+      }),
     publisher: {
       async send(message) {
         return { status: 'enviado', mensagemId: `fake:${message.idempotencyKey}`, simulado: true };

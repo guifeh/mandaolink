@@ -12,7 +12,7 @@ export function AffiliateAccountPage({ apiClient = api }: Props) {
   const [feedback, setFeedback] = useState<{ tipo: 'sucesso' | 'erro'; texto: string } | null>(null);
 
   useEffect(() => {
-    carregar();
+    void carregar();
   }, []);
 
   async function carregar() {

@@ -2,7 +2,8 @@
 
 /** Parte do socket do Baileys que o conector usa. Mantida mínima para o mock ser fiel. */
 export interface WaSocket {
-  ev: { on(event: string, handler: (arg: any) => void): void };
+  /** `never` no argumento: cada handler declara a forma do evento que lê (contravariância). */
+  ev: { on(event: string, handler: (arg: never) => void): void };
   ws?: { isOpen: boolean };
   user?: { id: string; lid?: string } | null;
   sendMessage(jid: string, content: Record<string, unknown>): Promise<{ key?: { id?: string | null } } | undefined>;

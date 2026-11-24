@@ -16,7 +16,9 @@ self.addEventListener('push', (event) => {
     const data = event.data?.json();
     title = typeof data?.title === 'string' ? data.title : title;
     body = typeof data?.body === 'string' ? data.body : body;
-  } catch {}
+  } catch {
+    // Payload sem JSON: mantém título e texto padrão.
+  }
   event.waitUntil(
     self.registration.showNotification(title, { body, tag: 'mandaolink-pendencia', data: { url: '/#operacao' } }),
   );
@@ -27,8 +29,9 @@ self.addEventListener('notificationclick', (event) => {
     (async () => {
       const windows = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
       const target = new URL('/#operacao', self.location.origin).href;
-      const existing = windows.find((client) => new URL(client.url).origin === self.location.origin) as
-        WindowClient | undefined;
+      const existing = windows.find<WindowClient>(
+        (client): client is WindowClient => new URL(client.url).origin === self.location.origin,
+      );
       if (existing) {
         await existing.navigate(target);
         await existing.focus();

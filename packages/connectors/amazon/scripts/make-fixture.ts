@@ -1,4 +1,4 @@
-﻿// Recorta de uma página real salva só os trechos que o parser usa, para testes offline.
+// Recorta de uma página real salva só os trechos que o parser usa, para testes offline.
 // Uso: node scripts/make-fixture.ts <pagina.html> <saida.html>
 import { readFileSync, writeFileSync } from 'node:fs';
 
