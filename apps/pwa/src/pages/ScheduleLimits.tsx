@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../api/client.js';
+import { Feedback, type FeedbackMsg } from '../components/Feedback.js';
 
 interface Props {
   apiClient?: typeof api;
@@ -12,7 +13,7 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
   const [maximoPorDia, setMaximoPorDia] = useState(30);
   const [carregando, setCarregando] = useState(true);
   const [salvando, setSalvando] = useState(false);
-  const [feedback, setFeedback] = useState<{ tipo: 'sucesso' | 'erro'; texto: string } | null>(null);
+  const [feedback, setFeedback] = useState<FeedbackMsg | null>(null);
 
   useEffect(() => {
     void carregar();
@@ -95,7 +96,7 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
         <p className="page-desc">Controle em quais períodos e com que frequência as mensagens são enviadas.</p>
       </div>
 
-      {feedback && <div className={`feedback-msg feedback-${feedback.tipo}`}>{feedback.texto}</div>}
+      <Feedback msg={feedback} />
 
       <form onSubmit={salvar}>
         {/* Seção 1: Horários de envio */}
