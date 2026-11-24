@@ -5,9 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { AffiliateAccountPage } from '../src/pages/AffiliateAccount.js';
-import { NicheConfigPage } from '../src/pages/NicheConfig.js';
-import { ScheduleLimitsPage } from '../src/pages/ScheduleLimits.js';
+import { Feedback } from '../src/components/Feedback.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -33,72 +31,48 @@ test('UX P1-3: CSS define exclusivamente .feedback-sucesso e .feedback-erro em p
   assert.ok(!css.includes('.feedback-error'), 'Classe legada .feedback-error deve ter sido removida do CSS');
 });
 
-test('UX P1-3: telas renderizam feedback com classes .feedback-sucesso e .feedback-erro e papéis de acessibilidade (role="status" e role="alert")', () => {
-  // 1. Tela de Conta de Afiliado - Sucesso
-  const htmlAfiliadoSucesso = renderToStaticMarkup(
-    React.createElement(AffiliateAccountPage, {
-      initialFeedback: { tipo: 'sucesso', texto: 'Tag salva com sucesso!' },
+test('UX P1-3: componente Feedback renderiza classes .feedback-sucesso e .feedback-erro e papéis de acessibilidade (role="status" e role="alert")', () => {
+  // Sucesso
+  const htmlSucesso = renderToStaticMarkup(
+    React.createElement(Feedback, {
+      msg: { tipo: 'sucesso', texto: 'Configurações salvas com sucesso!' },
     }),
   );
   assert.match(
-    htmlAfiliadoSucesso,
+    htmlSucesso,
     /class="[^"]*feedback-msg[^"]*feedback-sucesso[^"]*"/,
-    'Tela de Afiliado renderizada deve aplicar a classe .feedback-sucesso',
+    'Mensagem de sucesso deve aplicar a classe .feedback-sucesso',
   );
   assert.match(
-    htmlAfiliadoSucesso,
+    htmlSucesso,
     /role="status"/,
     'Mensagem de sucesso deve ter role="status" para anúncio por leitores de tela',
   );
+  assert.ok(htmlSucesso.includes('Configurações salvas com sucesso!'));
 
-  // 2. Tela de Conta de Afiliado - Erro
-  const htmlAfiliadoErro = renderToStaticMarkup(
-    React.createElement(AffiliateAccountPage, {
-      initialFeedback: { tipo: 'erro', texto: 'Formato de tag inválido.' },
+  // Erro
+  const htmlErro = renderToStaticMarkup(
+    React.createElement(Feedback, {
+      msg: { tipo: 'erro', texto: 'Falha na validação dos dados.' },
     }),
   );
   assert.match(
-    htmlAfiliadoErro,
+    htmlErro,
     /class="[^"]*feedback-msg[^"]*feedback-erro[^"]*"/,
-    'Tela de Afiliado renderizada deve aplicar a classe .feedback-erro',
+    'Mensagem de erro deve aplicar a classe .feedback-erro',
   );
   assert.match(
-    htmlAfiliadoErro,
+    htmlErro,
     /role="alert"/,
     'Mensagem de erro deve ter role="alert" para anúncio imediato por leitores de tela',
   );
+  assert.ok(htmlErro.includes('Falha na validação dos dados.'));
 
-  // 3. Tela de Nicho - Sucesso e Erro
-  const htmlNichoSucesso = renderToStaticMarkup(
-    React.createElement(NicheConfigPage, {
-      initialFeedback: { tipo: 'sucesso', texto: 'Nicho salvo com sucesso!' },
+  // Null não renderiza nada
+  const htmlNull = renderToStaticMarkup(
+    React.createElement(Feedback, {
+      msg: null,
     }),
   );
-  assert.ok(htmlNichoSucesso.includes('feedback-sucesso'));
-  assert.ok(htmlNichoSucesso.includes('role="status"'));
-
-  const htmlNichoErro = renderToStaticMarkup(
-    React.createElement(NicheConfigPage, {
-      initialFeedback: { tipo: 'erro', texto: 'Palavra duplicada.' },
-    }),
-  );
-  assert.ok(htmlNichoErro.includes('feedback-erro'));
-  assert.ok(htmlNichoErro.includes('role="alert"'));
-
-  // 4. Tela de Horários e Limites - Sucesso e Erro
-  const htmlHorariosSucesso = renderToStaticMarkup(
-    React.createElement(ScheduleLimitsPage, {
-      initialFeedback: { tipo: 'sucesso', texto: 'Horários atualizados!' },
-    }),
-  );
-  assert.ok(htmlHorariosSucesso.includes('feedback-sucesso'));
-  assert.ok(htmlHorariosSucesso.includes('role="status"'));
-
-  const htmlHorariosErro = renderToStaticMarkup(
-    React.createElement(ScheduleLimitsPage, {
-      initialFeedback: { tipo: 'erro', texto: 'Início deve ser antes do fim.' },
-    }),
-  );
-  assert.ok(htmlHorariosErro.includes('feedback-erro'));
-  assert.ok(htmlHorariosErro.includes('role="alert"'));
+  assert.equal(htmlNull, '', 'Feedback com msg null não deve renderizar nada');
 });
