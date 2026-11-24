@@ -374,6 +374,26 @@ test('removido do grupo: evento ao vivo (por LID) e conferência ao reconectar',
   assert.ok(exceptions.log.includes(`open:removido_do_grupo:vermelho:${CLIENTE}`));
 });
 
+test('onStatus: avisa cada mudança de estado e cada QR novo; unsubscribe para de avisar', async () => {
+  const { c, sock, openConn } = await setup();
+  const seen: unknown[] = [];
+  const off = c.onStatus((e) => seen.push(e));
+  sock().emit('connection.update', { qr: 'QR-1' });
+  sock().emit('connection.update', { qr: 'QR-2' });
+  await openConn();
+  sock().emit('connection.update', close(401));
+  await tick();
+  assert.deepEqual(seen, [
+    { estado: 'aguardando_pareamento', qr: 'QR-1' },
+    { estado: 'aguardando_pareamento', qr: 'QR-2' },
+    { estado: 'conectado' },
+    { estado: 'sessao_invalida' },
+  ]);
+  off();
+  await c.stop();
+  assert.equal(seen.length, 4, 'sem aviso depois do unsubscribe');
+});
+
 test('pareamento por código espera o socket ficar pronto (1º QR) e só manda dígitos', async () => {
   const sockets: FakeSocket[] = [];
   const c = createWhatsAppConnector({
