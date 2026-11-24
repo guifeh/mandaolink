@@ -1,0 +1,9 @@
+{
+  "all": true,
+  "src": ["apps/api/src", "apps/pwa/src", "packages/core/src", "packages/connectors/amazon/src", "packages/connectors/whatsapp/src"],
+  "include": ["apps/*/src/**", "packages/core/src/**", "packages/connectors/*/src/**"],
+  "exclude": ["**/*.test.ts", "**/node_modules/**", "**/dist/**"],
+  "extension": [".ts", ".tsx"],
+  "reporter": ["text-summary", "lcov", "json-summary"],
+  "reports-dir": "coverage"
+}

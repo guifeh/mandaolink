@@ -1,0 +1,11 @@
+node_modules/
+dist/
+dev-dist/
+coverage/
+package-lock.json
+**/.samples/
+**/.profile-*/
+**/reports/
+**/fixtures/
+*.md
+db/migrations/

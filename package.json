@@ -1,11 +1,35 @@
 {
-  "name": "mandaolink", "private": true, "type": "module",
-  "workspaces": ["apps/*", "packages/*", "packages/connectors/*"],
-  "engines": { "node": "24.x" },
+  "name": "mandaolink",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "packages/connectors/*"
+  ],
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "build": "npm run build -w packages/core && npm run build -w apps/api && npm run build -w apps/pwa",
-    "test": "npm run build && npm test -w packages/core && npm test -w apps/api && npm test -w apps/pwa",
+    "build:core": "npm run build -w packages/core",
+    "typecheck": "npm run build:core && npm run typecheck --workspaces --if-present",
+    "lint": "eslint . --max-warnings=400",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run build:core && npm test --workspaces --if-present",
+    "test:coverage": "npm run build:core && c8 npm test --workspaces --if-present",
     "migrate": "npm run migrate -w apps/api",
     "start": "npm start -w apps/api"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "c8": "^10.1.3",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.5.0",
+    "prettier": "^3.10.1",
+    "typescript-eslint": "^8.74.0"
   }
 }
