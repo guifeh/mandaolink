@@ -1,0 +1,28 @@
+{
+  "summary": {
+    "mode": "rate",
+    "via": "fetch",
+    "at": "2026-11-23T19:31:42.265Z",
+    "total": 1,
+    "publicavel": 0,
+    "taxaPublicavel": 0,
+    "taxaLeitura": 0,
+    "msMedio": 218,
+    "msP95": 218,
+    "leiturasPorHoraObservado": 16364,
+    "duracaoMin": 0,
+    "motivos": {
+      "bloqueado_captcha": 1
+    },
+    "parada": "bloqueio na leitura 1: bloqueado_captcha"
+  },
+  "rows": [
+    {
+      "i": 0,
+      "asin": "B0GHPGQLLB",
+      "result": "bloqueado_captcha",
+      "ms": 218,
+      "at": "2026-11-23T19:31:42.483Z"
+    }
+  ]
+}

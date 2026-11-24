@@ -1,0 +1,12 @@
+**/node_modules
+**/dist
+**/.profile-*
+**/reports
+backups
+*.dump
+*.log
+.env*
+.git
+.vscode
+.idea
+coverage

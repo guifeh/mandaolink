@@ -1,0 +1,51 @@
+{
+  "summary": {
+    "mode": "sample",
+    "via": "fetch",
+    "at": "2026-11-23T19:31:42.640Z",
+    "total": 3,
+    "publicavel": 1,
+    "taxaPublicavel": 33.3,
+    "taxaLeitura": 33.3,
+    "msMedio": 600,
+    "msP95": 1671,
+    "leiturasPorHoraObservado": 2252,
+    "duracaoMin": 0.1,
+    "motivos": {
+      "ok": 1,
+      "bloqueado_captcha": 1,
+      "em_pausa_por_bloqueio": 1
+    },
+    "parada": "pausa por bloqueio"
+  },
+  "rows": [
+    {
+      "asin": "B0GHPGQLLB",
+      "result": "ok",
+      "ms": 1671,
+      "via": "fetch",
+      "product": {
+        "asin": "B0GHPGQLLB",
+        "pageAsin": "B0GHPGQLLB",
+        "title": "Suporte Celular para Carro, Fixação no Vidro ou Painel Veicular",
+        "priceText": "R$ 20,87",
+        "priceCents": 2087,
+        "image": "https://m.media-amazon.com/images/I/71mCZsM920L._AC_SL1500_.jpg",
+        "available": true,
+        "checkedAt": "2026-11-23T19:31:44.311Z"
+      }
+    },
+    {
+      "asin": "B0FN8CH3KG",
+      "result": "bloqueado_captcha",
+      "ms": 129,
+      "via": "fetch"
+    },
+    {
+      "asin": "B0B8Z6JSMM",
+      "result": "em_pausa_por_bloqueio",
+      "ms": 0,
+      "via": "nenhum"
+    }
+  ]
+}

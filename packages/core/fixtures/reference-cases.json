@@ -1,0 +1,1180 @@
+[
+  {
+    "id": "ex-001",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Suporte veicular magnético para celular na Amazon",
+    "mensagem": {
+      "texto": "🔥 Suporte Veicular Magnético para Celular com Ventosa por apenas R$ 39,90! https://www.amazon.com.br/dp/B0EXEMPL01?tag=terceiro-20",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL01?tag=terceiro-20",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:00:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL01",
+      "agora": "2026-11-23T15:10:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Suporte Veicular Magnético de Celular para Painel e Saída de Ar",
+      "precoAtualCents": 3990,
+      "precoAnunciadoCents": 3990,
+      "tempoNaFilaMinutos": 5,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-002",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Carregador veicular rápido 30W USB-C via link curto",
+    "mensagem": {
+      "texto": "Imperdível! Carregador veicular rápido 30W USB-C turbo para carro por R$ 49,90 https://amzn.to/ex02",
+      "link": "https://amzn.to/ex02",
+      "fonte": { "id": "fonte-tg-01", "plataforma": "telegram", "ativa": true },
+      "publicadaEm": "2026-11-23T15:02:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL02",
+      "agora": "2026-11-23T15:10:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Carregador Veicular Rápido 30W Duplo USB e Type-C Automotivo",
+      "precoAtualCents": 4990,
+      "precoAnunciadoCents": 4990,
+      "tempoNaFilaMinutos": 3,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-003",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Câmera veicular dashcam Full HD com visão noturna",
+    "mensagem": {
+      "texto": "Segurança no trânsito! Dashcam Câmera Veicular Frontal 1080p https://www.amazon.com.br/dp/B0EXEMPL03",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL03",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:05:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL03",
+      "agora": "2026-11-23T15:15:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "eletronicos para veiculos",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Câmera Veicular Automotiva Dash Cam Full HD com Gravação Contínua",
+      "precoAtualCents": 18900,
+      "precoAnunciadoCents": 18900,
+      "tempoNaFilaMinutos": 10,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-004",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Aspirador de pó portátil 12V automotivo",
+    "mensagem": {
+      "texto": "Aspirador automotivo potente para carro 12V https://www.amazon.com.br/gp/product/B0EXEMPL04",
+      "link": "https://www.amazon.com.br/gp/product/B0EXEMPL04",
+      "fonte": { "id": "fonte-wa-02", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:08:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL04",
+      "agora": "2026-11-23T15:15:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Aspirador de Pó Automotivo Portátil 12V com Acessórios",
+      "precoAtualCents": 8990,
+      "precoAnunciadoCents": 8990,
+      "tempoNaFilaMinutos": 8,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-005",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Cera automotiva de carnaúba para proteção e brilho",
+    "mensagem": {
+      "texto": "Brilho impecável na lataria! Cera de carnaúba automotiva https://amzn.to/ex05",
+      "link": "https://amzn.to/ex05",
+      "fonte": { "id": "fonte-tg-01", "plataforma": "telegram", "ativa": true },
+      "publicadaEm": "2026-11-23T15:10:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL05",
+      "agora": "2026-11-23T15:20:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Cera Automotiva de Carnaúba Plus Proteção e Brilho para Veículos 500ml",
+      "precoAtualCents": 3550,
+      "precoAnunciadoCents": 3550,
+      "tempoNaFilaMinutos": 4,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-006",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Calibrador de pneus digital portátil com bateria",
+    "mensagem": {
+      "texto": "Compressor e calibrador portátil para pneu de carro https://www.amazon.com.br/dp/B0EXEMPL06",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL06",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:12:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL06",
+      "agora": "2026-11-23T15:20:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Calibrador e Compressor de Ar Digital Automotivo Portátil Recarregável",
+      "precoAtualCents": 14990,
+      "precoAnunciadoCents": 14990,
+      "tempoNaFilaMinutos": 12,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-007",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Organizador de porta-malas dobrável",
+    "mensagem": {
+      "texto": "Porta-malas sempre limpo e organizado! https://www.amazon.com.br/dp/B0EXEMPL07",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL07",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:14:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL07",
+      "agora": "2026-11-23T15:20:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Organizador de Porta-Malas Automotivo Dobrável com Divisórias",
+      "precoAtualCents": 6990,
+      "precoAnunciadoCents": 6990,
+      "tempoNaFilaMinutos": 2,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-008",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Capa de proteção impermeável para banco de carro",
+    "mensagem": {
+      "texto": "Capa protetora impermeável para banco de carro transporte pet https://www.amazon.com.br/dp/B0EXEMPL08",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL08",
+      "fonte": { "id": "fonte-wa-02", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:15:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL08",
+      "agora": "2026-11-23T15:20:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Capa Protetora de Banco Traseiro Automotivo Impermeável Lavável",
+      "precoAtualCents": 7990,
+      "precoAnunciadoCents": 7990,
+      "tempoNaFilaMinutos": 6,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-009",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Kit de lâmpadas automotivas H4 super branca",
+    "mensagem": {
+      "texto": "Par de Lâmpadas Automotivas H4 Efeito Xênon https://www.amazon.com.br/dp/B0EXEMPL09",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL09",
+      "fonte": { "id": "fonte-tg-01", "plataforma": "telegram", "ativa": true },
+      "publicadaEm": "2026-11-23T15:16:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL09",
+      "agora": "2026-11-23T15:20:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Par de Lâmpadas Automotivas H4 Farol Alto e Baixo 12V 55W",
+      "precoAtualCents": 5990,
+      "precoAnunciadoCents": 5990,
+      "tempoNaFilaMinutos": 7,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-010",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Aromatizador veicular para saída de ar de carro",
+    "mensagem": {
+      "texto": "Cheirinho para carro premium com clipe de ventilação https://amzn.to/ex10",
+      "link": "https://amzn.to/ex10",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:18:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL10",
+      "agora": "2026-11-23T15:20:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Aromatizador Veicular Automotivo Difusor para Saída de Ar de Carro",
+      "precoAtualCents": 2490,
+      "precoAnunciadoCents": 2490,
+      "tempoNaFilaMinutos": 4,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-011",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Kit de reparo rápido de pneu automotivo sem câmara",
+    "mensagem": {
+      "texto": "Kit socorro para furo de pneu sem câmara de veículo https://www.amazon.com.br/dp/B0EXEMPL11",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL11",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:20:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL11",
+      "agora": "2026-11-23T15:25:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Kit Reparo Rápido de Pneu Automotivo com Macarrão e Aplicador",
+      "precoAtualCents": 3200,
+      "precoAnunciadoCents": 3200,
+      "tempoNaFilaMinutos": 9,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-012",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Luva de microfibra para lavagem automotiva",
+    "mensagem": {
+      "texto": "Luva de microfibra macia para lavar lataria de carro sem riscar https://www.amazon.com.br/dp/B0EXEMPL12",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL12",
+      "fonte": { "id": "fonte-wa-02", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:22:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL12",
+      "agora": "2026-11-23T15:25:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Luva de Lavagem Automotiva em Microfibra Alta Densidade para Carro",
+      "precoAtualCents": 1990,
+      "precoAnunciadoCents": 1990,
+      "tempoNaFilaMinutos": 5,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-013",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Aditivo concentrado orgânico para radiador automotivo",
+    "mensagem": {
+      "texto": "Aditivo para radiador orgânico concentrado 1L https://www.amazon.com.br/dp/B0EXEMPL13",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL13",
+      "fonte": { "id": "fonte-tg-01", "plataforma": "telegram", "ativa": true },
+      "publicadaEm": "2026-11-23T15:24:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL13",
+      "agora": "2026-11-23T15:25:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Aditivo de Radiador Orgânico Concentrado Automotivo Linha Pesada e Leve 1L",
+      "precoAtualCents": 2850,
+      "precoAnunciadoCents": 2850,
+      "tempoNaFilaMinutos": 11,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-014",
+    "tipo": "exemplo",
+    "descricao": "Oferta válida nicho Carro: Espelho retrovisor panorâmico auxiliar veicular",
+    "mensagem": {
+      "texto": "Espelho retrovisor panorâmico sem ponto cego para automóvel https://www.amazon.com.br/dp/B0EXEMPL14",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL14",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:25:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL14",
+      "agora": "2026-11-23T15:27:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Espelho Retrovisor Panorâmico Auxiliar Veicular Convexo Anti Reflexo",
+      "precoAtualCents": 4500,
+      "precoAnunciadoCents": 4500,
+      "tempoNaFilaMinutos": 2,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-015",
+    "tipo": "exemplo",
+    "descricao": "G0: Mensagem vinda de fonte inativa / desativada",
+    "mensagem": {
+      "texto": "Oferta de suporte veicular https://www.amazon.com.br/dp/B0EXEMPL15",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL15",
+      "fonte": { "id": "fonte-inativa-99", "plataforma": "whatsapp", "ativa": false },
+      "publicadaEm": "2026-11-23T15:20:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL15",
+      "agora": "2026-11-23T15:22:00Z",
+      "tagAmazon": "cliente-20"
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "fonte inativa",
+      "gateEsperado": "G0"
+    }
+  },
+  {
+    "id": "ex-016",
+    "tipo": "exemplo",
+    "descricao": "G0: Mensagem recebida há mais de 30 minutos (antiga)",
+    "mensagem": {
+      "texto": "Promoção relâmpago de calota esportiva https://www.amazon.com.br/dp/B0EXEMPL16",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL16",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T14:15:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL16",
+      "agora": "2026-11-23T15:00:00Z",
+      "tagAmazon": "cliente-20"
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "mensagem antiga",
+      "gateEsperado": "G0"
+    }
+  },
+  {
+    "id": "ex-017",
+    "tipo": "exemplo",
+    "descricao": "G1: Mensagem sem nenhum link ou URL",
+    "mensagem": {
+      "texto": "Galera, o suporte de carro magnético tá saindo por 30 reais hoje no shopping!",
+      "link": null,
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:26:00Z"
+    },
+    "contexto": {
+      "agora": "2026-11-23T15:28:00Z",
+      "tagAmazon": "cliente-20"
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "sem link",
+      "gateEsperado": "G1"
+    }
+  },
+  {
+    "id": "ex-018",
+    "tipo": "exemplo",
+    "descricao": "G1: Texto sem link válido, apenas pontuação e menção textual",
+    "mensagem": {
+      "texto": "Acessem amazon ponto com ponto br barra produto e vejam a capa veicular",
+      "link": null,
+      "fonte": { "id": "fonte-tg-01", "plataforma": "telegram", "ativa": true },
+      "publicadaEm": "2026-11-23T15:27:00Z"
+    },
+    "contexto": {
+      "agora": "2026-11-23T15:28:00Z",
+      "tagAmazon": "cliente-20"
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "sem link",
+      "gateEsperado": "G1"
+    }
+  },
+  {
+    "id": "ex-019",
+    "tipo": "exemplo",
+    "descricao": "G2: Loja não suportada na v1 (Shopee)",
+    "mensagem": {
+      "texto": "Alarme automotivo na promoção da Shopee https://shopee.com.br/product/12345/67890",
+      "link": "https://shopee.com.br/product/12345/67890",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:28:00Z"
+    },
+    "contexto": {
+      "agora": "2026-11-23T15:29:00Z",
+      "tagAmazon": "cliente-20"
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "loja não suportada",
+      "gateEsperado": "G2"
+    }
+  },
+  {
+    "id": "ex-020",
+    "tipo": "exemplo",
+    "descricao": "G2: Loja não suportada na v1 (Magazine Luiza)",
+    "mensagem": {
+      "texto": "Pneu aro 14 no Magalu https://www.magazineluiza.com.br/pneu-aro-14/p/1234567/au/pnar/",
+      "link": "https://www.magazineluiza.com.br/pneu-aro-14/p/1234567/au/pnar/",
+      "fonte": { "id": "fonte-tg-01", "plataforma": "telegram", "ativa": true },
+      "publicadaEm": "2026-11-23T15:29:00Z"
+    },
+    "contexto": {
+      "agora": "2026-11-23T15:30:00Z",
+      "tagAmazon": "cliente-20"
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "loja não suportada",
+      "gateEsperado": "G2"
+    }
+  },
+  {
+    "id": "ex-021",
+    "tipo": "exemplo",
+    "descricao": "G2: Loja não suportada na v1 (AliExpress)",
+    "mensagem": {
+      "texto": "Módulo OBD2 automotivo no Ali https://pt.aliexpress.com/item/10050012345.html",
+      "link": "https://pt.aliexpress.com/item/10050012345.html",
+      "fonte": { "id": "fonte-wa-02", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:30:00Z"
+    },
+    "contexto": {
+      "agora": "2026-11-23T15:31:00Z",
+      "tagAmazon": "cliente-20"
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "loja não suportada",
+      "gateEsperado": "G2"
+    }
+  },
+  {
+    "id": "ex-022",
+    "tipo": "exemplo",
+    "descricao": "G2: Link não resolve (URL inexistente / erro 404)",
+    "mensagem": {
+      "texto": "Oferta fantasma https://www.amazon.com.br/dp/B0INEXISTENTE",
+      "link": "https://www.amazon.com.br/dp/B0INEXISTENTE",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:31:00Z"
+    },
+    "contexto": {
+      "agora": "2026-11-23T15:32:00Z",
+      "tagAmazon": "cliente-20"
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "link não resolve",
+      "gateEsperado": "G2"
+    }
+  },
+  {
+    "id": "ex-023",
+    "tipo": "exemplo",
+    "descricao": "G2: Link com loop ou excesso de redirecionamentos (> 5 saltos)",
+    "mensagem": {
+      "texto": "Link em loop infinito https://cutt.ly/loop-infinito-redirect",
+      "link": "https://cutt.ly/loop-infinito-redirect",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:32:00Z"
+    },
+    "contexto": {
+      "agora": "2026-11-23T15:33:00Z",
+      "tagAmazon": "cliente-20"
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "link não resolve",
+      "gateEsperado": "G2"
+    }
+  },
+  {
+    "id": "ex-024",
+    "tipo": "exemplo",
+    "descricao": "G3: Deduplicação - Mesmo ASIN já enviado há poucas horas na janela de 24h",
+    "mensagem": {
+      "texto": "Suporte magnético veicular novamente https://www.amazon.com.br/dp/B0EXEMPL01",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL01",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:33:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL01",
+      "agora": "2026-11-23T15:35:00Z",
+      "tagAmazon": "cliente-20",
+      "jaEnviadoJanela24h": true,
+      "disponivel": true,
+      "tituloOficial": "Suporte Veicular Magnético de Celular para Painel e Saída de Ar",
+      "precoAtualCents": 3990
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "repetida",
+      "gateEsperado": "G3"
+    }
+  },
+  {
+    "id": "ex-025",
+    "tipo": "exemplo",
+    "descricao": "G3: Deduplicação - Calibrador de pneus já divulgado sem queda expressiva de preço",
+    "mensagem": {
+      "texto": "Calibrador portátil em promoção https://www.amazon.com.br/dp/B0EXEMPL06",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL06",
+      "fonte": { "id": "fonte-tg-01", "plataforma": "telegram", "ativa": true },
+      "publicadaEm": "2026-11-23T15:34:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL06",
+      "agora": "2026-11-23T15:35:00Z",
+      "tagAmazon": "cliente-20",
+      "jaEnviadoJanela24h": true,
+      "disponivel": true,
+      "tituloOficial": "Calibrador e Compressor de Ar Digital Automotivo Portátil Recarregável",
+      "precoAtualCents": 14990
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "repetida",
+      "gateEsperado": "G3"
+    }
+  },
+  {
+    "id": "ex-026",
+    "tipo": "exemplo",
+    "descricao": "G4: Produto fora de estoque / indisponível na Amazon",
+    "mensagem": {
+      "texto": "Tapete automotivo personalizado https://www.amazon.com.br/dp/B0EXEMPL26",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL26",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:35:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL26",
+      "agora": "2026-11-23T15:36:00Z",
+      "tagAmazon": "cliente-20",
+      "jaEnviadoJanela24h": false,
+      "disponivel": false,
+      "tituloOficial": "Jogo de Tapetes Automotivos em Borracha para Carro",
+      "precoAtualCents": null
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "indisponível",
+      "gateEsperado": "G4"
+    }
+  },
+  {
+    "id": "ex-027",
+    "tipo": "exemplo",
+    "descricao": "G4: Produto sem preço ou esgotado",
+    "mensagem": {
+      "texto": "Chave de roda cruz automotiva https://www.amazon.com.br/dp/B0EXEMPL27",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL27",
+      "fonte": { "id": "fonte-wa-02", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:36:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL27",
+      "agora": "2026-11-23T15:37:00Z",
+      "tagAmazon": "cliente-20",
+      "jaEnviadoJanela24h": false,
+      "disponivel": false,
+      "tituloOficial": "Chave de Roda Cruz Reforçada Universal para Veículos",
+      "precoAtualCents": null
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "indisponível",
+      "gateEsperado": "G4"
+    }
+  },
+  {
+    "id": "ex-028",
+    "tipo": "exemplo",
+    "descricao": "G5: Fora do nicho Carro (Smartphone)",
+    "mensagem": {
+      "texto": "Celular Xiaomi Redmi Note 13 256GB https://www.amazon.com.br/dp/B0EXEMPL28",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL28",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:37:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL28",
+      "agora": "2026-11-23T15:38:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "celulares e comunicacao",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Smartphone Xiaomi Redmi Note 13 4G 256GB 8GB RAM Midnight Black",
+      "precoAtualCents": 119900
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "fora do nicho",
+      "gateEsperado": "G5"
+    }
+  },
+  {
+    "id": "ex-029",
+    "tipo": "exemplo",
+    "descricao": "G5: Fora do nicho Carro (Livro)",
+    "mensagem": {
+      "texto": "Livro O Poder do Hábito capa comum https://www.amazon.com.br/dp/B0EXEMPL29",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL29",
+      "fonte": { "id": "fonte-tg-01", "plataforma": "telegram", "ativa": true },
+      "publicadaEm": "2026-11-23T15:38:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL29",
+      "agora": "2026-11-23T15:39:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "livros",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "O Poder do Hábito: Por que fazemos o que fazemos na vida e nos negócios",
+      "precoAtualCents": 4290
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "fora do nicho",
+      "gateEsperado": "G5"
+    }
+  },
+  {
+    "id": "ex-030",
+    "tipo": "exemplo",
+    "descricao": "G5: Fora do nicho Carro (Maquiagem / Cosmético)",
+    "mensagem": {
+      "texto": "Kit Batom Matte e Rímel Volume https://www.amazon.com.br/dp/B0EXEMPL30",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL30",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:39:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL30",
+      "agora": "2026-11-23T15:40:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "beleza e cuidados pessoais",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Kit de Maquiagem Facial Batom Líquido Matte e Máscara para Cílios",
+      "precoAtualCents": 3990
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "fora do nicho",
+      "gateEsperado": "G5"
+    }
+  },
+  {
+    "id": "ex-031",
+    "tipo": "exemplo",
+    "descricao": "G5: Fora do nicho Carro (Fone Bluetooth)",
+    "mensagem": {
+      "texto": "Fone de ouvido sem fio TWS redução de ruído https://www.amazon.com.br/dp/B0EXEMPL31",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL31",
+      "fonte": { "id": "fonte-wa-02", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:40:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL31",
+      "agora": "2026-11-23T15:41:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "eletronicos",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Fone de Ouvido Bluetooth Sem Fio TWS com Microfone e Cancelamento",
+      "precoAtualCents": 9990
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "fora do nicho",
+      "gateEsperado": "G5"
+    }
+  },
+  {
+    "id": "ex-032",
+    "tipo": "exemplo",
+    "descricao": "G5: Fora do nicho Carro (Calçado esportivo)",
+    "mensagem": {
+      "texto": "Tênis de corrida amortecimento leve https://www.amazon.com.br/dp/B0EXEMPL32",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL32",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:41:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL32",
+      "agora": "2026-11-23T15:42:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "moda e calcados",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Tênis Esportivo Masculino para Corrida e Caminhada Confort",
+      "precoAtualCents": 15990
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "fora do nicho",
+      "gateEsperado": "G5"
+    }
+  },
+  {
+    "id": "ex-033",
+    "tipo": "exemplo",
+    "descricao": "G5: Palavra bloqueada (Carrinho de bebê - falso positivo de carro)",
+    "mensagem": {
+      "texto": "Carrinho de bebê dobrável com moisés https://www.amazon.com.br/dp/B0EXEMPL33",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL33",
+      "fonte": { "id": "fonte-tg-01", "plataforma": "telegram", "ativa": true },
+      "publicadaEm": "2026-11-23T15:42:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL33",
+      "agora": "2026-11-23T15:43:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "bebes",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Carrinho de Bebê Passeio Compacto Dobrável com Cinto 5 Pontos",
+      "precoAtualCents": 49900
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "palavra bloqueada",
+      "gateEsperado": "G5"
+    }
+  },
+  {
+    "id": "ex-034",
+    "tipo": "exemplo",
+    "descricao": "G5: Palavra bloqueada (Carrinho de controle remoto / brinquedo)",
+    "mensagem": {
+      "texto": "Carro de controle remoto 4x4 infantil https://www.amazon.com.br/dp/B0EXEMPL34",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL34",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:43:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL34",
+      "agora": "2026-11-23T15:44:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "brinquedos e jogos",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Carro de Controle Remoto Elétrico 4x4 Brinquedo Infantil Off-Road",
+      "precoAtualCents": 7990
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "palavra bloqueada",
+      "gateEsperado": "G5"
+    }
+  },
+  {
+    "id": "ex-035",
+    "tipo": "exemplo",
+    "descricao": "G5: Palavra bloqueada (Jogo de tabuleiro e cartas)",
+    "mensagem": {
+      "texto": "Jogo de cartas divertido para família https://www.amazon.com.br/dp/B0EXEMPL35",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL35",
+      "fonte": { "id": "fonte-wa-02", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:44:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL35",
+      "agora": "2026-11-23T15:45:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "brinquedos e jogos",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Jogo de Cartas UNO Clássico e Tabuleiro Copag",
+      "precoAtualCents": 2990
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "palavra bloqueada",
+      "gateEsperado": "G5"
+    }
+  },
+  {
+    "id": "ex-036",
+    "tipo": "exemplo",
+    "descricao": "G6: Oferta vencida - Preço oficial na Amazon subiu 100% em relação ao anunciado",
+    "mensagem": {
+      "texto": "Bomba de encher pneu por só R$ 39,90! https://www.amazon.com.br/dp/B0EXEMPL36",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL36",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:45:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL36",
+      "agora": "2026-11-23T15:47:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Bomba de Ar Manual para Pneu de Carro e Moto",
+      "precoAnunciadoCents": 3990,
+      "precoAtualCents": 7990
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "oferta vencida",
+      "gateEsperado": "G6"
+    }
+  },
+  {
+    "id": "ex-037",
+    "tipo": "exemplo",
+    "descricao": "G6: Oferta vencida - Preço oficial subiu mais de 5% de tolerância",
+    "mensagem": {
+      "texto": "Kit polimento automotivo de R$ 99,00 https://www.amazon.com.br/dp/B0EXEMPL37",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL37",
+      "fonte": { "id": "fonte-tg-01", "plataforma": "telegram", "ativa": true },
+      "publicadaEm": "2026-11-23T15:46:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL37",
+      "agora": "2026-11-23T15:48:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Kit Completo de Polimento e Espelhameto Automotivo para Carros",
+      "precoAnunciadoCents": 9900,
+      "precoAtualCents": 13900
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "oferta vencida",
+      "gateEsperado": "G6"
+    }
+  },
+  {
+    "id": "ex-038",
+    "tipo": "exemplo",
+    "descricao": "G7: Falha ao gerar link - Tag de afiliado Amazon corrompida / formato inválido",
+    "mensagem": {
+      "texto": "Suporte articulado veicular https://www.amazon.com.br/dp/B0EXEMPL38",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL38",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:47:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL38",
+      "agora": "2026-11-23T15:49:00Z",
+      "tagAmazon": "tag_invalida!!!",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Suporte Articulado Veicular para Painel",
+      "precoAtualCents": 3990
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "falha ao gerar link",
+      "gateEsperado": "G7"
+    }
+  },
+  {
+    "id": "ex-039",
+    "tipo": "exemplo",
+    "descricao": "G7: Falha ao gerar link - Tag de afiliado vazia no sistema",
+    "mensagem": {
+      "texto": "Organizador solar veicular https://www.amazon.com.br/dp/B0EXEMPL39",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL39",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:48:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL39",
+      "agora": "2026-11-23T15:50:00Z",
+      "tagAmazon": "",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Organizador Solar Veicular de Quebra-Sol",
+      "precoAtualCents": 2990
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "falha ao gerar link",
+      "gateEsperado": "G7"
+    }
+  },
+  {
+    "id": "ex-040",
+    "tipo": "exemplo",
+    "descricao": "G8: Mensagem inválida - Presença de link externo estranho no template gerado",
+    "mensagem": {
+      "texto": "Cera automotiva https://www.amazon.com.br/dp/B0EXEMPL40",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL40",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:49:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL40",
+      "agora": "2026-11-23T15:50:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Cera Automotiva Líquida Rápida Brilho e Proteção 500ml",
+      "precoAtualCents": 2990,
+      "mensagemRenderizadaComErro": "🔥 Cera Automotiva Líquida Rápida Brilho e Proteção 500ml\n\n💰 Por apenas R$ 29,90\n⏱️ Preço às 15:49, pode mudar\n\n👉 Compre: https://www.amazon.com.br/dp/B0EXEMPL40?tag=cliente-20\nGrupo parceiro: https://t.me/grupo_estranho"
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "mensagem inválida",
+      "gateEsperado": "G8"
+    }
+  },
+  {
+    "id": "ex-041",
+    "tipo": "exemplo",
+    "descricao": "G8: Mensagem inválida - Mensagem renderizada sem o link oficial de afiliado",
+    "mensagem": {
+      "texto": "Kit de chaves torx para oficina mecânica https://www.amazon.com.br/dp/B0EXEMPL41",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL41",
+      "fonte": { "id": "fonte-tg-01", "plataforma": "telegram", "ativa": true },
+      "publicadaEm": "2026-11-23T15:50:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL41",
+      "agora": "2026-11-23T15:52:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Jogo de Chaves Torx Automotivas de Precisão em Aço Cromo",
+      "precoAtualCents": 4990,
+      "mensagemRenderizadaComErro": "🔥 Jogo de Chaves Torx Automotivas de Precisão em Aço Cromo\n\n💰 Por apenas R$ 49,90\n⏱️ Preço às 15:50, pode mudar\n\nLink indisponível no momento"
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "mensagem inválida",
+      "gateEsperado": "G8"
+    }
+  },
+  {
+    "id": "ex-042",
+    "tipo": "exemplo",
+    "descricao": "G9: Vencida na fila - Tempo de espera na fila (150 min) superior ao TTL de 2 horas (agora = 15:52 na ingestão)",
+    "mensagem": {
+      "texto": "Lixeira automotiva impermeável para câmbio de carro https://www.amazon.com.br/dp/B0EXEMPL42",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL42",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:51:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL42",
+      "agora": "2026-11-23T15:52:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Lixeira para Carro Automotiva Impermeável Lavável para Câmbio",
+      "precoAtualCents": 2290,
+      "tempoNaFilaMinutos": 150,
+      "ttlMinutos": 120
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "vencida na fila",
+      "gateEsperado": "G9"
+    }
+  },
+  {
+    "id": "ex-043",
+    "tipo": "exemplo",
+    "descricao": "G6: Oferta válida com cupom legível (R$ 10,00 off abatido no preço efetivo)",
+    "mensagem": {
+      "texto": "Bomba de ar digital portátil para pneus https://www.amazon.com.br/dp/B0EXEMPL43",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL43",
+      "fonte": { "id": "fonte-wa-01", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:52:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL43",
+      "agora": "2026-11-23T15:53:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Compressor de Ar e Bomba Portátil Digital Automotiva",
+      "precoAnunciadoCents": 7990,
+      "precoAtualCents": 8990,
+      "cupom": {
+        "presente": true,
+        "legivel": true,
+        "valorCentavos": 1000
+      }
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  },
+  {
+    "id": "ex-044",
+    "tipo": "exemplo",
+    "descricao": "G6: Oferta com cupom ilegível / corrompido - reprova por segurança",
+    "mensagem": {
+      "texto": "Chave de impacto automotiva com cupom misterioso https://www.amazon.com.br/dp/B0EXEMPL44",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL44",
+      "fonte": { "id": "fonte-tg-01", "plataforma": "telegram", "ativa": true },
+      "publicadaEm": "2026-11-23T15:53:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL44",
+      "agora": "2026-11-23T15:54:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Chave de Impacto Elétrica Recarregável para Carro e Oficina",
+      "precoAnunciadoCents": 19990,
+      "precoAtualCents": 19990,
+      "cupom": {
+        "presente": true,
+        "legivel": false
+      }
+    },
+    "esperado": {
+      "rotulo": "nao_enviar",
+      "motivo": "cupom_ilegivel",
+      "gateEsperado": "G6"
+    }
+  },
+  {
+    "id": "ex-045",
+    "tipo": "exemplo",
+    "descricao": "G6: Oferta válida sem cupom (preço atual coincide com anunciado)",
+    "mensagem": {
+      "texto": "Cabo auxiliar para bateria de carro (chupeta) https://www.amazon.com.br/dp/B0EXEMPL45",
+      "link": "https://www.amazon.com.br/dp/B0EXEMPL45",
+      "fonte": { "id": "fonte-wa-02", "plataforma": "whatsapp", "ativa": true },
+      "publicadaEm": "2026-11-23T15:54:00Z"
+    },
+    "contexto": {
+      "asin": "B0EXEMPL45",
+      "agora": "2026-11-23T15:55:00Z",
+      "tagAmazon": "cliente-20",
+      "categoria": "automotivo",
+      "jaEnviadoJanela24h": false,
+      "disponivel": true,
+      "tituloOficial": "Cabo para Transferência de Carga Bateria Automotiva 500A",
+      "precoAnunciadoCents": 4500,
+      "precoAtualCents": 4500,
+      "cupom": {
+        "presente": false,
+        "legivel": false
+      }
+    },
+    "esperado": {
+      "rotulo": "enviar",
+      "motivo": null,
+      "gateEsperado": null
+    }
+  }
+]

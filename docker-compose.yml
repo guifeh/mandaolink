@@ -1,0 +1,86 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: mandaolink-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Defina a variavel POSTGRES_PASSWORD no .env}
+      POSTGRES_DB: ${POSTGRES_DB:-mandaolink}
+      TZ: America/Sao_Paulo
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-mandaolink}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mandaolink-db
+
+  app:
+    container_name: mandaolink-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 3000
+      TZ: America/Sao_Paulo
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-mandaolink}?sslmode=disable
+      APP_ORIGIN: ${APP_ORIGIN:-http://localhost:3000}
+      OWNER_EMAIL: ${OWNER_EMAIL:?Defina a variavel OWNER_EMAIL no .env}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      TRUSTED_TUNNEL_PROXIES: ${TRUSTED_TUNNEL_PROXIES:-}
+      HEARTBEAT_URL: ${HEARTBEAT_URL:-}
+      CONNECTORS: ${CONNECTORS:-fake}
+      DRY_RUN: ${DRY_RUN:-true}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:3000/saude || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - mandaolink-db
+      - mandaolink-edge
+
+  cloudflared:
+    image: cloudflare/cloudflared:2024.11.0
+    container_name: mandaolink-cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN:-}
+    profiles:
+      - tunnel
+    depends_on:
+      app:
+        condition: service_healthy
+    networks:
+      - mandaolink-edge
+
+volumes:
+  postgres_data:
+    name: mandaolink_postgres_data
+    driver: local
+
+networks:
+  mandaolink-db:
+    name: mandaolink-db-net
+    driver: bridge
+  mandaolink-edge:
+    name: mandaolink-edge-net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.31.250.0/29

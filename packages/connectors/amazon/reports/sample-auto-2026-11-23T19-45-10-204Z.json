@@ -1,0 +1,626 @@
+{
+  "summary": {
+    "mode": "sample",
+    "via": "auto",
+    "at": "2026-11-23T19:45:10.204Z",
+    "total": 30,
+    "publicavel": 30,
+    "taxaPublicavel": 100,
+    "taxaLeitura": 100,
+    "msMedio": 2157,
+    "msP95": 2999,
+    "leiturasPorHoraObservado": 661,
+    "duracaoMin": 2.7,
+    "motivos": {
+      "ok": 30
+    },
+    "cupom": {
+      "lidos": 30,
+      "comCupom": 0,
+      "ilegiveis": 0
+    },
+    "parada": "fim do tempo/amostra, sem bloqueio"
+  },
+  "rows": [
+    {
+      "asin": "B0GHPGQLLB",
+      "result": "ok",
+      "ms": 5536,
+      "via": "browser",
+      "product": {
+        "asin": "B0GHPGQLLB",
+        "pageAsin": "B0GHPGQLLB",
+        "title": "Suporte Celular para Carro, Fixação no Vidro ou Painel Veicular",
+        "priceText": "R$ 20,87",
+        "priceCents": 2087,
+        "image": "https://m.media-amazon.com/images/I/71mCZsM920L._AC_SL1500_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:45:15.982Z"
+      }
+    },
+    {
+      "asin": "B0FN8CH3KG",
+      "result": "ok",
+      "ms": 2042,
+      "via": "browser",
+      "product": {
+        "asin": "B0FN8CH3KG",
+        "pageAsin": "B0FN8CH3KG",
+        "title": "Suporte Veicular Celular GPS Ventosa Trava Automática Painel Para-Brisa",
+        "priceText": "R$ 28,40",
+        "priceCents": 2840,
+        "image": "https://m.media-amazon.com/images/I/51uQjdBNc4L._AC_SL1254_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:45:21.238Z"
+      }
+    },
+    {
+      "asin": "B0B8Z6JSMM",
+      "result": "ok",
+      "ms": 1091,
+      "via": "fetch",
+      "product": {
+        "asin": "B0B8Z6JSMM",
+        "pageAsin": "B0B8Z6JSMM",
+        "title": "Suporte de telefone de carro giratório e retrátil -para espelho retrovisor, ajuste de rotação de 360 ​​graus, fácil de instalar e remover, para a maioria dos telefones celulares e carros",
+        "priceText": "R$ 19,00",
+        "priceCents": 1900,
+        "image": "https://m.media-amazon.com/images/I/51AF+vxT0KL._AC_SL1000_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:45:25.610Z"
+      }
+    },
+    {
+      "asin": "B0H12GFG9K",
+      "result": "ok",
+      "ms": 1840,
+      "via": "browser",
+      "product": {
+        "asin": "B0H12GFG9K",
+        "pageAsin": "B0H12GFG9K",
+        "title": "Suporte Celular Carro com Ventosa e Trava Automática 360° | Suporte Veicular Universal para Painel e Para-brisa | Abertura Lateral Rápida | Compatível com Smartphones até 8,5cm",
+        "priceText": "R$ 17,90",
+        "priceCents": 1790,
+        "image": "https://m.media-amazon.com/images/I/61C-mcDLlNL._AC_SL1254_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:45:31.404Z"
+      }
+    },
+    {
+      "asin": "B0HKDSNL21",
+      "result": "ok",
+      "ms": 2464,
+      "via": "browser",
+      "product": {
+        "asin": "B0HKDSNL21",
+        "pageAsin": "B0HKDSNL21",
+        "title": "Suporte de Celular para Carro Universal Saída de Ar Condicionado Universal com Presilha Ajustável Garra de Fixação Giratório 360° com Trava para Smartphone e GPS..",
+        "priceText": "R$ 15,94",
+        "priceCents": 1594,
+        "image": "https://m.media-amazon.com/images/I/61inmWkimJL._AC_SL1254_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:45:37.224Z"
+      }
+    },
+    {
+      "asin": "B0FJYJFWNP",
+      "result": "ok",
+      "ms": 751,
+      "via": "fetch",
+      "product": {
+        "asin": "B0FJYJFWNP",
+        "pageAsin": "B0FJYJFWNP",
+        "title": "Suporte Celular para Carro, 360°, Antivibração, Antiqueda, Fixação Firme no Painel Veicular e Vidro. Automotivo Universal, Compativel com todos os Celulares Apple iPhone Samsung Galaxy - Premium",
+        "priceText": "R$ 29,95",
+        "priceCents": 2995,
+        "image": "https://m.media-amazon.com/images/I/61q+e9We+QL._AC_SL1200_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:45:40.991Z"
+      }
+    },
+    {
+      "asin": "B0HKSX8X2C",
+      "result": "ok",
+      "ms": 1944,
+      "via": "browser",
+      "product": {
+        "asin": "B0HKSX8X2C",
+        "pageAsin": "B0HKSX8X2C",
+        "title": "Carregador Veicular Turbo 60W com 2 Portas USB e Tipo-C + Cabo USB-C e Carregamento Rápido PD Compatível com Celulares e Tablets",
+        "priceText": "R$ 24,99",
+        "priceCents": 2499,
+        "image": "https://m.media-amazon.com/images/I/71uxM44VvaL._AC_SL1254_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:45:46.983Z"
+      }
+    },
+    {
+      "asin": "B0DWM1X4S8",
+      "result": "ok",
+      "ms": 1876,
+      "via": "browser",
+      "product": {
+        "asin": "B0DWM1X4S8",
+        "pageAsin": "B0DWM1X4S8",
+        "title": "Carregador Veicular Turbo 60W Para Automóvel Carregador de Carro Duas Entradas com Carregamento Super Rápido + Cabo USB-C Premium Compatível Com Dispositivos IOS e Android",
+        "priceText": "R$ 34,89",
+        "priceCents": 3489,
+        "image": "https://m.media-amazon.com/images/I/51ozVrHvIML._AC_SL1000_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:45:52.449Z"
+      }
+    },
+    {
+      "asin": "B0FTCWY5DX",
+      "result": "ok",
+      "ms": 1923,
+      "via": "browser",
+      "product": {
+        "asin": "B0FTCWY5DX",
+        "pageAsin": "B0FTCWY5DX",
+        "title": "Carregador Veicular 60W Turbo com Cabo USB-C – Duas Entradas USB-C, Carregamento Ultra Rápido, Proteção Inteligente e LED Indicador para Celulares e Tablets",
+        "priceText": "R$ 39,90",
+        "priceCents": 3990,
+        "image": "https://m.media-amazon.com/images/I/718StmqTNqL._AC_SL1500_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:45:58.374Z"
+      }
+    },
+    {
+      "asin": "B09MZTB48L",
+      "result": "ok",
+      "ms": 2054,
+      "via": "browser",
+      "product": {
+        "asin": "B09MZTB48L",
+        "pageAsin": "B09MZTB48L",
+        "title": "Geonav Carregador Veicular SuperPower Ultrarrápido Duo 38W, 2 portas - 1 USB (18W Quick Charge) e 1 USB-C (20W Power Delivery), CH38PDQC, Alumínio Cinza",
+        "priceText": "R$ 61,62",
+        "priceCents": 6162,
+        "image": "https://m.media-amazon.com/images/I/61lwexOZvVL._AC_SL1500_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:46:03.372Z"
+      }
+    },
+    {
+      "asin": "B0HDW8KB2V",
+      "result": "ok",
+      "ms": 2243,
+      "via": "browser",
+      "product": {
+        "asin": "B0HDW8KB2V",
+        "pageAsin": "B0HDW8KB2V",
+        "title": "Carregador Veicular Turbo 60W para Carro, 2 Entradas com Carregamento Rápido + Cabo USB-C Premium, Compatível com Dispositivos iOS e Android",
+        "priceText": "R$ 23,83",
+        "priceCents": 2383,
+        "image": "https://m.media-amazon.com/images/I/61NlxmarQVL._AC_SL1346_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:46:07.828Z"
+      }
+    },
+    {
+      "asin": "B0HKQDTQZX",
+      "result": "ok",
+      "ms": 1900,
+      "via": "browser",
+      "product": {
+        "asin": "B0HKQDTQZX",
+        "pageAsin": "B0HKQDTQZX",
+        "title": "Carregador Veicular Turbo 60W com USB-C e USB com Cabo USB-C, Carregamento Rápido para 2 Dispositivos Simultaneamente, Adaptador para Carro, para Celulares IOS, Android, Tablets",
+        "priceText": "R$ 25,49",
+        "priceCents": 2549,
+        "image": "https://m.media-amazon.com/images/I/61paP5s0oyL._AC_SL1080_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:46:13.269Z"
+      }
+    },
+    {
+      "asin": "B0GXBKH42M",
+      "result": "ok",
+      "ms": 2158,
+      "via": "browser",
+      "product": {
+        "asin": "B0GXBKH42M",
+        "pageAsin": "B0GXBKH42M",
+        "title": "Aspirador de Pó Automotivo 12V 6000Pa 120W com LED e Cabo 4 m",
+        "priceText": "R$ 84,64",
+        "priceCents": 8464,
+        "image": "https://m.media-amazon.com/images/I/71Yzr-JFtjL._AC_SL1500_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:46:17.856Z"
+      }
+    },
+    {
+      "asin": "B0H1564BCJ",
+      "result": "ok",
+      "ms": 1974,
+      "via": "browser",
+      "product": {
+        "asin": "B0H1564BCJ",
+        "pageAsin": "B0H1564BCJ",
+        "title": "Aspirador Portátil para Automóvel 22000PA Sem Fio",
+        "priceText": "R$ 284,05",
+        "priceCents": 28405,
+        "image": "https://m.media-amazon.com/images/I/61mFDwW5nuL._AC_SL1200_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:46:22.331Z"
+      }
+    },
+    {
+      "asin": "B0HC3BDLVF",
+      "result": "ok",
+      "ms": 1840,
+      "via": "browser",
+      "product": {
+        "asin": "B0HC3BDLVF",
+        "pageAsin": "B0HC3BDLVF",
+        "title": "Aspirador Portatil Sem Fio, Aspirador de Pó Automotivo, Mini Aspirador Portatil, Portátil Sem Fio, 3 Tipos de Bicos",
+        "priceText": "R$ 197,99",
+        "priceCents": 19799,
+        "image": "https://m.media-amazon.com/images/I/51Wtwz7ee1L._AC_SL1000_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:46:26.331Z"
+      }
+    },
+    {
+      "asin": "B0HFCCF7GV",
+      "result": "ok",
+      "ms": 941,
+      "via": "fetch",
+      "product": {
+        "asin": "B0HFCCF7GV",
+        "pageAsin": "B0HFCCF7GV",
+        "title": "Aspirador de Pó Automotivo 120W, Calibrador de Pneus Portátil, 6000mAh Sem Fio, Copo 750ml, LED Duplo com SOS, Kit 4 em 1 para Carro",
+        "priceText": "R$ 151,99",
+        "priceCents": 15199,
+        "image": "https://m.media-amazon.com/images/I/618CUBkqk6L._AC_SL1200_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:46:30.747Z"
+      }
+    },
+    {
+      "asin": "B0CLDRS18S",
+      "result": "ok",
+      "ms": 2343,
+      "via": "browser",
+      "product": {
+        "asin": "B0CLDRS18S",
+        "pageAsin": "B0CLDRS18S",
+        "title": "WAP Aspirador de Pó Automotivo Car 12V2, Portátil, 420ml, com Recipiente Removível e Filtro Lavável, 180W 12VDC",
+        "priceText": "R$ 91,75",
+        "priceCents": 9175,
+        "image": "https://m.media-amazon.com/images/I/71zj-+xJrbL._AC_SL1500_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:46:37.052Z"
+      }
+    },
+    {
+      "asin": "B07Y5LQGLC",
+      "result": "ok",
+      "ms": 2253,
+      "via": "browser",
+      "product": {
+        "asin": "B07Y5LQGLC",
+        "pageAsin": "B07Y5LQGLC",
+        "title": "Cera de Carnaúba Vonixx Tok Final, 500ml",
+        "priceText": "R$ 20,51",
+        "priceCents": 2051,
+        "image": "https://m.media-amazon.com/images/I/51i9ViTGF7L._AC_SL1500_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:46:42.511Z"
+      }
+    },
+    {
+      "asin": "B076X67XHH",
+      "result": "ok",
+      "ms": 2233,
+      "via": "browser",
+      "product": {
+        "asin": "B076X67XHH",
+        "pageAsin": "B076X67XHH",
+        "title": "Proauto Cera em Pasta com Carnaúba 200 g",
+        "priceText": "R$ 12,90",
+        "priceCents": 1290,
+        "image": "https://m.media-amazon.com/images/I/81A4g5q5sbL._AC_SL1500_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:46:47.295Z"
+      }
+    },
+    {
+      "asin": "B0CBD2282S",
+      "result": "ok",
+      "ms": 2376,
+      "via": "browser",
+      "product": {
+        "asin": "B0CBD2282S",
+        "pageAsin": "B0CBD2282S",
+        "title": "Cera Híbrida de Carnaúba, 120ml",
+        "priceText": "R$ 36,50",
+        "priceCents": 3650,
+        "image": "https://m.media-amazon.com/images/I/61tZg9Pa5-L._AC_SL1024_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:46:52.686Z"
+      }
+    },
+    {
+      "asin": "B076BF8KB6",
+      "result": "ok",
+      "ms": 2999,
+      "via": "browser",
+      "product": {
+        "asin": "B076BF8KB6",
+        "pageAsin": "B076BF8KB6",
+        "title": "3M Auto Cera Brilho Intenso de Alta Performance 1 Unidade",
+        "priceText": "R$ 26,78",
+        "priceCents": 2678,
+        "image": "https://m.media-amazon.com/images/I/718s6VJtzlL._AC_SL1500_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:46:59.371Z"
+      }
+    },
+    {
+      "asin": "B076MR6CWB",
+      "result": "ok",
+      "ms": 2057,
+      "via": "browser",
+      "product": {
+        "asin": "B076MR6CWB",
+        "pageAsin": "B076MR6CWB",
+        "title": "Cera Líquida Superbrilho Luxcar 500 Ml",
+        "priceText": "R$ 19,50",
+        "priceCents": 1950,
+        "image": "https://m.media-amazon.com/images/I/71kaqCiBnaL._AC_SL1500_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:47:05.386Z"
+      }
+    },
+    {
+      "asin": "B08MTJ4DNR",
+      "result": "ok",
+      "ms": 2512,
+      "via": "browser",
+      "product": {
+        "asin": "B08MTJ4DNR",
+        "pageAsin": "B08MTJ4DNR",
+        "title": "Cera Automotiva em Spray Vonixx Blend Ceramic & Carnaúba",
+        "priceText": "R$ 39,82",
+        "priceCents": 3982,
+        "image": "https://m.media-amazon.com/images/I/51b0xPnPrjL._AC_SL1500_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:47:11.891Z"
+      }
+    },
+    {
+      "asin": "B0B56Q7BT8",
+      "result": "ok",
+      "ms": 2650,
+      "via": "browser",
+      "product": {
+        "asin": "B0B56Q7BT8",
+        "pageAsin": "B0B56Q7BT8",
+        "title": "Compressor de ar portátil com inflador de pneu mini com bateria recarregável de 4000 mAh, bomba de pneu sem fio 150 PSI, luz de emergência LED, bomba de ar calibre de pressão para carro bicicleta motocicleta bola inflável",
+        "priceText": "R$ 60,51",
+        "priceCents": 6051,
+        "image": "https://m.media-amazon.com/images/I/41fHfQbB81L._AC_SL1000_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:47:17.757Z"
+      }
+    },
+    {
+      "asin": "B09TBBXC2Z",
+      "result": "ok",
+      "ms": 2345,
+      "via": "browser",
+      "product": {
+        "asin": "B09TBBXC2Z",
+        "pageAsin": "B09TBBXC2Z",
+        "title": "Compressor de Ar Automotivo Vonder CAV 150",
+        "priceText": "R$ 220,11",
+        "priceCents": 22011,
+        "image": "https://m.media-amazon.com/images/I/71glZSa-slL._AC_SL1500_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:47:24.360Z"
+      }
+    },
+    {
+      "asin": "B0CS3B7MD8",
+      "result": "ok",
+      "ms": 2096,
+      "via": "browser",
+      "product": {
+        "asin": "B0CS3B7MD8",
+        "pageAsin": "B0CS3B7MD8",
+        "title": "AstroAI Compressor de Ar Portátil Calibrador de Pneus para Carro L7",
+        "priceText": "R$ 113,54",
+        "priceCents": 11354,
+        "image": "https://m.media-amazon.com/images/I/71omUniDS7L._AC_SL1500_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:47:29.897Z"
+      }
+    },
+    {
+      "asin": "B0FP9FF295",
+      "result": "ok",
+      "ms": 2000,
+      "via": "browser",
+      "product": {
+        "asin": "B0FP9FF295",
+        "pageAsin": "B0FP9FF295",
+        "title": "Calibrador Compressor Bomba De Ar Portátil Digital Mini Com Lanterna LED para Encher Pneus de Carro, Moto, Bike, Bicicleta, Bola e Piscina Inflável",
+        "priceText": "R$ 69,90",
+        "priceCents": 6990,
+        "image": "https://m.media-amazon.com/images/I/51RHJAuAPmL._AC_SY300_SX300_QL70_ML2_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:47:35.837Z"
+      }
+    },
+    {
+      "asin": "B0H2BSP78P",
+      "result": "ok",
+      "ms": 1939,
+      "via": "browser",
+      "product": {
+        "asin": "B0H2BSP78P",
+        "pageAsin": "B0H2BSP78P",
+        "title": "Compressor de Ar Portátil Digital com Display LCD e Lanterna LED – Mini Bomba Elétrica Recarregável para Pneus de Carro, Moto, Bike, Bola e Infláveis",
+        "priceText": "R$ 56,04",
+        "priceCents": 5604,
+        "image": "https://m.media-amazon.com/images/I/71PjPdNAIsL._AC_SL1254_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:47:40.798Z"
+      }
+    },
+    {
+      "asin": "B08M8HBP7B",
+      "result": "ok",
+      "ms": 2278,
+      "via": "browser",
+      "product": {
+        "asin": "B08M8HBP7B",
+        "pageAsin": "B08M8HBP7B",
+        "title": "Compressor De Ar Automotivo, Cav 12, 12 V, Vonder",
+        "priceText": "R$ 110,00",
+        "priceCents": 11000,
+        "image": "https://m.media-amazon.com/images/I/51o1qsO+LiL._AC_SL1000_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:47:47.314Z"
+      }
+    },
+    {
+      "asin": "B0C8BB8SND",
+      "result": "ok",
+      "ms": 2043,
+      "via": "browser",
+      "product": {
+        "asin": "B0C8BB8SND",
+        "pageAsin": "B0C8BB8SND",
+        "title": "Câmera De Ré Universal Automotiva Borboleta Parachoque Com Visão Noturna Colorida Carro Caminhão Van",
+        "priceText": "R$ 26,50",
+        "priceCents": 2650,
+        "image": "https://m.media-amazon.com/images/I/41eXeCn0dQL._AC_SY300_SX300_QL70_ML2_.jpg",
+        "available": true,
+        "cupom": {
+          "presente": false,
+          "legivel": true
+        },
+        "checkedAt": "2026-11-23T19:47:53.671Z"
+      }
+    }
+  ]
+}

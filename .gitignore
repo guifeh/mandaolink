@@ -1,0 +1,34 @@
+# Dependências e builds
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+.vite/
+
+# Segredos: nunca versionar
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dados locais do sistema
+backups/
+*.dump
+pgdata/
+data/
+# Auth state do WhatsApp (cifrado, mas é da sessão do cliente)
+**/wa-auth/
+# Perfis do Playwright (cookies) e páginas salvas para análise
+**/.profile-*/
+**/.samples/
+
+# Logs e relatórios brutos de execução
+*.log
+**/reports/*.log
+
+# Sistema/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
