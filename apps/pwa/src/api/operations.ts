@@ -1,4 +1,4 @@
-import type { HistoryRow, OperationState } from '../operations-model.js';
+import type { HistoryRow, OperationState, PendingState } from '../operations-model.js';
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const response = await fetch(path, { credentials: 'include', ...options });
   if (!response.ok)
@@ -11,6 +11,7 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 }
 export const operations = {
   state: () => request<OperationState>('/operacao'),
+  pending: () => request<PendingState>('/pendencias'),
   history: (page: number) =>
     request<{ pagina: number; mais: boolean; envios: HistoryRow[] }>(`/operacao/historico?pagina=${page}`),
   pair: () => request<{ simulado: boolean; codigo: string; qr: string; aviso: string }>('/pareamento'),

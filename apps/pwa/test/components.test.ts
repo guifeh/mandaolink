@@ -280,6 +280,10 @@ test('getTabFromHash mapeia #pareamento para aba operacao e preserva as demais r
   assert.equal(getTabFromHash('#afiliado'), 'afiliado');
   assert.equal(getTabFromHash('#operacao'), 'operacao');
   assert.equal(getTabFromHash('#nicho'), 'nicho');
-  assert.equal(getTabFromHash(''), 'nicho');
-  assert.equal(getTabFromHash('#desconhecido'), 'nicho');
+  assert.equal(getTabFromHash(''), 'operacao');
+  assert.equal(getTabFromHash('#desconhecido'), 'operacao');
+  assert.equal(getTabFromHash('', '/'), 'operacao');
+  assert.equal(getTabFromHash('', '/desconhecido'), 'operacao');
+  assert.equal(getTabFromHash('', '/fontes'), 'fontes');
+  assert.equal(getTabFromHash('', '/ajuda'), 'ajuda');
 });

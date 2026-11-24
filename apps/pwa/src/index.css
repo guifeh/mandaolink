@@ -8,6 +8,7 @@
   --border: #e2e8f0;
   --danger: #ef4444;
   --success: #10b981;
+  --warning: #fde68a;
 }
 
 * {
@@ -88,6 +89,36 @@ body {
   font-weight: 600;
   margin-bottom: 12px;
   color: var(--text);
+}
+
+.operation-status {
+  padding: 28px 20px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  color: var(--text);
+}
+
+.operation-status-verde {
+  background: var(--success);
+}
+
+.operation-status-amarelo {
+  background: var(--warning);
+}
+
+.operation-status-vermelho {
+  background: var(--danger);
+}
+
+.operation-status-pausado {
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.operation-status-title {
+  font-size: 1.75rem;
+  line-height: 1.25;
+  margin-bottom: 16px;
 }
 
 .card-desc {

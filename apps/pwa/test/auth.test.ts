@@ -13,7 +13,8 @@ test('link magico remove token da URL, consome uma vez mesmo com chamadas simult
     value: {
       location: { hash: `#token=${token}` },
       history: {
-        replaceState() {
+        replaceState(_data: unknown, _unused: string, url: string) {
+          assert.equal(url, '/');
           removed = true;
         },
       },

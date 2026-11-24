@@ -7,8 +7,14 @@ export interface OperationState {
     descricao: string;
     severidade?: 'amarelo' | 'vermelho';
     criada_em?: string;
+    fonte_id?: string | null;
   }>;
   enviosPendentes: number;
+}
+
+export interface PendingState {
+  excecoes: OperationState['excecoes'];
+  envios: Array<{ id: string; estado: 'falhou' | 'incerto'; erro: string | null }>;
 }
 
 export interface HistoryRow {
@@ -29,15 +35,37 @@ export const statusText = {
   vermelho: 'Operação interrompida',
 } as const;
 
-export function repairLink(tipo: string): string {
-  if (tipo.includes('whatsapp') || tipo.includes('desconectado') || tipo === 'whatsapp_desconectado') {
-    return '#pareamento';
-  }
-  if (tipo.includes('tag') || tipo.includes('afiliado') || tipo === 'tag_invalida') {
-    return '#afiliado';
-  }
-  if (tipo.includes('limite') || tipo.includes('horario')) {
-    return '#horarios';
-  }
-  return '#operacao';
+export type TipoExcecao =
+  | 'fonte_perdida'
+  | 'whatsapp_removido_do_grupo'
+  | 'whatsapp_numero_bloqueado'
+  | 'whatsapp_sessao_invalidada'
+  | 'whatsapp_desconectado'
+  | 'tag_invalida'
+  | 'limite'
+  | 'horario_invalido'
+  | 'muitas_falhas'
+  | 'pausado_por_falhas';
+
+const repairRoutes: Record<TipoExcecao, string> = {
+  fonte_perdida: '/fontes',
+  whatsapp_removido_do_grupo: '/ajuda#grupo-destino',
+  whatsapp_numero_bloqueado: '/ajuda#numero-bloqueado',
+  whatsapp_sessao_invalidada: '/#pareamento',
+  whatsapp_desconectado: '/#pareamento',
+  tag_invalida: '/#afiliado',
+  limite: '/#horarios',
+  horario_invalido: '/#horarios',
+  muitas_falhas: '/ajuda#falhas',
+  pausado_por_falhas: '/ajuda#falhas',
+};
+
+function isTipoExcecao(tipo: string): tipo is TipoExcecao {
+  return Object.hasOwn(repairRoutes, tipo);
+}
+
+export function repairLink(tipo: string, fonteId?: string | null): string {
+  if (!isTipoExcecao(tipo)) return '/ajuda';
+  if (tipo === 'whatsapp_removido_do_grupo' && fonteId) return '/fontes';
+  return repairRoutes[tipo];
 }

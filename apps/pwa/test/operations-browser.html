@@ -10,11 +10,18 @@
     <script type="module">
       import React from 'react';
       import { createRoot } from 'react-dom/client';
-      import { OperationsPage } from '/src/pages/Operations.tsx';
+      import { App } from '/src/App.tsx';
       import '/src/index.css';
       let paused = true;
+      window.p7 = { calls: [], confirmPause: false, confirmations: 0, signal: 'amarelo' };
+      window.confirm = (message) => {
+        if (message !== 'Pausar todos os envios?') throw new Error('Confirmação inesperada');
+        window.p7.confirmations++;
+        return window.p7.confirmPause;
+      };
       window.fetch = async (url, init) => {
         const path = String(url);
+        window.p7.calls.push(path);
         if (path === '/pausa') {
           paused = JSON.parse(init.body).pausado;
           return new Response('{}');
@@ -22,7 +29,7 @@
         if (path === '/operacao')
           return Response.json({
             pausado: paused,
-            semaforo: paused ? 'vermelho' : 'amarelo',
+            semaforo: paused ? 'vermelho' : window.p7.signal,
             enviosPendentes: 0,
             excecoes: [
               {
@@ -32,6 +39,11 @@
                 severidade: 'amarelo',
               },
             ],
+          });
+        if (path === '/pendencias')
+          return Response.json({
+            excecoes: [{ id: 'fonte-exemplo', tipo: 'fonte_perdida', descricao: 'Exemplo sintético: fonte perdida.' }],
+            envios: [{ id: 'envio-exemplo', estado: 'incerto', erro: null }],
           });
         if (path.startsWith('/operacao/historico'))
           return Response.json({
@@ -68,7 +80,7 @@
           });
         throw new Error('Endpoint não previsto no teste');
       };
-      createRoot(document.getElementById('root')).render(React.createElement(OperationsPage));
+      createRoot(document.getElementById('root')).render(React.createElement(App));
     </script>
   </body>
 </html>

@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react';
 import { operations } from '../api/operations.js';
-import { statusText, repairLink, type OperationState, type HistoryRow } from '../operations-model.js';
+import {
+  statusText,
+  repairLink,
+  type OperationState,
+  type HistoryRow,
+  type PendingState,
+} from '../operations-model.js';
 
 export function OperationsPage() {
   const [state, setState] = useState<OperationState | null>(null);
   const [history, setHistory] = useState<HistoryRow[]>([]);
+  const [pending, setPending] = useState<PendingState | null>(null);
   const [page, setPage] = useState(1),
     [more, setMore] = useState(false);
   const [pair, setPair] = useState<Awaited<ReturnType<typeof operations.pair>> | null>(null);
@@ -14,12 +21,13 @@ export function OperationsPage() {
   useEffect(() => {
     let alive = true;
     setError('');
-    Promise.all([operations.state(), operations.history(page)])
-      .then(([status, past]) => {
+    Promise.all([operations.state(), operations.history(page), operations.pending()])
+      .then(([status, past, pendencias]) => {
         if (alive) {
           setState(status);
           setHistory(past.envios);
           setMore(past.mais);
+          setPending(pendencias);
         }
       })
       .catch((e) => {
@@ -43,9 +51,9 @@ export function OperationsPage() {
   }
   return (
     <div>
-      <h1 className="page-title">Operação</h1>
+      <h1 className="page-title">Início</h1>
       {error && (
-        <p className="feedback-msg feedback-error" role="alert">
+        <p className="feedback-msg feedback-erro" role="alert">
           {error}
         </p>
       )}
@@ -54,21 +62,24 @@ export function OperationsPage() {
         <p role="status">{error ? 'Dados indisponíveis.' : 'Carregando operação…'}</p>
       ) : (
         <>
-          <section className="card" aria-label="Status da operação">
-            <h2 className="card-title">
-              {state.semaforo === 'verde' ? '🟢' : state.semaforo === 'amarelo' ? '🟡' : '🔴'}{' '}
-              {statusText[state.semaforo]}
+          <section
+            className={`operation-status operation-status-${state.pausado ? 'pausado' : state.semaforo}`}
+            aria-label="Status da operação"
+          >
+            <h2 className="operation-status-title" role="status">
+              {state.pausado ? 'Todos os envios estão pausados' : statusText[state.semaforo]}
             </h2>
             <p>{state.pausado ? 'A pausa geral está ativa.' : 'A pausa geral está desativada.'}</p>
             <button
-              className="btn btn-primary"
+              className="btn btn-secondary"
               disabled={busy}
-              onClick={() =>
-                action(async () => {
+              onClick={() => {
+                if (!state.pausado && !window.confirm('Pausar todos os envios?')) return;
+                void action(async () => {
                   await operations.pause(!state.pausado);
                   setState(await operations.state());
-                })
-              }
+                });
+              }}
             >
               {state.pausado ? 'Retomar operação' : 'Pausar todos os envios'}
             </button>
@@ -81,6 +92,7 @@ export function OperationsPage() {
                   const h = await operations.history(page);
                   setHistory(h.envios);
                   setMore(h.mais);
+                  setPending(await operations.pending());
                 })
               }
             >
@@ -89,17 +101,18 @@ export function OperationsPage() {
           </section>
           <section className="card" aria-label="Pendências">
             <h2 className="card-title">Pendências</h2>
-            {!state.excecoes.length && !state.enviosPendentes && <p>Nenhuma pendência aberta.</p>}
-            {state.excecoes.map((e) => (
+            {pending && !pending.excecoes.length && !pending.envios.length && <p>Nenhuma pendência aberta.</p>}
+            {pending?.excecoes.map((e) => (
               <article key={e.id} style={{ marginBottom: 16 }}>
                 <p>{e.descricao}</p>
-                <a href={repairLink(e.tipo)}>Abrir conserto</a>
+                <a href={repairLink(e.tipo, e.fonte_id)}>Abrir conserto</a>
               </article>
             ))}
-            {!!state.enviosPendentes && (
+            {!!pending?.envios.length && (
               <p>
-                {state.enviosPendentes} envio(s) com falha ou confirmação incerta.{' '}
-                <a href="#pareamento">Verificar conexão</a>. Envios incertos aguardam conciliação para evitar repetição.
+                {pending.envios.length} {pending.envios.length === 1 ? 'oferta' : 'ofertas'} com falha ou sem
+                confirmação. <a href="/ajuda#falhas">Ver o que fazer</a>. Ofertas sem confirmação não são reenviadas
+                automaticamente para evitar repetição.
               </p>
             )}
           </section>

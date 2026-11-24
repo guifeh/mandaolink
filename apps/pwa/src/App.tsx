@@ -3,23 +3,28 @@ import { NicheConfigPage } from './pages/NicheConfig.js';
 import { ScheduleLimitsPage } from './pages/ScheduleLimits.js';
 import { AffiliateAccountPage } from './pages/AffiliateAccount.js';
 import { OperationsPage } from './pages/Operations.js';
+import { SourcesPage } from './pages/Sources.js';
+import { HelpPage } from './pages/Help.js';
 
-export type TabKey = 'nicho' | 'horarios' | 'afiliado' | 'operacao';
+export type TabKey = 'nicho' | 'horarios' | 'afiliado' | 'operacao' | 'fontes' | 'ajuda';
 
-export function getTabFromHash(hashString?: string): TabKey {
+export function getTabFromHash(hashString?: string, pathname?: string): TabKey {
+  const path = pathname ?? (hashString === undefined && typeof window !== 'undefined' ? window.location.pathname : '/');
+  if (path === '/fontes') return 'fontes';
+  if (path === '/ajuda') return 'ajuda';
   let hash = '';
   if (hashString !== undefined) {
     hash = hashString.replace(/^#\/?/, '').toLowerCase();
   } else if (typeof window !== 'undefined') {
     hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
   }
-  if (hash === 'horarios' || hash === 'afiliado' || hash === 'operacao') {
+  if (hash === 'nicho' || hash === 'horarios' || hash === 'afiliado' || hash === 'operacao') {
     return hash;
   }
   if (hash === 'pareamento') {
     return 'operacao';
   }
-  return 'nicho';
+  return 'operacao';
 }
 
 export function App() {
@@ -31,13 +36,17 @@ export function App() {
       setActiveTab(getTabFromHash());
     };
     window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('popstate', handleHashChange);
+    };
   }, []);
 
   const navigateTo = (tab: TabKey) => {
     setActiveTab(tab);
     if (typeof window !== 'undefined') {
-      window.location.hash = `#${tab}`;
+      window.history.pushState(null, '', tab === 'operacao' ? '/' : `/#${tab}`);
     }
   };
 
@@ -52,9 +61,20 @@ export function App() {
         {activeTab === 'horarios' && <ScheduleLimitsPage />}
         {activeTab === 'afiliado' && <AffiliateAccountPage />}
         {activeTab === 'operacao' && <OperationsPage />}
+        {activeTab === 'fontes' && <SourcesPage />}
+        {activeTab === 'ajuda' && <HelpPage />}
       </main>
 
       <nav className="bottom-nav">
+        <button
+          type="button"
+          className={`nav-item ${activeTab === 'operacao' ? 'active' : ''}`}
+          onClick={() => navigateTo('operacao')}
+          aria-label="Aba Início"
+          aria-current={activeTab === 'operacao' ? 'page' : undefined}
+        >
+          <span>Início</span>
+        </button>
         <button
           type="button"
           className={`nav-item ${activeTab === 'nicho' ? 'active' : ''}`}
@@ -83,16 +103,6 @@ export function App() {
         >
           <span className="nav-icon">🛒</span>
           <span>Afiliado</span>
-        </button>
-
-        <button
-          type="button"
-          className={`nav-item ${activeTab === 'operacao' ? 'active' : ''}`}
-          onClick={() => navigateTo('operacao')}
-          aria-label="Aba Operação"
-        >
-          <span className="nav-icon">📊</span>
-          <span>Operação</span>
         </button>
       </nav>
     </div>
