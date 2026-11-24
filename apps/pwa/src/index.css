@@ -218,14 +218,12 @@ body {
   margin-bottom: 16px;
 }
 
-.feedback-success,
 .feedback-sucesso {
   background: #ecfdf5;
   color: #065f46;
   border: 1px solid #a7f3d0;
 }
 
-.feedback-error,
 .feedback-erro {
   background: #fef2f2;
   color: #991b1b;

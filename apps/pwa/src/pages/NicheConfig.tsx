@@ -3,16 +3,18 @@ import { api } from '../api/client.js';
 
 interface Props {
   apiClient?: typeof api;
+  initialFeedback?: { tipo: 'sucesso' | 'erro'; texto: string } | null;
+  initialLoading?: boolean;
 }
 
-export function NicheConfigPage({ apiClient = api }: Props) {
+export function NicheConfigPage({ apiClient = api, initialFeedback = null, initialLoading }: Props) {
   const [palavrasNicho, setPalavrasNicho] = useState<string[]>([]);
   const [palavrasProibidas, setPalavrasProibidas] = useState<string[]>([]);
   const [novaPalavraNicho, setNovaPalavraNicho] = useState('');
   const [novaPalavraProibida, setNovaPalavraProibida] = useState('');
-  const [carregando, setCarregando] = useState(true);
+  const [carregando, setCarregando] = useState(initialLoading ?? !initialFeedback);
   const [salvando, setSalvando] = useState(false);
-  const [feedback, setFeedback] = useState<{ tipo: 'sucesso' | 'erro'; texto: string } | null>(null);
+  const [feedback, setFeedback] = useState<{ tipo: 'sucesso' | 'erro'; texto: string } | null>(initialFeedback ?? null);
 
   useEffect(() => {
     void carregar();
@@ -99,7 +101,14 @@ export function NicheConfigPage({ apiClient = api }: Props) {
         <p className="page-desc">Defina quais produtos fazem parte do seu nicho e quais devem ser ignorados.</p>
       </div>
 
-      {feedback && <div className={`feedback-msg feedback-${feedback.tipo}`}>{feedback.texto}</div>}
+      {feedback && (
+        <div
+          className={`feedback-msg feedback-${feedback.tipo}`}
+          role={feedback.tipo === 'sucesso' ? 'status' : 'alert'}
+        >
+          {feedback.texto}
+        </div>
+      )}
 
       {/* Seção 1: Palavras do nicho */}
       <div className="card">

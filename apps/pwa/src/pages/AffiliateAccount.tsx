@@ -3,13 +3,15 @@ import { api } from '../api/client.js';
 
 interface Props {
   apiClient?: typeof api;
+  initialFeedback?: { tipo: 'sucesso' | 'erro'; texto: string } | null;
+  initialLoading?: boolean;
 }
 
-export function AffiliateAccountPage({ apiClient = api }: Props) {
+export function AffiliateAccountPage({ apiClient = api, initialFeedback = null, initialLoading }: Props) {
   const [tagAmazon, setTagAmazon] = useState('');
-  const [carregando, setCarregando] = useState(true);
+  const [carregando, setCarregando] = useState(initialLoading ?? !initialFeedback);
   const [salvando, setSalvando] = useState(false);
-  const [feedback, setFeedback] = useState<{ tipo: 'sucesso' | 'erro'; texto: string } | null>(null);
+  const [feedback, setFeedback] = useState<{ tipo: 'sucesso' | 'erro'; texto: string } | null>(initialFeedback ?? null);
 
   useEffect(() => {
     void carregar();
@@ -80,7 +82,14 @@ export function AffiliateAccountPage({ apiClient = api }: Props) {
         <p className="page-desc">Configure seu identificador oficial da Amazon para comissionamento das vendas.</p>
       </div>
 
-      {feedback && <div className={`feedback-msg feedback-${feedback.tipo}`}>{feedback.texto}</div>}
+      {feedback && (
+        <div
+          className={`feedback-msg feedback-${feedback.tipo}`}
+          role={feedback.tipo === 'sucesso' ? 'status' : 'alert'}
+        >
+          {feedback.texto}
+        </div>
+      )}
 
       <form onSubmit={salvar}>
         <div className="card">

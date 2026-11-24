@@ -3,16 +3,18 @@ import { api } from '../api/client.js';
 
 interface Props {
   apiClient?: typeof api;
+  initialFeedback?: { tipo: 'sucesso' | 'erro'; texto: string } | null;
+  initialLoading?: boolean;
 }
 
-export function ScheduleLimitsPage({ apiClient = api }: Props) {
+export function ScheduleLimitsPage({ apiClient = api, initialFeedback = null, initialLoading }: Props) {
   const [horarioInicio, setHorarioInicio] = useState('08:00');
   const [horarioFim, setHorarioFim] = useState('22:00');
   const [maximoPorHora, setMaximoPorHora] = useState(5);
   const [maximoPorDia, setMaximoPorDia] = useState(30);
-  const [carregando, setCarregando] = useState(true);
+  const [carregando, setCarregando] = useState(initialLoading ?? !initialFeedback);
   const [salvando, setSalvando] = useState(false);
-  const [feedback, setFeedback] = useState<{ tipo: 'sucesso' | 'erro'; texto: string } | null>(null);
+  const [feedback, setFeedback] = useState<{ tipo: 'sucesso' | 'erro'; texto: string } | null>(initialFeedback ?? null);
 
   useEffect(() => {
     void carregar();
@@ -95,7 +97,14 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
         <p className="page-desc">Controle em quais períodos e com que frequência as mensagens são enviadas.</p>
       </div>
 
-      {feedback && <div className={`feedback-msg feedback-${feedback.tipo}`}>{feedback.texto}</div>}
+      {feedback && (
+        <div
+          className={`feedback-msg feedback-${feedback.tipo}`}
+          role={feedback.tipo === 'sucesso' ? 'status' : 'alert'}
+        >
+          {feedback.texto}
+        </div>
+      )}
 
       <form onSubmit={salvar}>
         {/* Seção 1: Horários de envio */}
