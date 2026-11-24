@@ -32,13 +32,13 @@ export type WaStatus =
   /** Servidor recusou o número (403): provável ban; trocar o chip. */
   | 'numero_bloqueado';
 
-/** Mensagem de um grupo-fonte. Sem remetente, nome ou telefone de quem postou (LGPD). */
 /** Evento de estado do conector. qr só vem em aguardando_pareamento; vale ~20 s. */
 export interface StatusEvent {
   estado: WaStatus;
   qr?: string;
 }
 
+/** Mensagem de um grupo-fonte. Sem remetente, nome ou telefone de quem postou (LGPD). */
 export interface SourceMessage {
   plataforma: 'whatsapp';
   grupoExternoId: string;
@@ -93,7 +93,10 @@ export interface WhatsAppConnector {
   pairByQR(): Promise<string>;
   onMessage(handler: (m: SourceMessage) => void): () => void;
   onEcho(handler: (e: EchoMessage) => void): () => void;
-  /** Mudanças de estado (e cada QR novo), para o pareamento no PWA via SSE/polling. */
+  /**
+   * Mudanças de estado (e cada QR novo), para o pareamento no PWA via SSE/polling.
+   * Ao se inscrever, recebe o estado atual (assíncrono, no próximo microtask).
+   */
   onStatus(handler: (e: StatusEvent) => void): () => void;
   listGroups(): Promise<{ id: string; nome: string; participantes: number }[]>;
   sendToGroup(

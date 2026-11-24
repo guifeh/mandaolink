@@ -378,12 +378,14 @@ test('onStatus: avisa cada mudança de estado e cada QR novo; unsubscribe para d
   const { c, sock, openConn } = await setup();
   const seen: unknown[] = [];
   const off = c.onStatus((e) => seen.push(e));
+  await tick();
   sock().emit('connection.update', { qr: 'QR-1' });
   sock().emit('connection.update', { qr: 'QR-2' });
   await openConn();
   sock().emit('connection.update', close(401));
   await tick();
   assert.deepEqual(seen, [
+    { estado: 'conectando' }, // estado atual, entregue na inscrição
     { estado: 'aguardando_pareamento', qr: 'QR-1' },
     { estado: 'aguardando_pareamento', qr: 'QR-2' },
     { estado: 'conectado' },
@@ -391,7 +393,39 @@ test('onStatus: avisa cada mudança de estado e cada QR novo; unsubscribe para d
   ]);
   off();
   await c.stop();
-  assert.equal(seen.length, 4, 'sem aviso depois do unsubscribe');
+  assert.equal(seen.length, 5, 'sem aviso depois do unsubscribe');
+});
+
+test('onStatus: ouvinte que lança não impede o QR, o "conectado", a reconexão nem os outros ouvintes', async () => {
+  const errors: unknown[] = [];
+  const { c, sockets, sock, exceptions, openConn } = await setup({
+    onError: (e) => errors.push(e),
+    auth: async () => memAuth(false), // sessão ainda não pareada: pairByQR é permitido
+  });
+  const seen: string[] = [];
+  c.onStatus(() => {
+    throw new Error('ouvinte quebrado');
+  });
+  c.onStatus((e) => seen.push(e.estado));
+  try {
+    await tick(); // entrega do estado atual na inscrição
+    const qr = c.pairByQR();
+    sock().emit('connection.update', { qr: 'QR-1' });
+    assert.equal(await qr, 'QR-1', 'qrWaiters resolvidos');
+    await openConn();
+    assert.equal(c.status(), 'conectado');
+    assert.ok(exceptions.log.includes('resolve:desconectado:-'), 'resolve das exceções rodou');
+    sock().emit('connection.update', close(408));
+    await new Promise((r) => setTimeout(r, backoffMs(0, () => 0) + 50));
+    assert.equal(sockets.length, 2, 'reconexão agendada');
+    assert.deepEqual(seen.slice(0, 4), ['conectando', 'aguardando_pareamento', 'conectado', 'reconectando']);
+    assert.ok(
+      errors.length >= 4 && errors.every((e) => (e as Error).message === 'ouvinte quebrado'),
+      'erros vão para onError',
+    );
+  } finally {
+    await c.stop();
+  }
 });
 
 test('pareamento por código espera o socket ficar pronto (1º QR) e só manda dígitos', async () => {

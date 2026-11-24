@@ -148,8 +148,18 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
     if (next === state && !qr) return;
     state = next;
     const ev: StatusEvent = qr ? { estado: next, qr } : { estado: next };
-    for (const h of statusHandlers) h(ev);
+    notify(ev);
   };
+  /** Ouvinte com erro não pode interromper o fluxo de conexão (QR, alertas, reconexão). */
+  function notify(ev: StatusEvent, only?: (s: StatusEvent) => void) {
+    for (const h of only ? [only] : statusHandlers) {
+      try {
+        h(ev);
+      } catch (e) {
+        onError(e);
+      }
+    }
+  }
   let open = false;
   let attempt = 0;
   let stopped = false;
@@ -412,6 +422,10 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
     },
     onStatus(h) {
       statusHandlers.add(h);
+      // Estado atual na inscrição: um cliente SSE novo não precisa esperar a próxima mudança.
+      queueMicrotask(() => {
+        if (statusHandlers.has(h)) notify({ estado: state }, h);
+      });
       return () => statusHandlers.delete(h);
     },
     onEcho(h) {
