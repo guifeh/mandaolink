@@ -10,12 +10,20 @@ const FONTE = '120363000000000002@g.us';
 async function db() {
   const pg = new PGlite();
   const dir = new URL('../../../../db/migrations/', import.meta.url);
-  for (const f of (await readdir(dir)).filter((n) => /^\d+.*\.sql$/.test(n)).sort()) await pg.exec(await readFile(new URL(f, dir), 'utf8'));
-  await pg.query(`INSERT INTO fontes(plataforma, identificador_externo, nome, ativa, autorizada_em) VALUES ('whatsapp', $1, 'Fonte exemplo', true, now())`, [FONTE]);
+  for (const f of (await readdir(dir)).filter((n) => /^\d+.*\.sql$/.test(n)).sort())
+    await pg.exec(await readFile(new URL(f, dir), 'utf8'));
+  await pg.query(
+    `INSERT INTO fontes(plataforma, identificador_externo, nome, ativa, autorizada_em) VALUES ('whatsapp', $1, 'Fonte exemplo', true, now())`,
+    [FONTE],
+  );
   return pg;
 }
 const abertas = async (pg: PGlite) =>
-  (await pg.query<{ tipo: string; fonte: boolean }>(`SELECT tipo, fonte_id IS NOT NULL AS fonte FROM excecoes WHERE resolvida_em IS NULL ORDER BY tipo`)).rows;
+  (
+    await pg.query<{ tipo: string; fonte: boolean }>(
+      `SELECT tipo, fonte_id IS NOT NULL AS fonte FROM excecoes WHERE resolvida_em IS NULL ORDER BY tipo`,
+    )
+  ).rows;
 
 test('abre uma exceção por (tipo, fonte), sem duplicar, e resolve', async () => {
   const pg = await db();

@@ -8,14 +8,22 @@ export type PublishResult =
   | { status: 'falhou'; naoTransmitido: true; motivo: string };
 
 export interface Publisher {
-  send(message: { destinoId: string; texto: string; mediaUrl: string | null; idempotencyKey: string }, signal: AbortSignal): Promise<PublishResult>;
+  send(
+    message: { destinoId: string; texto: string; mediaUrl: string | null; idempotencyKey: string },
+    signal: AbortSignal,
+  ): Promise<PublishResult>;
 }
 
 export function createWhatsAppPublisher(connector: Pick<WhatsAppConnector, 'sendToGroup'>): Publisher {
   return {
     async send(m, signal) {
       try {
-        const r = await connector.sendToGroup(m.destinoId, { texto: m.texto, mediaUrl: m.mediaUrl }, m.idempotencyKey, signal);
+        const r = await connector.sendToGroup(
+          m.destinoId,
+          { texto: m.texto, mediaUrl: m.mediaUrl },
+          m.idempotencyKey,
+          signal,
+        );
         if (r.status === 'enviado') return r;
         if (r.status === 'nao_transmitido') return { status: 'falhou', naoTransmitido: true, motivo: r.motivo };
         return r;

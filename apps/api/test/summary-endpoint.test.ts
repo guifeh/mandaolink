@@ -11,15 +11,21 @@ const localClient = {
   async query(sql: string, params?: unknown[]) {
     if (sql.includes('pg_try_advisory_lock')) return { rows: [{ acquired: true }], rowCount: 1 };
     if (sql.includes('pg_advisory_')) return { rows: [], rowCount: 1 };
-    if (!params && sql.includes('\n') && /^(CREATE|ALTER)/.test(sql)) { await embedded!.exec(sql); return { rows: [], rowCount: 0 }; }
+    if (!params && sql.includes('\n') && /^(CREATE|ALTER)/.test(sql)) {
+      await embedded!.exec(sql);
+      return { rows: [], rowCount: 0 };
+    }
     const result = await embedded!.query(sql, params);
     return { rows: result.rows, rowCount: result.rows.length || result.affectedRows || 0 };
   },
-  release() {}
+  release() {},
 };
-const db = process.env.TEST_DATABASE_URL ? connectDatabase(process.env.TEST_DATABASE_URL) : {
-  query: localClient.query, connect: async () => localClient
-} as unknown as Pool;
+const db = process.env.TEST_DATABASE_URL
+  ? connectDatabase(process.env.TEST_DATABASE_URL)
+  : ({
+      query: localClient.query,
+      connect: async () => localClient,
+    } as unknown as Pool);
 
 let capturedLink = '';
 const app = await buildApp({
@@ -27,7 +33,9 @@ const app = await buildApp({
   ownerEmail: 'owner@example.test',
   appOrigin: 'http://localhost:3000',
   cookieSecure: false,
-  sendMagicLink: async (_email, link) => { capturedLink = link; }
+  sendMagicLink: async (_email, link) => {
+    capturedLink = link;
+  },
 });
 
 let sessionCookie = '';

@@ -53,10 +53,7 @@ export function formatarDataBrasilia(dataInput?: string | Date): string {
  * - Fuso America/Sao_Paulo
  * - Contém: enviadas, descartadas, top 3 motivos legíveis, tempo parado e pendências abertas.
  */
-export function buildDailySummary(
-  dados: DadosResumoDiario,
-  dataInput?: string | Date
-): string {
+export function buildDailySummary(dados: DadosResumoDiario, dataInput?: string | Date): string {
   const dataFormatada = formatarDataBrasilia(dataInput);
   const linhas: string[] = [];
 
@@ -70,12 +67,10 @@ export function buildDailySummary(
 
   // Linha 4 e 5: Top 3 motivos de descarte mais frequentes
   if (dados.motivosPrincipais && dados.motivosPrincipais.length > 0) {
-    const top3 = dados.motivosPrincipais
-      .slice(0, 3)
-      .map((item) => {
-        const frase = traduzirMotivo(item.motivo);
-        return `• ${frase} (${item.quantidade})`;
-      });
+    const top3 = dados.motivosPrincipais.slice(0, 3).map((item) => {
+      const frase = traduzirMotivo(item.motivo);
+      return `• ${frase} (${item.quantidade})`;
+    });
 
     linhas.push(``);
     linhas.push(`Principais motivos:`);

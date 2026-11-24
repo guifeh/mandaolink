@@ -79,7 +79,9 @@ test('detecta captcha real e 503 de bloqueio; página de produto não é bloquei
 });
 
 test('fetch reader: 404 vira produto_inexistente e erro de rede vira rede:*', async () => {
-  const r404 = await createFetchReader({ fetchImpl: async () => new Response('x', { status: 404 }) }).read('B0EXEMPLO1');
+  const r404 = await createFetchReader({ fetchImpl: async () => new Response('x', { status: 404 }) }).read(
+    'B0EXEMPLO1',
+  );
   assert.deepEqual([r404.ok, !r404.ok && r404.reason], [false, 'produto_inexistente']);
   const rNet = await createFetchReader({
     fetchImpl: async () => {

@@ -95,22 +95,18 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
         <p className="page-desc">Controle em quais períodos e com que frequência as mensagens são enviadas.</p>
       </div>
 
-      {feedback && (
-        <div className={`feedback-msg feedback-${feedback.tipo}`}>
-          {feedback.texto}
-        </div>
-      )}
+      {feedback && <div className={`feedback-msg feedback-${feedback.tipo}`}>{feedback.texto}</div>}
 
       <form onSubmit={salvar}>
         {/* Seção 1: Horários de envio */}
         <div className="card">
           <h2 className="card-title">Horários de envio</h2>
-          <p className="card-desc">
-            Defina o período diário em que o sistema pode postar mensagens nos grupos.
-          </p>
+          <p className="card-desc">Defina o período diário em que o sistema pode postar mensagens nos grupos.</p>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="horario-inicio">Início do envio</label>
+            <label className="form-label" htmlFor="horario-inicio">
+              Início do envio
+            </label>
             <input
               id="horario-inicio"
               type="time"
@@ -122,7 +118,9 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
           </div>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="horario-fim">Término do envio</label>
+            <label className="form-label" htmlFor="horario-fim">
+              Término do envio
+            </label>
             <input
               id="horario-fim"
               type="time"
@@ -142,7 +140,9 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
           </p>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="maximo-hora">Máximo por hora</label>
+            <label className="form-label" htmlFor="maximo-hora">
+              Máximo por hora
+            </label>
             <input
               id="maximo-hora"
               type="number"
@@ -156,7 +156,9 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
           </div>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="maximo-dia">Máximo por dia</label>
+            <label className="form-label" htmlFor="maximo-dia">
+              Máximo por dia
+            </label>
             <input
               id="maximo-dia"
               type="number"
@@ -170,11 +172,7 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="btn btn-primary"
-          disabled={salvando}
-        >
+        <button type="submit" className="btn btn-primary" disabled={salvando}>
           {salvando ? 'Salvando...' : 'Salvar alterações'}
         </button>
       </form>

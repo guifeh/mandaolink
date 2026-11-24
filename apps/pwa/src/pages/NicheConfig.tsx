@@ -99,18 +99,12 @@ export function NicheConfigPage({ apiClient = api }: Props) {
         <p className="page-desc">Defina quais produtos fazem parte do seu nicho e quais devem ser ignorados.</p>
       </div>
 
-      {feedback && (
-        <div className={`feedback-msg feedback-${feedback.tipo}`}>
-          {feedback.texto}
-        </div>
-      )}
+      {feedback && <div className={`feedback-msg feedback-${feedback.tipo}`}>{feedback.texto}</div>}
 
       {/* Seção 1: Palavras do nicho */}
       <div className="card">
         <h2 className="card-title">Palavras do nicho</h2>
-        <p className="card-desc">
-          Termos que identificam os produtos que você deseja enviar aos seus grupos.
-        </p>
+        <p className="card-desc">Termos que identificam os produtos que você deseja enviar aos seus grupos.</p>
 
         <form onSubmit={adicionarNicho} className="input-add-group">
           <input
@@ -139,18 +133,14 @@ export function NicheConfigPage({ apiClient = api }: Props) {
               </button>
             </span>
           ))}
-          {palavrasNicho.length === 0 && (
-            <span className="card-desc">Nenhuma palavra cadastrada ainda.</span>
-          )}
+          {palavrasNicho.length === 0 && <span className="card-desc">Nenhuma palavra cadastrada ainda.</span>}
         </div>
       </div>
 
       {/* Seção 2: Palavras proibidas */}
       <div className="card">
         <h2 className="card-title">Palavras proibidas</h2>
-        <p className="card-desc">
-          Produtos com qualquer uma destas palavras serão descartados automaticamente.
-        </p>
+        <p className="card-desc">Produtos com qualquer uma destas palavras serão descartados automaticamente.</p>
 
         <form onSubmit={adicionarProibida} className="input-add-group">
           <input
@@ -179,18 +169,11 @@ export function NicheConfigPage({ apiClient = api }: Props) {
               </button>
             </span>
           ))}
-          {palavrasProibidas.length === 0 && (
-            <span className="card-desc">Nenhuma palavra proibida cadastrada.</span>
-          )}
+          {palavrasProibidas.length === 0 && <span className="card-desc">Nenhuma palavra proibida cadastrada.</span>}
         </div>
       </div>
 
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={salvar}
-        disabled={salvando}
-      >
+      <button type="button" className="btn btn-primary" onClick={salvar} disabled={salvando}>
         {salvando ? 'Salvando...' : 'Salvar alterações'}
       </button>
     </div>

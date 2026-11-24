@@ -18,4 +18,7 @@ const parts = [
   h.match(/<input[^>]*name="items\[0\.base\]\[customerVisiblePrice\]\[amount\]"[^>]*>/)?.[0] ?? '',
 ];
 writeFileSync(out, parts.join('\n'));
-console.log(out, parts.map((p) => p.length));
+console.log(
+  out,
+  parts.map((p) => p.length),
+);

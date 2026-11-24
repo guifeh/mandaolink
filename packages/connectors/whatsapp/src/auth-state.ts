@@ -20,7 +20,12 @@ export function encrypt(key: Buffer, name: string, plain: string): string {
   const c = createCipheriv('aes-256-gcm', key, iv);
   c.setAAD(Buffer.from(name)); // amarra o conteúdo ao nome do arquivo: trocar arquivos falha
   const data = Buffer.concat([c.update(plain, 'utf8'), c.final()]);
-  return JSON.stringify({ v: 1, iv: iv.toString('base64'), tag: c.getAuthTag().toString('base64'), data: data.toString('base64') });
+  return JSON.stringify({
+    v: 1,
+    iv: iv.toString('base64'),
+    tag: c.getAuthTag().toString('base64'),
+    data: data.toString('base64'),
+  });
 }
 
 export function decrypt(key: Buffer, name: string, stored: string): string {
@@ -38,7 +43,10 @@ export async function useEncryptedFileAuthState(folder: string, key: Buffer): Pr
   const fileName = (f: string) => `${f.replace(/\//g, '__').replace(/:/g, '-')}.enc`;
   const locked = <T>(name: string, work: () => Promise<T>): Promise<T> => {
     const p = (locks.get(name) ?? Promise.resolve()).then(work, work);
-    locks.set(name, p.catch(() => {}));
+    locks.set(
+      name,
+      p.catch(() => {}),
+    );
     return p;
   };
 

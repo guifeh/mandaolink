@@ -6,11 +6,21 @@ import { chromium } from 'playwright';
 
 const [maxArg, ...extra] = process.argv.slice(2);
 const max = Number(maxArg ?? 12);
-const QUERIES = ['acessorios automotivos', 'suporte celular carro', 'aspirador automotivo', 'cera automotiva', 'carregador veicular'];
+const QUERIES = [
+  'acessorios automotivos',
+  'suporte celular carro',
+  'aspirador automotivo',
+  'cera automotiva',
+  'carregador veicular',
+];
 
 mkdirSync('.samples', { recursive: true });
 const browser = await chromium.launch({ headless: true });
-const ctx = await browser.newContext({ locale: 'pt-BR', timezoneId: 'America/Sao_Paulo', viewport: { width: 1366, height: 900 } });
+const ctx = await browser.newContext({
+  locale: 'pt-BR',
+  timezoneId: 'America/Sao_Paulo',
+  viewport: { width: 1366, height: 900 },
+});
 const page = await ctx.newPage();
 const pause = () => page.waitForTimeout(2500 + Math.random() * 1500);
 const found = new Map<string, string>();

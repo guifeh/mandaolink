@@ -16,7 +16,13 @@ export type ReadFailure =
 
 export type ReadResult =
   | { ok: true; product: Product; via: 'fetch' | 'browser'; ms: number }
-  | { ok: false; reason: ReadFailure; via: 'fetch' | 'browser' | 'nenhum'; ms: number; /** Bloqueio: não tentar antes disto (epoch ms). */ retryAt?: number };
+  | {
+      ok: false;
+      reason: ReadFailure;
+      via: 'fetch' | 'browser' | 'nenhum';
+      ms: number;
+      /** Bloqueio: não tentar antes disto (epoch ms). */ retryAt?: number;
+    };
 
 export interface ProductReader {
   read(asin: string): Promise<ReadResult>;
@@ -60,7 +66,11 @@ export function createFetchReader(opts: { timeoutMs?: number; fetchImpl?: typeof
 }
 
 /** Playwright com perfil persistente. Só carrega HTML e scripts: imagem, fonte e mídia são cortadas. */
-export function createBrowserReader(opts: { userDataDir: string; headless?: boolean; timeoutMs?: number }): ProductReader {
+export function createBrowserReader(opts: {
+  userDataDir: string;
+  headless?: boolean;
+  timeoutMs?: number;
+}): ProductReader {
   let ctxPromise: Promise<import('playwright').BrowserContext> | null = null;
   const context = () =>
     (ctxPromise ??= import('playwright').then(async ({ chromium }) => {
@@ -83,7 +93,10 @@ export function createBrowserReader(opts: { userDataDir: string; headless?: bool
       const t0 = Date.now();
       const page = await (await context()).newPage();
       try {
-        const res = await page.goto(productUrl(asin), { waitUntil: 'domcontentloaded', timeout: opts.timeoutMs ?? 30_000 });
+        const res = await page.goto(productUrl(asin), {
+          waitUntil: 'domcontentloaded',
+          timeout: opts.timeoutMs ?? 30_000,
+        });
         return fromPage(asin, res?.status() ?? 0, await page.content(), 'browser', Date.now() - t0);
       } catch (e) {
         return { ok: false, reason: `rede:${(e as Error).name}`, via: 'browser', ms: Date.now() - t0 };

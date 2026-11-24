@@ -191,10 +191,7 @@ test('validateMessage reprova se faltar a linha de horário do preço', () => {
 
 test('validateMessage reprova vazamento de texto não autorizado da fonte', () => {
   const ourLink = 'https://www.amazon.com.br/dp/B0EXEMPL01?tag=cliente-20';
-  const fonteOriginal = [
-    'CORRE QUE ESTA ACABANDO O ESTOQUE GALERA DO GRUPO VIP!',
-    'https://amzn.to/outro',
-  ].join('\n');
+  const fonteOriginal = ['CORRE QUE ESTA ACABANDO O ESTOQUE GALERA DO GRUPO VIP!', 'https://amzn.to/outro'].join('\n');
 
   const textoVazado = [
     'CORRE QUE ESTA ACABANDO O ESTOQUE GALERA DO GRUPO VIP!',

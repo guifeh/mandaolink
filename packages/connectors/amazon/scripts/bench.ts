@@ -85,7 +85,9 @@ const summary = {
   duracaoMin: +(elapsedMs / 60_000).toFixed(1),
   motivos: reasons,
   cupom: (() => {
-    const lidos = rows.map((r) => (r.product as { cupom?: { presente: boolean; legivel: boolean } } | undefined)?.cupom).filter(Boolean);
+    const lidos = rows
+      .map((r) => (r.product as { cupom?: { presente: boolean; legivel: boolean } } | undefined)?.cupom)
+      .filter(Boolean);
     return {
       lidos: lidos.length,
       comCupom: lidos.filter((c) => c!.presente).length,

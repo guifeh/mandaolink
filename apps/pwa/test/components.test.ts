@@ -143,7 +143,9 @@ test('Tela Horários e Limites: validação estrita de horários e proporção h
   // Mock de salvamento
   let salvo = false;
   const mockClient = {
-    async fetchConfig() { return {} as NicheConfig; },
+    async fetchConfig() {
+      return {} as NicheConfig;
+    },
     async updateConfig(partial: Partial<NicheConfig>) {
       assert.equal(partial.horario_inicio, '08:00');
       assert.equal(partial.horario_fim, '22:00');
@@ -191,7 +193,9 @@ test('Tela Conta de Afiliado: validação do formato da tag Amazon antes de salv
   // Mock de salvamento
   let salvo = false;
   const mockClient = {
-    async fetchConfig() { return {} as NicheConfig; },
+    async fetchConfig() {
+      return {} as NicheConfig;
+    },
     async updateConfig(partial: Partial<NicheConfig>) {
       assert.equal(partial.tag_amazon, 'mandaolink-20');
       salvo = true;
@@ -216,7 +220,7 @@ test('ApiClient normaliza horários HH:MM:SS do PostgreSQL para HH:MM em fetchCo
     limite_hora: 5,
     limite_dia: 30,
     horario_inicio: '08:00:00', // Formato retornado pelo tipo TIME do PostgreSQL
-    horario_fim: '22:00:00',    // Formato retornado pelo tipo TIME do PostgreSQL
+    horario_fim: '22:00:00', // Formato retornado pelo tipo TIME do PostgreSQL
   };
 
   const client = new ApiClient('http://fake-api.local');

@@ -1,11 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import {
-  traduzirMotivo,
-  MOTIVO_GENERICO_PADRAO,
-  buildDailySummary,
-  formatarDataBrasilia,
-} from '../src/index.js';
+import { traduzirMotivo, MOTIVO_GENERICO_PADRAO, buildDailySummary, formatarDataBrasilia } from '../src/index.js';
 
 test('todos os códigos de motivos dos gates possuem tradução específica no mapa', () => {
   // Lista oficial de motivos de gates (G0 a G9)
@@ -31,7 +26,7 @@ test('todos os códigos de motivos dos gates possuem tradução específica no m
     assert.notEqual(
       frase,
       MOTIVO_GENERICO_PADRAO,
-      `O código de gate "${codigo}" deve possuir tradução legível mapeada no dicionário.`
+      `O código de gate "${codigo}" deve possuir tradução legível mapeada no dicionário.`,
     );
     assert.ok(frase.length > 3, `A frase para "${codigo}" deve ser descritiva`);
   }

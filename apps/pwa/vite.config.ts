@@ -23,20 +23,24 @@ export default defineConfig({
             src: '/icon-192.svg',
             sizes: '192x192',
             type: 'image/svg+xml',
-            purpose: 'any maskable'
+            purpose: 'any maskable',
           },
           {
             src: '/icon-512.svg',
             sizes: '512x512',
             type: 'image/svg+xml',
-            purpose: 'any maskable'
-          }
-        ]
-      }
-    })
+            purpose: 'any maskable',
+          },
+        ],
+      },
+    }),
   ],
   server: {
     port: 5173,
-    proxy: Object.fromEntries(['/config','/auth','/saude','/operacao','/pendencias','/pausa','/historico','/pareamento','/push'].map(path => [path, 'http://127.0.0.1:3000']))
-  }
+    proxy: Object.fromEntries(
+      ['/config', '/auth', '/saude', '/operacao', '/pendencias', '/pausa', '/historico', '/pareamento', '/push'].map(
+        (path) => [path, 'http://127.0.0.1:3000'],
+      ),
+    ),
+  },
 });

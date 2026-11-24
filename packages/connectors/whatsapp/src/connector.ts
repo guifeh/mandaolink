@@ -19,18 +19,49 @@ import type {
 } from './types.ts';
 
 /** Códigos de desconexão do Baileys (DisconnectReason). */
-const CODE = { loggedOut: 401, forbidden: 403, multideviceMismatch: 411, connectionReplaced: 440, badSession: 500, restartRequired: 515 };
+const CODE = {
+  loggedOut: 401,
+  forbidden: 403,
+  multideviceMismatch: 411,
+  connectionReplaced: 440,
+  badSession: 500,
+  restartRequired: 515,
+};
 /**
  * Sessão morta: reconectar não resolve e pode brigar com outro aparelho.
  * 403 só vem do servidor (stream:error), nunca de logout local: tratado como provável ban.
  * Limitação: um ban também pode chegar como 401 e aí aparece como sessao_invalidada.
  */
 const FATAL = new Map<number, { tipo: 'sessao_invalidada' | 'numero_bloqueado'; descricao: string }>([
-  [CODE.loggedOut, { tipo: 'sessao_invalidada', descricao: 'WhatsApp desconectado: precisa conectar de novo (sessão encerrada no celular).' }],
-  [CODE.multideviceMismatch, { tipo: 'sessao_invalidada', descricao: 'WhatsApp desconectado: precisa conectar de novo (sessão incompatível).' }],
-  [CODE.connectionReplaced, { tipo: 'sessao_invalidada', descricao: 'WhatsApp desconectado: precisa conectar de novo (outro WhatsApp Web assumiu o número).' }],
-  [CODE.badSession, { tipo: 'sessao_invalidada', descricao: 'WhatsApp desconectado: precisa conectar de novo (sessão corrompida).' }],
-  [CODE.forbidden, { tipo: 'numero_bloqueado', descricao: 'O WhatsApp recusou o número (provável bloqueio). Confira no celular; se bloqueado, troque o chip.' }],
+  [
+    CODE.loggedOut,
+    {
+      tipo: 'sessao_invalidada',
+      descricao: 'WhatsApp desconectado: precisa conectar de novo (sessão encerrada no celular).',
+    },
+  ],
+  [
+    CODE.multideviceMismatch,
+    { tipo: 'sessao_invalidada', descricao: 'WhatsApp desconectado: precisa conectar de novo (sessão incompatível).' },
+  ],
+  [
+    CODE.connectionReplaced,
+    {
+      tipo: 'sessao_invalidada',
+      descricao: 'WhatsApp desconectado: precisa conectar de novo (outro WhatsApp Web assumiu o número).',
+    },
+  ],
+  [
+    CODE.badSession,
+    { tipo: 'sessao_invalidada', descricao: 'WhatsApp desconectado: precisa conectar de novo (sessão corrompida).' },
+  ],
+  [
+    CODE.forbidden,
+    {
+      tipo: 'numero_bloqueado',
+      descricao: 'O WhatsApp recusou o número (provável bloqueio). Confira no celular; se bloqueado, troque o chip.',
+    },
+  ],
 ]);
 /** Queda transitória só vira aviso ao cliente se durar mais que isto. */
 export const DISCONNECT_ALERT_MS = 10 * 60_000;
@@ -82,7 +113,8 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
   const [typeMin, typeMax] = o.typingMs ?? [2000, 5000];
   const onError = o.onError ?? (() => {});
   const destinos = new Set(o.destinos.map(jidUser));
-  if (!destinos.size || [...destinos].some((d) => !d.endsWith('@g.us'))) throw new Error('destino deve ser um grupo (@g.us)');
+  if (!destinos.size || [...destinos].some((d) => !d.endsWith('@g.us')))
+    throw new Error('destino deve ser um grupo (@g.us)');
 
   let sock: WaSocket | null = null;
   let auth: AuthBundle | null = null;
@@ -119,16 +151,31 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
     const present = new Set(Object.keys(groups).map(jidUser));
     for (const g of await sources()) {
       if (present.has(g)) await o.exceptions.resolve('removido_do_grupo', g);
-      else await o.exceptions.open({ tipo: 'removido_do_grupo', descricao: 'O número não está mais neste grupo-fonte.', severidade: 'amarelo', grupoExternoId: g });
+      else
+        await o.exceptions.open({
+          tipo: 'removido_do_grupo',
+          descricao: 'O número não está mais neste grupo-fonte.',
+          severidade: 'amarelo',
+          grupoExternoId: g,
+        });
     }
     for (const d of destinos) {
       if (present.has(d)) await o.exceptions.resolve('removido_do_grupo', d);
-      else await o.exceptions.open({ tipo: 'removido_do_grupo', descricao: 'O número não está no grupo do cliente: envios parados.', severidade: 'vermelho', grupoExternoId: d });
+      else
+        await o.exceptions.open({
+          tipo: 'removido_do_grupo',
+          descricao: 'O número não está no grupo do cliente: envios parados.',
+          severidade: 'vermelho',
+          grupoExternoId: d,
+        });
     }
   }
 
   function isMe(s: WaSocket, participant: unknown): boolean {
-    const p = typeof participant === 'string' ? { id: participant } : ((participant ?? {}) as { id?: string; lid?: string; phoneNumber?: string });
+    const p =
+      typeof participant === 'string'
+        ? { id: participant }
+        : ((participant ?? {}) as { id?: string; lid?: string; phoneNumber?: string });
     const mine = [s.user?.id, s.user?.lid].filter(Boolean).map((j) => jidUser(j!));
     return [p.id, p.lid, p.phoneNumber].filter(Boolean).some((j) => mine.includes(jidUser(j!)));
   }
@@ -183,7 +230,13 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
         alertTimer ??= setTimeout(() => {
           alertTimer = null;
           if (!open && !stopped && state === 'reconectando')
-            safe(o.exceptions.open({ tipo: 'desconectado', descricao: 'WhatsApp fora do ar há mais de 10 min; o sistema segue tentando reconectar.', severidade: 'vermelho' }));
+            safe(
+              o.exceptions.open({
+                tipo: 'desconectado',
+                descricao: 'WhatsApp fora do ar há mais de 10 min; o sistema segue tentando reconectar.',
+                severidade: 'vermelho',
+              }),
+            );
         }, alertAfterMs);
         scheduleReconnect(false);
       }
@@ -205,7 +258,13 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
         }
         // Só mensagem nova (não histórico) de grupo que não é o do cliente. Sem remetente.
         if (u.type !== 'notify' || destinos.has(jid) || !texto) continue;
-        const sm: SourceMessage = { plataforma: 'whatsapp', grupoExternoId: jid, mensagemExternaId: m.key.id, texto, publicadaEm: em };
+        const sm: SourceMessage = {
+          plataforma: 'whatsapp',
+          grupoExternoId: jid,
+          mensagemExternaId: m.key.id,
+          texto,
+          publicadaEm: em,
+        };
         for (const h of msgHandlers) h(sm);
       }
     });
@@ -217,7 +276,9 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
       safe(
         o.exceptions.open({
           tipo: 'removido_do_grupo',
-          descricao: cliente ? 'O número foi removido do grupo do cliente: envios parados.' : 'O número foi removido de um grupo-fonte.',
+          descricao: cliente
+            ? 'O número foi removido do grupo do cliente: envios parados.'
+            : 'O número foi removido de um grupo-fonte.',
           severidade: cliente ? 'vermelho' : 'amarelo',
           grupoExternoId: g,
         }),
@@ -247,7 +308,8 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
 
   async function doSend(groupId: string, msg: OutgoingMessage, signal?: AbortSignal): Promise<SendOutcome> {
     const jid = jidUser(groupId);
-    if (!destinos.has(jid) || (await sources()).has(jid)) return { status: 'nao_transmitido', motivo: 'destino_nao_permitido' };
+    if (!destinos.has(jid) || (await sources()).has(jid))
+      return { status: 'nao_transmitido', motivo: 'destino_nao_permitido' };
     if (await o.isPaused()) return { status: 'nao_transmitido', motivo: 'pausado' };
     if (!socketOpen()) return { status: 'nao_transmitido', motivo: 'socket_fechado' };
     const s = sock!;
@@ -278,7 +340,12 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
       const id = res?.key?.id;
       outcome = id ? { status: 'enviado', mensagemId: id } : { status: 'incerto', motivo: 'ack_sem_id' };
     } catch (e) {
-      outcome = { status: 'incerto', motivo: signal?.aborted ? 'timeout_durante_envio' : `erro_durante_envio:${(e as Error)?.message ?? 'desconhecido'}` };
+      outcome = {
+        status: 'incerto',
+        motivo: signal?.aborted
+          ? 'timeout_durante_envio'
+          : `erro_durante_envio:${(e as Error)?.message ?? 'desconhecido'}`,
+      };
     }
     safe(s.sendPresenceUpdate('paused', jid));
     return outcome;
@@ -314,7 +381,11 @@ export function createWhatsAppConnector(o: ConnectorOptions): WhatsAppConnector 
     async listGroups() {
       if (!socketOpen()) throw new Error('socket_fechado');
       const groups = await sock!.groupFetchAllParticipating();
-      return Object.values(groups).map((g) => ({ id: g.id, nome: g.subject ?? '', participantes: g.participants?.length ?? 0 }));
+      return Object.values(groups).map((g) => ({
+        id: g.id,
+        nome: g.subject ?? '',
+        participantes: g.participants?.length ?? 0,
+      }));
     },
     sendToGroup(groupId, msg, idempotencyKey, signal) {
       // Mesma chave no mesmo processo: devolve o mesmo resultado, nunca envia duas vezes.

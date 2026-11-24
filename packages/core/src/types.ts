@@ -1,16 +1,6 @@
 export type DecisionLabel = 'enviar' | 'nao_enviar';
 
-export type GateCode =
-  | 'G0'
-  | 'G1'
-  | 'G2'
-  | 'G3'
-  | 'G4'
-  | 'G5'
-  | 'G6'
-  | 'G7'
-  | 'G8'
-  | 'G9';
+export type GateCode = 'G0' | 'G1' | 'G2' | 'G3' | 'G4' | 'G5' | 'G6' | 'G7' | 'G8' | 'G9';
 
 export interface MensagemFonte {
   id: string;
@@ -67,9 +57,7 @@ export interface PipelineDecision {
   gate?: GateCode | string | null;
 }
 
-export type PipelineFunction = (
-  caso: ReferenceCase
-) => Promise<PipelineDecision> | PipelineDecision;
+export type PipelineFunction = (caso: ReferenceCase) => Promise<PipelineDecision> | PipelineDecision;
 
 export interface Discrepancia {
   id: string;

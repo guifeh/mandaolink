@@ -1,11 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import {
-  nicheGate,
-  normalizeText,
-  buildTermRegex,
-  DEFAULT_CAR_NICHE_CONFIG,
-} from '../src/niche.js';
+import { nicheGate, normalizeText, buildTermRegex, DEFAULT_CAR_NICHE_CONFIG } from '../src/niche.js';
 import { loadReferenceFixtures, evaluateReferenceSuite } from '../src/runner.js';
 
 test('normalizeText remove acentos, caixa alta e pontuações', () => {
@@ -81,11 +76,9 @@ test('nicheGate reprova produtos fora do nicho Carro', () => {
 test('nicheGate integra com o runner da J2 e alcança 100% nos casos de nicho (G5)', async () => {
   const cases = await loadReferenceFixtures();
   // Filtra casos relevantes para nicho: os que falham no G5 e os válidos
-  const casosNicho = cases.filter(
-    (c) => c.esperado.gateEsperado === 'G5' || c.esperado.rotulo === 'enviar'
-  );
+  const casosNicho = cases.filter((c) => c.esperado.gateEsperado === 'G5' || c.esperado.rotulo === 'enviar');
 
-  const pipelineG5 = (caso: typeof cases[0]) => {
+  const pipelineG5 = (caso: (typeof cases)[0]) => {
     const titulo = caso.contexto?.tituloOficial ?? caso.mensagem.texto;
     const gateRes = nicheGate(titulo, DEFAULT_CAR_NICHE_CONFIG, caso.contexto?.categoria);
 

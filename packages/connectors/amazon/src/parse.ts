@@ -109,7 +109,8 @@ export function parseProductHtml(asin: string, html: string, now = new Date()): 
   // A ordem dos atributos muda; isola a tag <img id="landingImage"> e lê os atributos dela.
   const imgTag = html.match(/<img\b[^>]*\bid="landingImage"[^>]*>/i)?.[0] ?? '';
   const image =
-    first(imgTag, [/data-old-hires="(https:[^"]+)"/i, /\bsrc="(https:[^"]+)"/i]) ?? first(html, [/"hiRes":"(https:[^"]+)"/i]);
+    first(imgTag, [/data-old-hires="(https:[^"]+)"/i, /\bsrc="(https:[^"]+)"/i]) ??
+    first(html, [/"hiRes":"(https:[^"]+)"/i]);
 
   // O bloco de disponibilidade carrega <script> com JSON; tira antes de procurar o texto.
   const availRaw = html.match(/<div[^>]*id="availability"[^>]*>([\s\S]*?)<\/div>/i)?.[1] ?? null;

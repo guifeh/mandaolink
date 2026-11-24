@@ -15,9 +15,7 @@ export function getDefaultFixturesPath(): string {
   return resolve(currentDir, '..', 'fixtures', 'reference-cases.json');
 }
 
-export async function loadReferenceFixtures(
-  customPath?: string
-): Promise<ReferenceCase[]> {
+export async function loadReferenceFixtures(customPath?: string): Promise<ReferenceCase[]> {
   const targetPath = customPath ?? getDefaultFixturesPath();
   const raw = await readFile(targetPath, 'utf8');
   const parsed = JSON.parse(raw);
@@ -34,7 +32,7 @@ function normalizeMotivo(motivo: string | null | undefined): string | null {
 
 export async function evaluateReferenceSuite(
   cases: ReferenceCase[],
-  pipeline: PipelineFunction
+  pipeline: PipelineFunction,
 ): Promise<EvaluationReport> {
   let acertosRotulo = 0;
   let acertosMotivo = 0;
@@ -125,10 +123,8 @@ export async function evaluateReferenceSuite(
   }
 
   const totalCasos = cases.length;
-  const taxaAcertoRotulo =
-    totalCasos > 0 ? Number(((acertosRotulo / totalCasos) * 100).toFixed(2)) : 0;
-  const taxaAcertoMotivo =
-    totalCasos > 0 ? Number(((acertosMotivo / totalCasos) * 100).toFixed(2)) : 0;
+  const taxaAcertoRotulo = totalCasos > 0 ? Number(((acertosRotulo / totalCasos) * 100).toFixed(2)) : 0;
+  const taxaAcertoMotivo = totalCasos > 0 ? Number(((acertosMotivo / totalCasos) * 100).toFixed(2)) : 0;
 
   return {
     totalCasos,
@@ -146,7 +142,7 @@ export async function evaluateReferenceSuite(
 
 export async function runReferenceSuite(
   pipeline: PipelineFunction,
-  customFixturesPath?: string
+  customFixturesPath?: string,
 ): Promise<EvaluationReport> {
   const cases = await loadReferenceFixtures(customFixturesPath);
   return evaluateReferenceSuite(cases, pipeline);
@@ -170,9 +166,7 @@ export function formatEvaluationReport(report: EvaluationReport): string {
 
   for (const [gate, metrics] of Object.entries(report.porGate)) {
     const taxa = metrics.total > 0 ? ((metrics.acertosRotulo / metrics.total) * 100).toFixed(1) : '0';
-    lines.push(
-      `  Gate ${gate.padEnd(6)}: ${metrics.acertosRotulo}/${metrics.total} acertos (${taxa}%)`
-    );
+    lines.push(`  Gate ${gate.padEnd(6)}: ${metrics.acertosRotulo}/${metrics.total} acertos (${taxa}%)`);
   }
 
   if (report.discrepancias.length > 0) {
@@ -181,7 +175,7 @@ export function formatEvaluationReport(report: EvaluationReport): string {
       lines.push(
         `  [${d.id}] ${d.descricao}`,
         `    Esperado: rotulo=${d.esperado.rotulo}, motivo=${d.esperado.motivo ?? 'nenhum'}`,
-        `    Obtido:   rotulo=${d.obtido.rotulo}, motivo=${d.obtido.motivo ?? 'nenhum'} (tipo: ${d.tipoDiscrepancia})`
+        `    Obtido:   rotulo=${d.obtido.rotulo}, motivo=${d.obtido.motivo ?? 'nenhum'} (tipo: ${d.tipoDiscrepancia})`,
       );
     }
   } else {

@@ -69,7 +69,12 @@ export type SendOutcome =
 export type TipoExcecao = 'desconectado' | 'removido_do_grupo' | 'sessao_invalidada' | 'numero_bloqueado';
 
 export interface ExceptionSink {
-  open(e: { tipo: TipoExcecao; descricao: string; severidade: 'amarelo' | 'vermelho'; grupoExternoId?: string }): Promise<void>;
+  open(e: {
+    tipo: TipoExcecao;
+    descricao: string;
+    severidade: 'amarelo' | 'vermelho';
+    grupoExternoId?: string;
+  }): Promise<void>;
   resolve(tipo: TipoExcecao, grupoExternoId?: string): Promise<void>;
 }
 
@@ -82,7 +87,12 @@ export interface WhatsAppConnector {
   onMessage(handler: (m: SourceMessage) => void): () => void;
   onEcho(handler: (e: EchoMessage) => void): () => void;
   listGroups(): Promise<{ id: string; nome: string; participantes: number }[]>;
-  sendToGroup(groupId: string, msg: OutgoingMessage, idempotencyKey: string, signal?: AbortSignal): Promise<SendOutcome>;
+  sendToGroup(
+    groupId: string,
+    msg: OutgoingMessage,
+    idempotencyKey: string,
+    signal?: AbortSignal,
+  ): Promise<SendOutcome>;
   status(): WaStatus;
   stop(): Promise<void>;
 }

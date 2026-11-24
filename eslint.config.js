@@ -7,7 +7,16 @@ import globals from 'globals';
 
 export default tseslint.config(
   {
-    ignores: ['**/node_modules/**', '**/dist/**', '**/dev-dist/**', '**/coverage/**', '**/.samples/**', '**/.profile-*/**', '**/*.js', '**/*.cjs'],
+    ignores: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/dev-dist/**',
+      '**/coverage/**',
+      '**/.samples/**',
+      '**/.profile-*/**',
+      '**/*.js',
+      '**/*.cjs',
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
@@ -46,7 +55,10 @@ export default tseslint.config(
     // Testes: asserts em mocks e promessas do node:test são legítimos.
     files: ['**/test/**/*.ts', '**/*.test.ts'],
     rules: {
-      '@typescript-eslint/no-floating-promises': ['error', { allowForKnownSafeCalls: [{ from: 'package', package: 'node:test', name: ['test', 'it', 'describe'] }] }],
+      '@typescript-eslint/no-floating-promises': [
+        'error',
+        { allowForKnownSafeCalls: [{ from: 'package', package: 'node:test', name: ['test', 'it', 'describe'] }] },
+      ],
     },
   },
   prettier,

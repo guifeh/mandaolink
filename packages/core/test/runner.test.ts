@@ -34,11 +34,7 @@ test('dataset de referência possui pelo menos 40 casos sintéticos válidos', a
     assert.ok(c.mensagem.texto.length > 0, `Caso ${c.id} possui texto vazio`);
 
     if (c.contexto?.asin) {
-      assert.match(
-        c.contexto.asin,
-        /^(B0EXEMPL[0-9]{2}|CURTO12)$/,
-        `Caso ${c.id} deve usar ASIN sintético`
-      );
+      assert.match(c.contexto.asin, /^(B0EXEMPL[0-9]{2}|CURTO12)$/, `Caso ${c.id} deve usar ASIN sintético`);
     }
 
     if (c.esperado.rotulo === 'enviar') {
@@ -47,7 +43,7 @@ test('dataset de referência possui pelo menos 40 casos sintéticos válidos', a
     } else {
       assert.ok(
         c.esperado.motivo && validGateMotivos.has(c.esperado.motivo.toLowerCase()),
-        `Caso ${c.id} possui motivo não mapeado nos gates: ${c.esperado.motivo}`
+        `Caso ${c.id} possui motivo não mapeado nos gates: ${c.esperado.motivo}`,
       );
       assert.ok(c.esperado.gateEsperado, `Caso ${c.id} reprovado deve apontar gate esperada`);
     }

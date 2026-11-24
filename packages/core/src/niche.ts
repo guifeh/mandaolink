@@ -70,7 +70,7 @@ export function buildTermRegex(term: string): RegExp {
 export function nicheGate(
   title: string | null | undefined,
   config: NicheFilterConfig,
-  categoria?: string | null
+  categoria?: string | null,
 ): NicheGateResult {
   if (!title || typeof title !== 'string') {
     return {
@@ -110,7 +110,7 @@ export function nicheGate(
     const normCategoria = normalizeText(categoria);
     const categoriasPermitidasNorm = config.categorias.map(normalizeText);
     const categoriaValida = categoriasPermitidasNorm.some(
-      (cat) => cat === normCategoria || normCategoria.includes(cat)
+      (cat) => cat === normCategoria || normCategoria.includes(cat),
     );
     if (!categoriaValida) {
       return {

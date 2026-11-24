@@ -71,7 +71,10 @@ function sink() {
   return s;
 }
 
-const memAuth = (registered = true): AuthBundle => ({ state: { creds: { registered }, keys: {} }, saveCreds: async () => {} });
+const memAuth = (registered = true): AuthBundle => ({
+  state: { creds: { registered }, keys: {} },
+  saveCreds: async () => {},
+});
 const tick = () => new Promise((r) => setImmediate(r));
 
 async function setup(over: Partial<ConnectorOptions> = {}) {
@@ -112,7 +115,10 @@ test('envio ok: "digitando" antes, sendMessage com imagem e legenda, retorna o i
   const r = await c.sendToGroup(CLIENTE, { texto: 'Oferta X', mediaUrl: 'https://m.media-amazon.com/x.jpg' }, 'k1');
   assert.deepEqual(r, { status: 'enviado', mensagemId: 'WAMSG1' });
   assert.deepEqual(sock().calls.slice(0, 2), ['presence:composing', 'sendMessage']);
-  assert.deepEqual(sock().sent[0], { jid: CLIENTE, content: { image: { url: 'https://m.media-amazon.com/x.jpg' }, caption: 'Oferta X' } });
+  assert.deepEqual(sock().sent[0], {
+    jid: CLIENTE,
+    content: { image: { url: 'https://m.media-amazon.com/x.jpg' }, caption: 'Oferta X' },
+  });
 });
 
 test('mesma chave de idempotência no processo: um envio só', async () => {
@@ -138,7 +144,10 @@ test('número único: nunca escreve em grupo-fonte nem fora da allowlist', async
 
 test('allowlist que contém uma fonte é recusada na conexão', async () => {
   await assert.rejects(setup({ destinos: [FONTE] }), /também é fonte/);
-  assert.throws(() => createWhatsAppConnector({ ...({} as ConnectorOptions), destinos: ['5511988887777@s.whatsapp.net'] }), /grupo/);
+  assert.throws(
+    () => createWhatsAppConnector({ ...({} as ConnectorOptions), destinos: ['5511988887777@s.whatsapp.net'] }),
+    /grupo/,
+  );
 });
 
 test('queda ANTES de transmitir: falhou + naoTransmitido; sendMessage não é chamado', async () => {
@@ -147,7 +156,10 @@ test('queda ANTES de transmitir: falhou + naoTransmitido; sendMessage não é ch
   const pub = createWhatsAppPublisher(c);
   sock().emit('connection.update', close(408));
   await tick();
-  const r = await pub.send({ destinoId: CLIENTE, texto: 'T', mediaUrl: null, idempotencyKey: 'k2' }, AbortSignal.timeout(1000));
+  const r = await pub.send(
+    { destinoId: CLIENTE, texto: 'T', mediaUrl: null, idempotencyKey: 'k2' },
+    AbortSignal.timeout(1000),
+  );
   assert.deepEqual(r, { status: 'falhou', naoTransmitido: true, motivo: 'socket_fechado' });
   assert.equal(sock().sent.length, 0);
   await c.stop();
@@ -172,7 +184,10 @@ test('queda DURANTE a transmissão: incerto (nunca falhou), no publisher também
     throw new Error('Connection Closed');
   };
   const pub = createWhatsAppPublisher(c);
-  const r = await pub.send({ destinoId: CLIENTE, texto: 'T', mediaUrl: null, idempotencyKey: 'k4' }, AbortSignal.timeout(1000));
+  const r = await pub.send(
+    { destinoId: CLIENTE, texto: 'T', mediaUrl: null, idempotencyKey: 'k4' },
+    AbortSignal.timeout(1000),
+  );
   assert.equal(r.status, 'incerto');
   assert.match((r as { motivo: string }).motivo, /erro_durante_envio/);
 });
@@ -189,18 +204,27 @@ test('ack sem id: incerto', async () => {
   const { c, sock, openConn } = await setup();
   await openConn();
   sock().sendImpl = async () => ({ key: {} });
-  assert.deepEqual(await c.sendToGroup(CLIENTE, { texto: 'T', mediaUrl: null }, 'k6'), { status: 'incerto', motivo: 'ack_sem_id' });
+  assert.deepEqual(await c.sendToGroup(CLIENTE, { texto: 'T', mediaUrl: null }, 'k6'), {
+    status: 'incerto',
+    motivo: 'ack_sem_id',
+  });
 });
 
 test('pausa geral: não envia, antes e depois do "digitando"', async () => {
   const ctx = await setup();
   await ctx.openConn();
   ctx.setPaused(true);
-  assert.deepEqual(await ctx.c.sendToGroup(CLIENTE, { texto: 'T', mediaUrl: null }, 'k7'), { status: 'nao_transmitido', motivo: 'pausado' });
+  assert.deepEqual(await ctx.c.sendToGroup(CLIENTE, { texto: 'T', mediaUrl: null }, 'k7'), {
+    status: 'nao_transmitido',
+    motivo: 'pausado',
+  });
 
   const ctx2 = await setup({ sleep: async () => void ctx2.setPaused(true) });
   await ctx2.openConn();
-  assert.deepEqual(await ctx2.c.sendToGroup(CLIENTE, { texto: 'T', mediaUrl: null }, 'k8'), { status: 'nao_transmitido', motivo: 'pausado' });
+  assert.deepEqual(await ctx2.c.sendToGroup(CLIENTE, { texto: 'T', mediaUrl: null }, 'k8'), {
+    status: 'nao_transmitido',
+    motivo: 'pausado',
+  });
   assert.equal(ctx2.sock().sent.length, 0);
 });
 
@@ -213,9 +237,17 @@ test('eco: mensagem nossa no grupo do cliente vira EchoMessage com o hash do tex
   c.onMessage((m) => sources.push(m));
   sock().emit('messages.upsert', {
     type: 'append',
-    messages: [{ key: { remoteJid: CLIENTE, id: 'WAMSG1', fromMe: true }, messageTimestamp: 1795000000, message: { imageMessage: { caption: 'Oferta X' } } }],
+    messages: [
+      {
+        key: { remoteJid: CLIENTE, id: 'WAMSG1', fromMe: true },
+        messageTimestamp: 1795000000,
+        message: { imageMessage: { caption: 'Oferta X' } },
+      },
+    ],
   });
-  assert.deepEqual(echoes, [{ grupoExternoId: CLIENTE, mensagemExternaId: 'WAMSG1', textoHash: textHash('Oferta X'), em: 1795000000000 }]);
+  assert.deepEqual(echoes, [
+    { grupoExternoId: CLIENTE, mensagemExternaId: 'WAMSG1', textoHash: textHash('Oferta X'), em: 1795000000000 },
+  ]);
   assert.equal(sources.length, 0);
 });
 
@@ -224,10 +256,26 @@ test('mensagem de fonte: entrega texto e ids, sem remetente; ignora histórico, 
   await openConn();
   const got: any[] = [];
   c.onMessage((m) => got.push(m));
-  const msg = (jid: string, id: string) => ({ key: { remoteJid: jid, id, fromMe: false, participant: '5511977776666@s.whatsapp.net' }, pushName: 'Fulano', messageTimestamp: 1795000000, message: { conversation: 'Oferta https://amzn.to/x' } });
-  sock().emit('messages.upsert', { type: 'notify', messages: [msg(FONTE, 'A1'), msg(CLIENTE, 'A2'), msg('5511977776666@s.whatsapp.net', 'A3')] });
+  const msg = (jid: string, id: string) => ({
+    key: { remoteJid: jid, id, fromMe: false, participant: '5511977776666@s.whatsapp.net' },
+    pushName: 'Fulano',
+    messageTimestamp: 1795000000,
+    message: { conversation: 'Oferta https://amzn.to/x' },
+  });
+  sock().emit('messages.upsert', {
+    type: 'notify',
+    messages: [msg(FONTE, 'A1'), msg(CLIENTE, 'A2'), msg('5511977776666@s.whatsapp.net', 'A3')],
+  });
   sock().emit('messages.upsert', { type: 'append', messages: [msg(FONTE, 'A4')] });
-  assert.deepEqual(got, [{ plataforma: 'whatsapp', grupoExternoId: FONTE, mensagemExternaId: 'A1', texto: 'Oferta https://amzn.to/x', publicadaEm: 1795000000000 }]);
+  assert.deepEqual(got, [
+    {
+      plataforma: 'whatsapp',
+      grupoExternoId: FONTE,
+      mensagemExternaId: 'A1',
+      texto: 'Oferta https://amzn.to/x',
+      publicadaEm: 1795000000000,
+    },
+  ]);
   assert.ok(!JSON.stringify(got).includes('Fulano') && !JSON.stringify(got).includes('5511977776666'));
 });
 
@@ -284,7 +332,11 @@ test('sessão invalidada (401, 440, 500) vs número bloqueado (403): avisos dist
     await new Promise((r) => setTimeout(r, 600));
     assert.equal(c.status(), status);
     assert.equal(sockets.length, 1, `não reconectou (${code})`);
-    assert.deepEqual(exceptions.log.filter((l) => l.startsWith('open:')), [`open:${tipo}:vermelho:-`], `só o aviso certo (${code})`);
+    assert.deepEqual(
+      exceptions.log.filter((l) => l.startsWith('open:')),
+      [`open:${tipo}:vermelho:-`],
+      `só o aviso certo (${code})`,
+    );
   }
 });
 
@@ -292,11 +344,24 @@ test('removido do grupo: evento ao vivo (por LID) e conferência ao reconectar',
   const { sock, exceptions, openConn } = await setup();
   await openConn();
   assert.ok(exceptions.log.includes(`resolve:removido_do_grupo:${FONTE}`), 'presente na conferência inicial');
-  sock().emit('group-participants.update', { id: FONTE, author: 'x', action: 'remove', participants: [{ id: '99999999999@lid' }] });
-  sock().emit('group-participants.update', { id: CLIENTE, author: 'x', action: 'remove', participants: [{ id: '5511955554444@s.whatsapp.net' }] });
+  sock().emit('group-participants.update', {
+    id: FONTE,
+    author: 'x',
+    action: 'remove',
+    participants: [{ id: '99999999999@lid' }],
+  });
+  sock().emit('group-participants.update', {
+    id: CLIENTE,
+    author: 'x',
+    action: 'remove',
+    participants: [{ id: '5511955554444@s.whatsapp.net' }],
+  });
   await tick();
   assert.ok(exceptions.log.includes(`open:removido_do_grupo:amarelo:${FONTE}`));
-  assert.ok(!exceptions.log.includes(`open:removido_do_grupo:vermelho:${CLIENTE}`), 'remoção de outra pessoa não conta');
+  assert.ok(
+    !exceptions.log.includes(`open:removido_do_grupo:vermelho:${CLIENTE}`),
+    'remoção de outra pessoa não conta',
+  );
 
   // Removido enquanto estava offline: o grupo do cliente some da lista ao reconectar.
   delete sock().groups[CLIENTE];
@@ -326,10 +391,22 @@ test('pareamento por código espera o socket ficar pronto (1º QR) e só manda d
 });
 
 test('backoff: cresce, tem teto de 5 min e jitter', () => {
-  assert.equal(backoffMs(0, () => 1), 1000);
-  assert.equal(backoffMs(3, () => 1), 8000);
-  assert.equal(backoffMs(30, () => 1), 300_000);
-  assert.equal(backoffMs(3, () => 0), 4000);
+  assert.equal(
+    backoffMs(0, () => 1),
+    1000,
+  );
+  assert.equal(
+    backoffMs(3, () => 1),
+    8000,
+  );
+  assert.equal(
+    backoffMs(30, () => 1),
+    300_000,
+  );
+  assert.equal(
+    backoffMs(3, () => 0),
+    4000,
+  );
 });
 
 test('auth cifrado: grava sem texto claro, relê com a chave certa e falha com a errada', async () => {
@@ -338,7 +415,9 @@ test('auth cifrado: grava sem texto claro, relê com a chave certa e falha com a
   const a = await useEncryptedFileAuthState(dir, key);
   const regId = (a.state.creds as { registrationId: number }).registrationId;
   await a.saveCreds();
-  await (a.state.keys as any).set({ 'pre-key': { '1': { public: Buffer.from('segredo-teste'), private: Buffer.alloc(32, 1) } } });
+  await (a.state.keys as any).set({
+    'pre-key': { '1': { public: Buffer.from('segredo-teste'), private: Buffer.alloc(32, 1) } },
+  });
   const files = await readdir(dir);
   assert.ok(files.includes('creds.json.enc') && files.some((f) => f.startsWith('pre-key-1')));
   assert.ok(!files.some((f) => f.endsWith('.tmp')), 'gravação atômica não deixa temporário');
@@ -352,7 +431,16 @@ test('auth cifrado: grava sem texto claro, relê com a chave certa e falha com a
 
   await assert.rejects(useEncryptedFileAuthState(dir, parseAuthKey(Buffer.alloc(32, 8).toString('base64'))));
   // Arquivo trocado de nome (AAD) também falha.
-  await writeFile(join(dir, 'creds.json.enc'), await readFile(join(dir, files.find((f) => f.startsWith('pre-key-1'))!), 'utf8'));
+  await writeFile(
+    join(dir, 'creds.json.enc'),
+    await readFile(
+      join(
+        dir,
+        files.find((f) => f.startsWith('pre-key-1'))!,
+      ),
+      'utf8',
+    ),
+  );
   await assert.rejects(useEncryptedFileAuthState(dir, key));
   assert.throws(() => parseAuthKey('curta'), /32 bytes/);
 });

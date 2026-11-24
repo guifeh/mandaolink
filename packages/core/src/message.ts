@@ -107,11 +107,7 @@ export const DEFAULT_TEMPLATE = (d: DadosTemplate): string => {
     lines.push(`🎟️ Tem cupom na página`);
   }
 
-  lines.push(
-    ``,
-    `👉 Ver oferta: ${d.link}`,
-    `Link de afiliado`
-  );
+  lines.push(``, `👉 Ver oferta: ${d.link}`, `Link de afiliado`);
 
   return lines.join('\n');
 };
@@ -119,10 +115,7 @@ export const DEFAULT_TEMPLATE = (d: DadosTemplate): string => {
 /**
  * Renderiza a mensagem final para envio a partir dos dados da oferta.
  */
-export function renderMessage(
-  oferta: OfertaParaRender,
-  options: RenderOptions = {}
-): RenderedMessage {
+export function renderMessage(oferta: OfertaParaRender, options: RenderOptions = {}): RenderedMessage {
   const maxTitulo = options.maxTituloLen ?? 120;
   const timeZone = options.timeZone ?? 'America/Sao_Paulo';
   const templateFn = options.templateFn ?? DEFAULT_TEMPLATE;
@@ -174,7 +167,7 @@ export function validateMessage(
   options: {
     maxCharacters?: number;
     fonteTextoParaVerificar?: string;
-  } = {}
+  } = {},
 ): MessageValidationResult {
   const maxChars = options.maxCharacters ?? 1024;
   const texto = typeof msg === 'string' ? msg : msg.texto;

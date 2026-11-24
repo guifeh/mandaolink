@@ -12,5 +12,7 @@ test('shell e SW publicos, endpoints operacionais privados na mesma origem', asy
     assert.equal((await app.inject('/sw.js')).statusCode, 200);
     assert.equal((await app.inject('/operacao')).statusCode, 401);
     assert.equal(publicPwaPath('/assets/../config'), false);
-  } finally { await app.close(); }
+  } finally {
+    await app.close();
+  }
 });

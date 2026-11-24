@@ -80,11 +80,7 @@ export function AffiliateAccountPage({ apiClient = api }: Props) {
         <p className="page-desc">Configure seu identificador oficial da Amazon para comissionamento das vendas.</p>
       </div>
 
-      {feedback && (
-        <div className={`feedback-msg feedback-${feedback.tipo}`}>
-          {feedback.texto}
-        </div>
-      )}
+      {feedback && <div className={`feedback-msg feedback-${feedback.tipo}`}>{feedback.texto}</div>}
 
       <form onSubmit={salvar}>
         <div className="card">
@@ -94,7 +90,9 @@ export function AffiliateAccountPage({ apiClient = api }: Props) {
           </p>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="tag-amazon">ID de Associado (termina com -20)</label>
+            <label className="form-label" htmlFor="tag-amazon">
+              ID de Associado (termina com -20)
+            </label>
             <input
               id="tag-amazon"
               type="text"
@@ -107,11 +105,7 @@ export function AffiliateAccountPage({ apiClient = api }: Props) {
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="btn btn-primary"
-          disabled={salvando}
-        >
+        <button type="submit" className="btn btn-primary" disabled={salvando}>
           {salvando ? 'Salvando...' : 'Salvar tag da Amazon'}
         </button>
       </form>
