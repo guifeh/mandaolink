@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react';
 import { api } from '../api/client.js';
 import { Feedback, type FeedbackMsg } from '../components/Feedback.js';
 
+interface ScheduleConfigState {
+  horario_inicio: string;
+  horario_fim: string;
+  limite_hora: number;
+  limite_dia: number;
+}
+
 interface Props {
   apiClient?: typeof api;
 }
@@ -11,6 +18,15 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
   const [horarioFim, setHorarioFim] = useState('22:00');
   const [maximoPorHora, setMaximoPorHora] = useState(5);
   const [maximoPorDia, setMaximoPorDia] = useState(30);
+  const [configOriginal, setConfigOriginal] = useState<ScheduleConfigState>({
+    horario_inicio: '08:00',
+    horario_fim: '22:00',
+    limite_hora: 5,
+    limite_dia: 30,
+  });
+
+  const [erroHorarios, setErroHorarios] = useState<string | null>(null);
+  const [erroLimites, setErroLimites] = useState<string | null>(null);
   const [carregando, setCarregando] = useState(true);
   const [salvando, setSalvando] = useState(false);
   const [feedback, setFeedback] = useState<FeedbackMsg | null>(null);
@@ -23,43 +39,66 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
     try {
       setCarregando(true);
       const conf = await apiClient.fetchConfig();
-      if (conf.horario_inicio) setHorarioInicio(conf.horario_inicio.slice(0, 5));
-      if (conf.horario_fim) setHorarioFim(conf.horario_fim.slice(0, 5));
-      if (conf.limite_hora) setMaximoPorHora(conf.limite_hora);
-      if (conf.limite_dia) setMaximoPorDia(conf.limite_dia);
+      const inicio = conf.horario_inicio ? conf.horario_inicio.slice(0, 5) : '08:00';
+      const fim = conf.horario_fim ? conf.horario_fim.slice(0, 5) : '22:00';
+      const hora = conf.limite_hora ?? 5;
+      const dia = conf.limite_dia ?? 30;
+
+      setHorarioInicio(inicio);
+      setHorarioFim(fim);
+      setMaximoPorHora(hora);
+      setMaximoPorDia(dia);
+      setConfigOriginal({
+        horario_inicio: inicio,
+        horario_fim: fim,
+        limite_hora: hora,
+        limite_dia: dia,
+      });
       setFeedback(null);
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Falha ao carregar';
-      setFeedback({ tipo: 'erro', texto: msg });
+    } catch {
+      setFeedback({ tipo: 'erro', texto: 'Não foi possível carregar os horários. Tente novamente mais tarde.' });
     } finally {
       setCarregando(false);
     }
   }
 
-  function validar(): string | null {
+  const passaMeiaNoite = horarioInicio > horarioFim;
+  const temMudancas =
+    horarioInicio !== configOriginal.horario_inicio ||
+    horarioFim !== configOriginal.horario_fim ||
+    maximoPorHora !== configOriginal.limite_hora ||
+    maximoPorDia !== configOriginal.limite_dia;
+
+  function validar(): boolean {
+    let valido = true;
+    setErroHorarios(null);
+    setErroLimites(null);
+
     if (!horarioInicio || !horarioFim) {
-      return 'Informe o horário de início e término.';
+      setErroHorarios('Informe o horário de início e término.');
+      valido = false;
+    } else if (horarioInicio.slice(0, 5) === horarioFim.slice(0, 5)) {
+      setErroHorarios('Os horários de início e término devem ser diferentes.');
+      valido = false;
     }
-    if (horarioInicio >= horarioFim) {
-      return 'O horário de início deve ser anterior ao horário de término.';
-    }
+
     if (maximoPorHora <= 0) {
-      return 'O máximo por hora deve ser pelo menos 1.';
+      setErroLimites('O máximo por hora deve ser pelo menos 1.');
+      valido = false;
+    } else if (maximoPorDia <= 0) {
+      setErroLimites('O máximo por dia deve ser pelo menos 1.');
+      valido = false;
+    } else if (maximoPorHora > maximoPorDia) {
+      setErroLimites('O limite por hora não pode ser maior que o limite diário.');
+      valido = false;
     }
-    if (maximoPorDia <= 0) {
-      return 'O máximo por dia deve ser pelo menos 1.';
-    }
-    if (maximoPorHora > maximoPorDia) {
-      return 'O limite por hora não pode ser maior que o limite diário.';
-    }
-    return null;
+
+    return valido;
   }
 
   async function salvar(e: React.FormEvent) {
     e.preventDefault();
-    const erroValidacao = validar();
-    if (erroValidacao) {
-      setFeedback({ tipo: 'erro', texto: erroValidacao });
+    if (!validar()) {
       return;
     }
 
@@ -72,10 +111,20 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
         limite_hora: Number(maximoPorHora),
         limite_dia: Number(maximoPorDia),
       });
+
+      setConfigOriginal({
+        horario_inicio: horarioInicio,
+        horario_fim: horarioFim,
+        limite_hora: maximoPorHora,
+        limite_dia: maximoPorDia,
+      });
       setFeedback({ tipo: 'sucesso', texto: 'Horários e limites salvos com sucesso!' });
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Erro ao salvar alterações';
-      setFeedback({ tipo: 'erro', texto: msg });
+    } catch (err) {
+      console.error(err);
+      setFeedback({
+        tipo: 'erro',
+        texto: 'Não foi possível salvar os horários e limites. Confira a conexão e tente de novo.',
+      });
     } finally {
       setSalvando(false);
     }
@@ -113,7 +162,12 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
               type="time"
               className="form-input"
               value={horarioInicio}
-              onChange={(e) => setHorarioInicio(e.target.value)}
+              onChange={(e) => {
+                setHorarioInicio(e.target.value);
+                setErroHorarios(null);
+              }}
+              aria-invalid={erroHorarios ? 'true' : 'false'}
+              aria-describedby={erroHorarios ? 'erro-horarios' : passaMeiaNoite ? 'dica-madrugada' : undefined}
               required
             />
           </div>
@@ -127,10 +181,26 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
               type="time"
               className="form-input"
               value={horarioFim}
-              onChange={(e) => setHorarioFim(e.target.value)}
+              onChange={(e) => {
+                setHorarioFim(e.target.value);
+                setErroHorarios(null);
+              }}
+              aria-invalid={erroHorarios ? 'true' : 'false'}
+              aria-describedby={erroHorarios ? 'erro-horarios' : passaMeiaNoite ? 'dica-madrugada' : undefined}
               required
             />
+            {passaMeiaNoite && !erroHorarios && (
+              <span id="dica-madrugada" className="form-hint">
+                termina no dia seguinte
+              </span>
+            )}
           </div>
+
+          {erroHorarios && (
+            <span id="erro-horarios" className="field-error" role="alert">
+              {erroHorarios}
+            </span>
+          )}
         </div>
 
         {/* Seção 2: Limites de envio */}
@@ -151,7 +221,12 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
               max="100"
               className="form-input"
               value={maximoPorHora}
-              onChange={(e) => setMaximoPorHora(parseInt(e.target.value, 10) || 0)}
+              onChange={(e) => {
+                setMaximoPorHora(parseInt(e.target.value, 10) || 0);
+                setErroLimites(null);
+              }}
+              aria-invalid={erroLimites ? 'true' : 'false'}
+              aria-describedby={erroLimites ? 'erro-limites' : undefined}
               required
             />
           </div>
@@ -167,15 +242,28 @@ export function ScheduleLimitsPage({ apiClient = api }: Props) {
               max="1000"
               className="form-input"
               value={maximoPorDia}
-              onChange={(e) => setMaximoPorDia(parseInt(e.target.value, 10) || 0)}
+              onChange={(e) => {
+                setMaximoPorDia(parseInt(e.target.value, 10) || 0);
+                setErroLimites(null);
+              }}
+              aria-invalid={erroLimites ? 'true' : 'false'}
+              aria-describedby={erroLimites ? 'erro-limites' : undefined}
               required
             />
           </div>
+
+          {erroLimites && (
+            <span id="erro-limites" className="field-error" role="alert">
+              {erroLimites}
+            </span>
+          )}
         </div>
 
-        <button type="submit" className="btn btn-primary" disabled={salvando}>
-          {salvando ? 'Salvando...' : 'Salvar alterações'}
-        </button>
+        {temMudancas && (
+          <button type="submit" className="btn btn-primary" disabled={salvando}>
+            {salvando ? 'Salvando…' : 'Salvar alterações'}
+          </button>
+        )}
       </form>
     </div>
   );
