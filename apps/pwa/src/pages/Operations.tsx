@@ -65,9 +65,8 @@ export function OperationsPage() {
           <section
             className={`operation-status operation-status-${state.pausado ? 'pausado' : state.semaforo}`}
             aria-label="Status da operação"
-            role="status"
           >
-            <h2 className="operation-status-title">
+            <h2 className="operation-status-title" role="status">
               {state.pausado ? 'Todos os envios estão pausados' : statusText[state.semaforo]}
             </h2>
             <p>{state.pausado ? 'A pausa geral está ativa.' : 'A pausa geral está desativada.'}</p>

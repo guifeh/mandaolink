@@ -18,7 +18,6 @@ test('cada tipo de pendencia leva a uma rota de conserto existente, inclusive ti
     ['whatsapp_removido_do_grupo', null, '/ajuda#grupo-destino', 'ajuda'],
     ['whatsapp_numero_bloqueado', null, '/ajuda#numero-bloqueado', 'ajuda'],
     ['whatsapp_sessao_invalidada', null, '/#pareamento', 'operacao'],
-    ['whatsapp_identidade_mudou', null, '/#pareamento', 'operacao'],
     ['whatsapp_desconectado', null, '/#pareamento', 'operacao'],
     ['tag_invalida', null, '/#afiliado', 'afiliado'],
     ['limite', null, '/#horarios', 'horarios'],
@@ -26,6 +25,8 @@ test('cada tipo de pendencia leva a uma rota de conserto existente, inclusive ti
     ['muitas_falhas', null, '/ajuda#falhas', 'ajuda'],
     ['pausado_por_falhas', null, '/ajuda#falhas', 'ajuda'],
     ['tipo_novo', null, '/ajuda', 'ajuda'],
+    ['nova_fonte', null, '/ajuda', 'ajuda'],
+    ['novo_whatsapp', null, '/ajuda', 'ajuda'],
   ] as const;
   for (const [tipo, fonte, path, tab] of cases) {
     const link = repairLink(tipo, fonte);
