@@ -870,3 +870,135 @@ button.ml-item:hover {
 .ml-etiqueta--vermelho {
   box-shadow: none;
 }
+
+/* ---------- Palavras (chips removíveis) ---------- */
+.ml-chips {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+}
+.ml-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+  min-height: 36px;
+  padding-left: var(--esp-3);
+  border-radius: 18px;
+  background: var(--cor-superficie);
+  border: var(--borda) solid var(--cor-borda-campo);
+  font-size: var(--texto-sm);
+  max-width: 100%;
+}
+.ml-chip__texto {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ml-chip--proibida {
+  background: var(--cor-vermelho-claro);
+  border-color: var(--cor-vermelho);
+  color: var(--cor-vermelho-tinta);
+}
+.ml-chip__remover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.ml-chip__remover::after {
+  content: '';
+  position: absolute;
+  inset: -6px; /* área de toque de 48 px */
+}
+
+/* ---------- Opções em lista (rádio ou checkbox com a linha inteira clicável) ---------- */
+.ml-opcao {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  min-height: 56px;
+  padding: var(--esp-3) var(--esp-4);
+  background: var(--cor-superficie);
+  border: var(--borda) solid var(--cor-divisoria);
+  border-radius: var(--raio-md);
+  cursor: pointer;
+}
+.ml-opcao input {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--cor-casco);
+}
+.ml-opcao:has(input:checked) {
+  border: 2px solid var(--cor-casco);
+  padding: calc(var(--esp-3) - 1px) calc(var(--esp-4) - 1px);
+}
+.ml-opcao:has(input:disabled) {
+  cursor: not-allowed;
+  color: var(--cor-tinta-suave);
+}
+
+/* ---------- Progresso do assistente ---------- */
+.ml-progresso {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  font-size: var(--texto-xs);
+  color: var(--cor-tinta-suave);
+}
+.ml-progresso__trilho {
+  display: grid;
+  grid-auto-flow: column;
+  gap: var(--esp-1);
+}
+.ml-progresso__trilho span {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--cor-divisoria);
+}
+.ml-progresso__trilho span[data-feito] {
+  background: var(--cor-casco);
+}
+
+/* ---------- Barra de alterações não salvas ---------- */
+.ml-barra-salvar {
+  position: sticky;
+  bottom: calc(var(--altura-nav) + var(--area-segura-baixo) + var(--esp-2));
+  z-index: var(--camada-aviso);
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  padding: var(--esp-3) var(--esp-3) var(--esp-3) var(--esp-4);
+  border-radius: var(--raio-md);
+  background: var(--cor-casco);
+  color: #fff;
+  font-size: var(--texto-sm);
+  animation: ml-sinal-entra var(--dur-rapida) var(--curva-saida);
+}
+.ml-barra-salvar > span {
+  flex: 1;
+}
+.ml-barra-salvar .ml-botao--principal {
+  background: #fff;
+  color: var(--cor-casco);
+}
+.ml-barra-salvar .ml-botao--texto {
+  color: #fff;
+}
+@media (min-width: 960px) {
+  .ml-barra-salvar {
+    bottom: var(--esp-6);
+  }
+}
