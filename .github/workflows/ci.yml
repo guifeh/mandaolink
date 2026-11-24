@@ -1,0 +1,124 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  NODE_VERSION: '24'
+
+jobs:
+  quality:
+    name: quality (typecheck, lint, format, audit, compose)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - name: Install (lockfile)
+        run: npm ci
+      - name: Typecheck (todos os workspaces)
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Format check
+        run: npm run format:check
+      - name: Audit (produção, high)
+        run: npm audit --omit=dev --audit-level=high
+      - name: docker compose config (TUNNEL_TOKEN vazio)
+        env:
+          POSTGRES_PASSWORD: ci-only-not-a-secret
+          OWNER_EMAIL: ci@example.com
+          TUNNEL_TOKEN: ''
+        run: |
+          docker compose config --quiet
+          docker compose --profile tunnel config --quiet
+
+  test:
+    name: test (Postgres real + PGlite, cobertura)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: mandaolink_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d mandaolink_test"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/mandaolink_test
+      TZ: America/Sao_Paulo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - name: Testes de todos os workspaces, com cobertura
+        run: npm run test:coverage
+      - name: Resumo da cobertura
+        if: always()
+        run: |
+          if [ -f coverage/coverage-summary.json ]; then
+            node -e "const t=require('./coverage/coverage-summary.json').total;const r=k=>t[k].pct+'%';console.log('### Cobertura\n\n| Linhas | Funções | Branches | Statements |\n|---|---|---|---|\n|'+[r('lines'),r('functions'),r('branches'),r('statements')].join('|')+'|')" >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 14
+
+  build:
+    name: build (API e PWA)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - name: Build
+        run: npm run build
+
+  # CD por enquanto = só build da imagem, anexada como artefato. Sem registry e sem deploy.
+  docker-image:
+    name: docker image (artefato)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [quality, test, build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Build da imagem (sem push)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: mandaolink-app:${{ github.sha }}
+          outputs: type=docker,dest=${{ runner.temp }}/mandaolink-app.tar
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mandaolink-app-image-${{ github.sha }}
+          path: ${{ runner.temp }}/mandaolink-app.tar
+          retention-days: 14
