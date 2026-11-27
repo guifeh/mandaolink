@@ -5,7 +5,8 @@
     "apps/pwa/src",
     "packages/core/src",
     "packages/connectors/amazon/src",
-    "packages/connectors/whatsapp/src"
+    "packages/connectors/whatsapp/src",
+    "packages/connectors/telegram/src"
   ],
   "include": ["apps/*/src/**", "packages/core/src/**", "packages/connectors/*/src/**"],
   "exclude": ["**/*.test.ts", "**/node_modules/**", "**/dist/**"],
